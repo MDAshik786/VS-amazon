@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { product } from "../Datas__/Arrays";
 import "./Products.css";
 const Products = () => {
+  const [quantity, setQuantity] = useState({});
   const moveToCart = (id) => {};
+  const handelOnChange = (e) => {
+    setQuantity(e.target.value);
+  };
+  const handelOnClick = (e, key) => {
+    const { name } = e.target;
+    setQuantity((prevQuantity) => {
+      const updatedQuantity = { ...prevQuantity };
+    console.log(updatedQuantity,"const")
+      if (name === "increase") {
+        updatedQuantity[key] = (updatedQuantity[key] || 1) + 1;
+      } else {
+        updatedQuantity[key] = Math.max((updatedQuantity[key] || 1) - 1, 1);
+      }
+  
+      return updatedQuantity;
+    });
+  
+    console.log(key, quantity, "object");
+  };
+  
+  const handleQuanttiy = (key, e) => {
+    let value = (e.target.value);
+    setQuantity({ ...quantity, [key]: Number(value) });
+    console.log(quantity);
+  };
   return (
     <div>
       <div className="grid-main">
@@ -26,25 +52,28 @@ const Products = () => {
               <div className="product-price">
                 ${(product.priceCents / 100).toFixed(2)}
               </div>
-              <div className="product-quantity-container">
-                <select
-                  className={`quantity-container quantity-container-${product.id}`}
+              <div className="number-container">
+                <button
+                  className="symbol"
+                  name="decrease"
+                  onClick={(e) => handelOnClick(e,product.id)}
                 >
-                  <option selected value="1">
-                    1
-                  </option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
+                  -
+                </button>
+                <input
+                  type="number"
+                  className="number"
+                  value={quantity[product.id] == null ? 1: quantity[product.id]}
+                  onChange={(e) => handleQuanttiy(product.id, e)}
+                />
+                <button
+                  className="symbol"
+                  name="increase"
+                  onClick={(e) => handelOnClick(e,product.id)}
+                >
+                  +
+                </button>
               </div>
-              <div className="product-spacer"></div>
               <div id={`added-to-cart-${product.id}`} className="added-to-cart">
                 <img
                   src="images/icons/checkmark.png"

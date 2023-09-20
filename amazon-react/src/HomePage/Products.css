@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     overflow-wrap:anywhere;
+    font:1rem 'Roboto', sans-serif;
   }
   @media (max-width: 142rem) {
     .grid-main {
@@ -121,7 +122,50 @@
     box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
     padding: 0.5rem;
     border-radius: 4rem;
+    font:1rem 'Roboto', sans-serif;
+
 }
 .grid-main .product-spacer{
     flex: 1;
+}
+.number-container{
+
+  display: flex;
+  width: 55%;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 0.5rem;
+}
+.symbol{
+  border: none;
+  background-color: transparent;
+  padding: 0.1rem 0.5rem;
+  font-size: 1.2rem;
+  
+}
+.number:active,.number:hover{
+  border: 1px solid  rgb(252, 210, 0);
+}
+.number{
+  text-align: center;
+  color: rgb(33, 33, 33); 
+  border: 1px solid rgb(213, 217, 217);
+  border-radius: 0.6rem;
+  width: 4rem;
+  outline: none;
+  font-size: 1.1rem;
+  padding: 0.2rem 0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+
+.number ::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.number :-moz-placeholder {
+  text-align: center;
 }
