@@ -1,0 +1,127 @@
+.grid-main {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    overflow-wrap:anywhere;
+  }
+  @media (max-width: 142rem) {
+    .grid-main {
+      grid-template-columns: repeat(7, 1fr);
+    }
+  }
+
+  @media (max-width: 114rem) {
+    .grid-main {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  
+  @media (max-width: 92rem) {
+    .grid-main {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  @media (max-width: 71rem) {
+    .grid-main {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 57rem) {
+    .grid-main {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 41rem) {
+    .grid-main {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 32rem) {
+    .grid-main {
+      grid-template-columns: 1fr;
+    }
+  }
+  .grid-main .img-container {
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 1;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  .grid-main .img-container .img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.grid-main .container{
+    padding: 2.2rem 1.5rem 1.2rem 1.5rem;
+    border-right: 1px solid rgb(231, 231, 231);
+    border-bottom: 1px solid rgb(231, 231, 231);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap:1.2rem
+}
+.grid-main .product-name{
+    padding: 1rem 0;
+    height: 4.5rem;
+}
+.grid-main .product-rating-container{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0 0 1rem 0;
+}
+.grid-main .product-rating-stars{
+    width: 9rem;
+}
+.grid-main .product-rating-count {
+    padding: 0.2rem 0 0 0.2rem;
+    color: #017cb6;
+    cursor: pointer;
+}
+.grid-main .product-price{
+    font-weight: 700;
+    padding-bottom: 1rem;
+}
+.grid-main .quantity-container{
+    padding: 0.2rem;
+    color: rgb(33, 33, 33); 
+    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(213, 217, 217);
+    border-radius: 0.6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5); 
+}
+.grid-main .added-to-cart{
+    color: rgb(6, 125, 98);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    opacity: 0; 
+}
+.grid-main .added-to-cart .img{
+  height: 1.5rem;
+  padding: 0 0.5rem 0 0.2rem;
+}
+
+.grid-main .add-to-cart-button{
+    color: rgb(33, 33, 33);
+    background-color: rgb(255, 216, 20);
+    border: 1px solid rgb(252, 210, 0);
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+    padding: 0.5rem;
+    border-radius: 4rem;
+}
+.grid-main .product-spacer{
+    flex: 1;
+}
