@@ -6,35 +6,133 @@
   gap: 0.4rem;
 }
 .in {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
   padding-bottom: 0.5rem;
   color: black;
 }
 .login-container-outside {
   display: flex;
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
+
 }
 .login-container {
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid  rgb(193, 192, 192);
   padding: 1rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  gap: 1rem;
+  border-radius: 0.5rem;
 }
 .login-heading {
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 400;
   line-height: 1.2;
   padding-bottom: 0.5rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
-.Email-heading {
-  font-weight: 700;
-  padding-bottom: 0.1rem;
+.Email-heading,.input-heading {
+  font-weight: 500;
+  padding-bottom: 0.2rem;
+  padding-left: 0.2rem;
+  font-size: 1rem;
 }
-.email-input {
-  width: 80%;
-  padding: 1rem 0;
+.email-input,.password-input,.name-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  border: 1px solid  rgb(193, 192, 192);
+  outline: none;
+  border-radius: 0.4rem;
+}
+.email-input::placeholder,.password-input::placeholder,.name-input::placeholder{
+  font-size: 0.9rem;
+}
+.countinue-button{
+  background-color:  rgb(246, 213, 46);
+  padding: 0.6rem ;
+  border: none;
+  border-radius: 0.4rem;
+  height:2.2rem;
+  text-align: center;
+}
+.paragraph{
+  font-size: 0.9rem;
+    line-height: 1.5; 
+   
+}
+.link{
+  text-decoration: none;
+    color: #0066c0;
+  padding: 0 0.1rem;
+  
+}
+.link:hover,.link:active{
+  text-decoration-line:underline ;
+  color: red;
+}
+.work{
+  padding-top: 1rem;
+  line-height: 2rem;
+}
+.bottom-line{
+  border-bottom: 1px solid rgb(193, 192, 192);
+  color: aquamarine;
+}
+.center{
+  display: flex;
+  align-items: center;
+}
+.small-line{
+  display: block;
+  width: 6vw;
+  border-bottom: 1px solid  rgb(193, 192, 192);
+ 
+
+}
+.create-user-container{
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding:1rem;
+  gap: 1rem;
+}
+
+.create-button{
+  width: 70%;
+  padding: 0.6rem ;
+  font-weight: 500;
+  border: 1px solid rgb(193, 192, 192) ;
+  border-radius: 0.4rem;
+  background-color: whitesmoke;
+}
+.new{
+  color: #767676;
+  font-size: 0.9rem;
+  padding: 0 0.3rem;
+}
+.eye-icon{
+  position:absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: gray;
+}
+.relative{
+   position: relative;
+}
+
+.input-number{
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  border: 1px solid  rgb(193, 192, 192);
+  outline: none;
+  border-radius: 0.4rem;
 }

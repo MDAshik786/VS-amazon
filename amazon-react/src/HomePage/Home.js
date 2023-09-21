@@ -3,12 +3,12 @@ import Header from './Header'
 import Products from './Products'
 
 
-const Home = () => {
+const Home = ({state, dispatch}) => {
   return (
     <div>
         <Header/>
 
-        <Products/>
+        <Products state={state} dispatch={dispatch}/>
     </div>
   )
 }

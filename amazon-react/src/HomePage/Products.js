@@ -1,33 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { product } from "../Datas__/Arrays";
 import "./Products.css";
-const Products = () => {
-  const [quantity, setQuantity] = useState({});
+import { ACTION } from "../Reducer__/FormReducer";
+const Products = ({state, dispatch}) => {
   const moveToCart = (id) => {};
-  const handelOnChange = (e) => {
-    setQuantity(e.target.value);
-  };
+
   const handelOnClick = (e, key) => {
     const { name } = e.target;
-    setQuantity((prevQuantity) => {
-      const updatedQuantity = { ...prevQuantity };
-    console.log(updatedQuantity,"const")
-      if (name === "increase") {
-        updatedQuantity[key] = (updatedQuantity[key] || 1) + 1;
-      } else {
-        updatedQuantity[key] = Math.max((updatedQuantity[key] || 1) - 1, 1);
-      }
-  
-      return updatedQuantity;
-    });
-  
-    console.log(key, quantity, "object");
+    dispatch({
+      type:ACTION.COUNTNAME,
+      payload:{name,key }
+    })
   };
   
   const handleQuanttiy = (key, e) => {
-    let value = (e.target.value);
-    setQuantity({ ...quantity, [key]: Number(value) });
-    console.log(quantity);
+    dispatch({
+      type:ACTION.PRODUCTCOUNT,
+      payload:{value:e.target.value,key}
+    })
   };
   return (
     <div>
@@ -63,7 +53,8 @@ const Products = () => {
                 <input
                   type="number"
                   className="number"
-                  value={quantity[product.id] == null ? 1: quantity[product.id]}
+                  value={(state.productCount[product.id] == null ) ? 1: state.productCount[product.id] }
+                  onBlur={(e) => e.target.value == '' ? (e.target.value = 1) : null}
                   onChange={(e) => handleQuanttiy(product.id, e)}
                 />
                 <button
