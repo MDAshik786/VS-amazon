@@ -1,4 +1,5 @@
 export const ACTION = {
+  GETDATA: "getdata",
   HANDELONCHANGE: "handelOnChange",
   EMAIL: "email",
   PASSWORD: "password",
@@ -13,6 +14,7 @@ export const InitialValue = {
   password: "",
   passwordVisible: false,
   wishList: {},
+  getApiData:[],
   productCount: {},
 };
 export const FormReducer = (state, action) => {
@@ -48,13 +50,14 @@ export const FormReducer = (state, action) => {
   };
   case ACTION.WISHLIST:
     return {
+      ...state,wishList: action.payload.data
+    } 
+  case ACTION.GETDATA:
+    console.log(action.payload.data,"action")
+    return{
       ...state,
-      wishList: {
-      ...state.wishList,
-      [action.payload.key]:state.wishList[action.payload.key] ? !state.wishList[action.payload.key] : true 
-      },
+      getApiData: action.payload.data
     }
-
     default:
       return state;
   }
