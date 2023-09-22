@@ -10,12 +10,12 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "socks",
+        "keyword": "socks"
       },
       {
-        "keyword": "sports",
-      },
-    ],
+        "keyword": "sports"
+      }
+    ]
   },
   {
     "name": "Intermediate Size Basketball",
@@ -28,12 +28,12 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "sports",
+        "keyword": "sports"
       },
       {
-        "keyword": "basketballs",
-      },
-    ],
+        "keyword": "basketballs"
+      }
+    ]
   },
   {
     "name": "Adults Plain Cotton T-Shirt - 2 Pack",
@@ -46,15 +46,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "tshirts",
+        "keyword": "tshirts"
       },
       {
-        "keyword": "apparel",
+        "keyword": "apparel"
       },
       {
-        "keyword": "mens",
-      },
-    ],
+        "keyword": "mens"
+      }
+    ]
   },
   {
     "name": "2 Slot Toaster - Black",
@@ -67,15 +67,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "toaster",
+        "keyword": "toaster"
       },
       {
-        "keyword": "kitchen",
+        "keyword": "kitchen"
       },
       {
-        "keyword": "appliances",
-      },
-    ],
+        "keyword": "appliances"
+      }
+    ]
   },
   {
     "name": "6 Piece White Dinner Plate Set",
@@ -88,15 +88,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "plates",
+        "keyword": "plates"
       },
       {
-        "keyword": "kitchen",
+        "keyword": "kitchen"
       },
       {
-        "keyword": "dining",
-      },
-    ],
+        "keyword": "dining"
+      }
+    ]
   },
   {
     "name": "6-Piece Nonstick, Carbon Steel Oven Bakeware Baking Set",
@@ -109,12 +109,12 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "kitchen",
+        "keyword": "kitchen"
       },
       {
-        "keyword": "cookware",
-      },
-    ],
+        "keyword": "cookware"
+      }
+    ]
   },
   {
     "name": "Plain Hooded Fleece Sweatshirt",
@@ -127,15 +127,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "hoodies",
+        "keyword": "hoodies"
       },
       {
-        "keyword": "sweaters",
+        "keyword": "sweaters"
       },
       {
-        "keyword": "apparel",
-      },
-    ],
+        "keyword": "apparel"
+      }
+    ]
   },
   {
     "name": "Luxury Towel Set - Graphite Gray",
@@ -148,21 +148,21 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "bathroom",
+        "keyword": "bathroom"
       },
       {
-        "keyword": "washroom",
+        "keyword": "washroom"
       },
       {
-        "keyword": "restroom",
+        "keyword": "restroom"
       },
       {
-        "keyword": "towels",
+        "keyword": "towels"
       },
       {
-        "keyword": "bath towels",
-      },
-    ],
+        "keyword": "bath towels"
+      }
+    ]
   },
   {
     "name": "Liquid Laundry Detergent, 110 Loads, 82.5 Fl Oz",
@@ -175,12 +175,12 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "bathroom",
+        "keyword": "bathroom"
       },
       {
-        "keyword": "cleaning",
-      },
-    ],
+        "keyword": "cleaning"
+      }
+    ]
   },
   {
     "name": "Waterproof Knit Athletic Sneakers - Gray",
@@ -193,15 +193,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "shoes",
+        "keyword": "shoes"
       },
       {
-        "keyword": "running shoes",
+        "keyword": "running shoes"
       },
       {
-        "keyword": "footwear",
-      },
-    ],
+        "keyword": "footwear"
+      }
+    ]
   },
   {
     "name": "Women's Chiffon Beachwear Cover Up - Black",
@@ -214,21 +214,21 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "robe",
+        "keyword": "robe"
       },
       {
-        "keyword": "swimsuit",
+        "keyword": "swimsuit"
       },
       {
-        "keyword": "swimming",
+        "keyword": "swimming"
       },
       {
-        "keyword": "bathing",
+        "keyword": "bathing"
       },
       {
-        "keyword": "apparel",
-      },
-    ],
+        "keyword": "apparel"
+      }
+    ]
   },
   {
     "name": "Round Sunglasses",
@@ -241,12 +241,12 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "accessories",
+        "keyword": "accessories"
       },
       {
-        "keyword": "shades",
-      },
-    ],
+        "keyword": "shades"
+      }
+    ]
   },
   {
     "name": "Women's Two Strap Buckle Sandals - Tan",
@@ -259,21 +259,21 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "footwear",
+        "keyword": "footwear"
       },
       {
-        "keyword": "sandals",
+        "keyword": "sandals"
       },
       {
-        "keyword": "womens",
+        "keyword": "womens"
       },
       {
-        "keyword": "beach",
+        "keyword": "beach"
       },
       {
-        "keyword": "summer",
-      },
-    ],
+        "keyword": "summer"
+      }
+    ]
   },
   {
     "name": "Blackout Curtains Set 4-Pack - Beige",
@@ -286,15 +286,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "bedroom",
+        "keyword": "bedroom"
       },
       {
-        "keyword": "curtains",
+        "keyword": "curtains"
       },
       {
-        "keyword": "home",
-      },
-    ],
+        "keyword": "home"
+      }
+    ]
   },
   {
     "name": "Men's Slim-Fit Summer Shorts",
@@ -307,15 +307,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "shorts",
+        "keyword": "shorts"
       },
       {
-        "keyword": "apparel",
+        "keyword": "apparel"
       },
       {
-        "keyword": "mens",
-      },
-    ],
+        "keyword": "mens"
+      }
+    ]
   },
   {
     "name": "Electric Glass and Steel Hot Tea Water Kettle - 1.7-Liter",
@@ -329,15 +329,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "water boiler",
+        "keyword": "water boiler"
       },
       {
-        "keyword": "appliances",
+        "keyword": "appliances"
       },
       {
-        "keyword": "kitchen",
-      },
-    ],
+        "keyword": "kitchen"
+      }
+    ]
   },
   {
     "name": "Ultra Soft Tissue 2-Ply - 18 Box",
@@ -350,21 +350,21 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "kleenex",
+        "keyword": "kleenex"
       },
       {
-        "keyword": "tissues",
+        "keyword": "tissues"
       },
       {
-        "keyword": "kitchen",
+        "keyword": "kitchen"
       },
       {
-        "keyword": "tissues box",
+        "keyword": "tissues box"
       },
       {
-        "keyword": "napkins",
-      },
-    ],
+        "keyword": "napkins"
+      }
+    ]
   },
   {
     "name": "Straw Lifeguard Sun Hat",
@@ -377,18 +377,18 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "hats",
+        "keyword": "hats"
       },
       {
-        "keyword": "straw hats",
+        "keyword": "straw hats"
       },
       {
-        "keyword": "summer",
+        "keyword": "summer"
       },
       {
-        "keyword": "apparel",
-      },
-    ],
+        "keyword": "apparel"
+      }
+    ]
   },
   {
     "name": "Sterling Silver Sky Flower Stud Earrings",
@@ -402,15 +402,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "jewelry",
+        "keyword": "jewelry"
       },
       {
-        "keyword": "accessories",
+        "keyword": "accessories"
       },
       {
-        "keyword": "womens",
-      },
-    ],
+        "keyword": "womens"
+      }
+    ]
   },
   {
     "name": "Women's Stretch Popover Hoodie",
@@ -424,21 +424,21 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "hooded",
+        "keyword": "hooded"
       },
       {
-        "keyword": "hoodies",
+        "keyword": "hoodies"
       },
       {
-        "keyword": "sweaters",
+        "keyword": "sweaters"
       },
       {
-        "keyword": "womens",
+        "keyword": "womens"
       },
       {
-        "keyword": "apparel",
-      },
-    ],
+        "keyword": "apparel"
+      }
+    ]
   },
   {
     "name": "Bathroom Bath Rug Mat 20 x 31 Inch - Grey",
@@ -451,15 +451,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "bathmat",
+        "keyword": "bathmat"
       },
       {
-        "keyword": "bathroom",
+        "keyword": "bathroom"
       },
       {
-        "keyword": "home",
-      },
-    ],
+        "keyword": "home"
+      }
+    ]
   },
   {
     "name": "Women's Knit Ballet Flat",
@@ -472,18 +472,18 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "shoes",
+        "keyword": "shoes"
       },
       {
-        "keyword": "flats",
+        "keyword": "flats"
       },
       {
-        "keyword": "womens",
+        "keyword": "womens"
       },
       {
-        "keyword": "footwear",
-      },
-    ],
+        "keyword": "footwear"
+      }
+    ]
   },
   {
     "name": "Men's Regular-Fit Quick-Dry Golf Polo Shirt",
@@ -496,18 +496,18 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "tshirts",
+        "keyword": "tshirts"
       },
       {
-        "keyword": "shirts",
+        "keyword": "shirts"
       },
       {
-        "keyword": "apparel",
+        "keyword": "apparel"
       },
       {
-        "keyword": "mens",
-      },
-    ],
+        "keyword": "mens"
+      }
+    ]
   },
   {
     "name": "Trash Can with Foot Pedal - Brushed Stainless Steel",
@@ -521,18 +521,18 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "garbage",
+        "keyword": "garbage"
       },
       {
-        "keyword": "bins",
+        "keyword": "bins"
       },
       {
-        "keyword": "cans",
+        "keyword": "cans"
       },
       {
-        "keyword": "kitchen",
-      },
-    ],
+        "keyword": "kitchen"
+      }
+    ]
   },
   {
     "name": "Duvet Cover Set with Zipper Closure",
@@ -545,21 +545,21 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "bedroom",
+        "keyword": "bedroom"
       },
       {
-        "keyword": "bed sheets",
+        "keyword": "bed sheets"
       },
       {
-        "keyword": "sheets",
+        "keyword": "sheets"
       },
       {
-        "keyword": "covers",
+        "keyword": "covers"
       },
       {
-        "keyword": "home",
-      },
-    ],
+        "keyword": "home"
+      }
+    ]
   },
   {
     "name": "Women's Chunky Cable Beanie - Gray",
@@ -572,24 +572,24 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "hats",
+        "keyword": "hats"
       },
       {
-        "keyword": "winter hats",
+        "keyword": "winter hats"
       },
       {
-        "keyword": "beanies",
+        "keyword": "beanies"
       },
       {
-        "keyword": "tuques",
+        "keyword": "tuques"
       },
       {
-        "keyword": "apparel",
+        "keyword": "apparel"
       },
       {
-        "keyword": "womens",
-      },
-    ],
+        "keyword": "womens"
+      }
+    ]
   },
   {
     "name": "Men's Classic-fit Pleated Chino Pants",
@@ -602,15 +602,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "pants",
+        "keyword": "pants"
       },
       {
-        "keyword": "apparel",
+        "keyword": "apparel"
       },
       {
-        "keyword": "mens",
-      },
-    ],
+        "keyword": "mens"
+      }
+    ]
   },
   {
     "name": "Men's Athletic Sneaker",
@@ -623,18 +623,18 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "shoes",
+        "keyword": "shoes"
       },
       {
-        "keyword": "running shoes",
+        "keyword": "running shoes"
       },
       {
-        "keyword": "footwear",
+        "keyword": "footwear"
       },
       {
-        "keyword": "mens",
-      },
-    ],
+        "keyword": "mens"
+      }
+    ]
   },
   {
     "name": "Men's Navigator Sunglasses Pilot",
@@ -647,18 +647,18 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "sunglasses",
+        "keyword": "sunglasses"
       },
       {
-        "keyword": "glasses",
+        "keyword": "glasses"
       },
       {
-        "keyword": "accessories",
+        "keyword": "accessories"
       },
       {
-        "keyword": "shades",
-      },
-    ],
+        "keyword": "shades"
+      }
+    ]
   },
   {
     "name": "Non-Stick Cookware Set, Pots, Pans and Utensils - 15 Pieces",
@@ -672,12 +672,12 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "cooking set",
+        "keyword": "cooking set"
       },
       {
-        "keyword": "kitchen",
-      },
-    ],
+        "keyword": "kitchen"
+      }
+    ]
   },
   {
     "name": "Vanity Mirror with Heavy Base - Chrome",
@@ -690,16 +690,17 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "bathroom",
+        "keyword": "bathroom"
       },
-      { "keyword": "washroom" },
+      { "keyword": "washroom" 
+    },
       {
-        "keyword": "mirrors",
+        "keyword": "mirrors"
       },
       {
-        "keyword": "home",
-      },
-    ],
+        "keyword": "home"
+      }
+    ]
   },
   {
     "name": "Women's Fleece Jogger Sweatpant",
@@ -712,21 +713,21 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "pants",
+        "keyword": "pants"
       },
       {
-        "keyword": "sweatpants",
+        "keyword": "sweatpants"
       },
       {
-        "keyword": "jogging",
+        "keyword": "jogging"
       },
       {
-        "keyword": "apparel",
+        "keyword": "apparel"
       },
       {
-        "keyword": "womens",
-      },
-    ],
+        "keyword": "womens"
+      }
+    ]
   },
   {
     "name": "Double Oval Twist French Wire Earrings - Gold",
@@ -739,12 +740,12 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "accessories",
+        "keyword": "accessories"
       },
       {
-        "keyword": "womens",
-      },
-    ],
+        "keyword": "womens"
+      }
+    ]
   },
   {
     "name": "Round Airtight Food Storage Containers - 5 Piece",
@@ -757,15 +758,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "boxes",
+        "keyword": "boxes"
       },
       {
-        "keyword": "food containers",
+        "keyword": "food containers"
       },
       {
-        "keyword": "kitchen",
-      },
-    ],
+        "keyword": "kitchen"
+      }
+    ]
   },
   {
     "name": "Coffeemaker with Glass Carafe and Reusable Filter - 25 Oz, Black",
@@ -778,15 +779,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "coffeemakers",
+        "keyword": "coffeemakers"
       },
       {
-        "keyword": "kitchen",
+        "keyword": "kitchen"
       },
       {
-        "keyword": "appliances",
-      },
-    ],
+        "keyword": "appliances"
+      }
+    ]
   },
   {
     "name": "Blackout Curtains Set 42 x 84-Inch - Black, 2 Panels",
@@ -800,12 +801,12 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "bedroom",
+        "keyword": "bedroom"
       },
       {
-        "keyword": "home",
-      },
-    ],
+        "keyword": "home"
+      }
+    ]
   },
   {
     "name": "100% Cotton Bath Towels - 2 Pack, Light Teal",
@@ -818,15 +819,15 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "bathroom",
+        "keyword": "bathroom"
       },
       {
-        "keyword": "home",
+        "keyword": "home"
       },
       {
-        "keyword": "towels",
-      },
-    ],
+        "keyword": "towels"
+      }
+    ]
   },
   {
     "name": "Waterproof Knit Athletic Sneakers - Pink",
@@ -839,18 +840,18 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "shoes",
+        "keyword": "shoes"
       },
       {
-        "keyword": "running shoes",
+        "keyword": "running shoes"
       },
       {
-        "keyword": "footwear",
+        "keyword": "footwear"
       },
       {
-        "keyword": "womens",
-      },
-    ],
+        "keyword": "womens"
+      }
+    ]
   },
   {
     "name": "Countertop Blender - 64oz, 1400 Watts",
@@ -864,14 +865,14 @@ const datas = [
     "size": "Not specified",
     "keywords": [
       {
-        "keyword": "food blenders",
+        "keyword": "food blenders"
       },
       {
-        "keyword": "kitchen",
+        "keyword": "kitchen"
       },
       {
-        "keyword": "appliances",
-      },
-    ],
-  },
+        "keyword": "appliances"
+      }
+    ]
+  }
 ];
