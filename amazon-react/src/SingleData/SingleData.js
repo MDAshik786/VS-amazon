@@ -1,12 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router";
 import { GrLocation } from "react-icons/gr";
 import { AiFillLock } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 
 import "./SingleData.css";
-const SingleData = () => {
+import { ACTION } from "../Reducer__/FormReducer";
+const SingleData = ({ state, dispatch }) => {
   const location = useLocation();
   const product = location.state.product;
+
+  const checkWishList = (key) => {
+    if (!localStorage.getItem("wishItems")) {
+      localStorage.setItem("wishItems", JSON.stringify({}));
+    }
+    let prevState = JSON.parse(localStorage.getItem("wishItems"));
+    localStorage.setItem(
+      "wishItems",
+      JSON.stringify({
+        ...prevState,
+        [key]: prevState[key] === undefined ? true : !prevState[key],
+      })
+    );
+    let res = JSON.parse(localStorage.getItem("wishItems"));
+    console.log(res);
+    dispatch({
+      type: ACTION.WISHLIST,
+      payload: { data: res },
+    });
+  };
+  useEffect(() => {
+    const savedWishlist = localStorage.getItem("wishlist");
+    console.log(savedWishlist, "save  ");
+    if (localStorage.getItem("wishItems")) {
+      dispatch({
+        type: ACTION.WISHLIST,
+        payload: { data: JSON.parse(localStorage.getItem("wishItems")) },
+      });
+    }
+  }, []);
+
   return (
     <div className="single-main-box">
       <div className="single-container">
@@ -18,7 +52,7 @@ const SingleData = () => {
           <div className="single-rating">
             <img
               className="product-rating-stars"
-              src={`images/ratings/rating-${product.ratingstar* 10}.png`}
+              src={`images/ratings/rating-${product.ratingstar * 10}.png`}
               alt={`Rating: ${product.ratingstar}`}
             />
             <p className="single-rating-count">{product.ratingcount} rating</p>
@@ -35,9 +69,10 @@ const SingleData = () => {
           </div>
           <div>
             {" "}
-            <p className="single-price">
-              ${(product.priceCents / 100).toFixed(2)}
-            </p>
+            <div className="single-price">
+              <span className="single-symbol-icon">₹</span>
+              {product.priceIndia}.00
+            </div>
             <span className="link paragraph">Convert to Indian currency.</span>
           </div>
           <div className="Fulfilled">
@@ -53,7 +88,9 @@ const SingleData = () => {
           <div className="description-container">
             <p className="about-heading">About:</p>
             <p className="about-content"> {product.description}</p>
-            <p className="about-content">{product.size === 'Not specified' ? '' : product.size}</p>
+            <p className="about-content">
+              {product.size === "Not specified" ? "" : product.size}
+            </p>
           </div>
           <p className="bottom-line"></p>
           <div className="image-container">
@@ -115,11 +152,19 @@ const SingleData = () => {
             </div>
           </div>
           <p className="bottom-line"></p>
+          <div className="absolute" onClick={() => checkWishList(product.id)}>
+            {state.wishList[product.id] ? (
+              <AiFillHeart className="single-wishlist-img-true" />
+            ) : (
+              <AiOutlineHeart className="single-wishlist-img" />
+            )}
+          </div>
         </div>
         <div className="single-right-div">
-          <p className="single-price">
-            ${(product.priceCents / 100).toFixed(2)}
-          </p>
+          <div className="single-price">
+            <span className="single-symbol-icon">₹</span>
+            {product.priceIndia}.00
+          </div>
           <div className="Fulfilled">
             <button className="Fulfilled-button">
               <img

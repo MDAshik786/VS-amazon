@@ -8,7 +8,7 @@ export const ACTION = {
   COUNTNAME:"countName",
   WISHLIST:"wishList"
 };
-
+// ₹
 export const InitialValue = {
   email: "",
   password: "",
