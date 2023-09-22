@@ -4,13 +4,15 @@ export const ACTION = {
   PASSWORD: "password",
   VISIBLE: "passwordVisible",
   PRODUCTCOUNT: "productCount",
-  COUNTNAME:"countName"
+  COUNTNAME:"countName",
+  WISHLIST:"wishList"
 };
 
 export const InitialValue = {
   email: "",
   password: "",
   passwordVisible: false,
+  wishList: {},
   productCount: {},
 };
 export const FormReducer = (state, action) => {
@@ -44,6 +46,14 @@ export const FormReducer = (state, action) => {
     ...state,
     productCount: updatedQuantity, 
   };
+  case ACTION.WISHLIST:
+    return {
+      ...state,
+      wishList: {
+      ...state.wishList,
+      [action.payload.key]:state.wishList[action.payload.key] ? !state.wishList[action.payload.key] : true 
+      },
+    }
 
     default:
       return state;

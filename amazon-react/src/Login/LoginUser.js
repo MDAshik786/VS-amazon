@@ -58,6 +58,7 @@ const LoginUser = ({state,dispatch}) => {
               placeholder="Enter Your Password"
             
             />
+            <span className='error'>Passwords must be at least 6 characters.</span>
            {state.passwordVisible ? <FiEyeOff className='eye-icon' onClick={passwordVisible}/> : <FiEye className='eye-icon' name='visible' onClick={passwordVisible}/> }    
             </div>
           </div>

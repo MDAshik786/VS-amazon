@@ -3,6 +3,8 @@
     grid-template-columns: repeat(8, 1fr);
     overflow-wrap:anywhere;
     font:1rem 'Roboto', sans-serif;
+    
+   
   }
   @media (max-width: 142rem) {
     .grid-main {
@@ -68,11 +70,19 @@
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
-    gap:1.2rem
+    gap:0.8rem;
+    position: relative;
+
 }
 .grid-main .product-name{
     padding: 1rem 0;
     height: 4.5rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    
+}
+.product-name:hover,.product-name:active{
+  color: rgb(244, 71, 71);
 }
 .grid-main .product-rating-container{
     display: flex;
@@ -168,4 +178,23 @@ input::-webkit-inner-spin-button {
 
 .number :-moz-placeholder {
   text-align: center;
+}
+.absolute{
+  position: absolute;
+  top:0.2rem;
+   right:0.4rem; 
+   
+}
+.wishlist-img{
+  /* position: absolute;
+  top: 0.2rem;
+  right: 0.4rem; */
+  width: 2rem;
+  height: 2rem;
+  color: gray;
+}
+.wishlist-img-true{
+  height: 2rem;
+  width: 2rem;
+  color: red;
 }

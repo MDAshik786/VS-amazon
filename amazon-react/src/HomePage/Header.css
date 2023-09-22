@@ -13,6 +13,7 @@ a{
     left: 0;
     right: 0;
     height: 5rem;
+    z-index: 2;
 }
 .left-header .logo{
     display: inline;
