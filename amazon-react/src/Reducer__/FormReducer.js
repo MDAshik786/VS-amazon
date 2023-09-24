@@ -6,7 +6,8 @@ export const ACTION = {
   VISIBLE: "passwordVisible",
   PRODUCTCOUNT: "productCount",
   COUNTNAME:"countName",
-  WISHLIST:"wishList"
+  WISHLIST:"wishList",
+  CURRENCY:"currency"
 };
 // ₹
 export const InitialValue = {
@@ -16,6 +17,8 @@ export const InitialValue = {
   wishList: {},
   getApiData:[],
   productCount: {},
+  currency:true,
+
 };
 export const FormReducer = (state, action) => {
   switch (action.type) {
@@ -58,7 +61,13 @@ export const FormReducer = (state, action) => {
       ...state,
       getApiData: action.payload.data
     }
+    case ACTION.LANGUAGE:
     default:
       return state;
+   case ACTION.CURRENCY:
+    return{
+      ...state,
+      currency: !state.currency
+    }   
   }
 };

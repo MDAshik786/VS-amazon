@@ -44,6 +44,7 @@
     width: 20%;
     gap: 1.5rem;
     padding: 1rem;
+    border-radius: 0.5rem;
 }
 .single-price{
     display: flex;
@@ -85,7 +86,7 @@
 .image-container .single-img{
     width: 50%;
 }
-.image-container .img-text{
+.img-text{
     font-size: 0.9rem;
     text-align: center;
     color: #007185;
@@ -163,4 +164,21 @@
     color: #007185;
     padding-right:1px;
     padding-bottom: 0.2rem;
+}
+.single-absolute{
+    position: absolute;
+    left:-15%;
+    top:0.5rem;
+    border: 1px solid rgb(194, 193, 193);
+    padding: 0.6rem;
+    border-radius: 1.9rem;
+    display: flex;
+}
+.lock-icon{
+    width: 2rem;
+    height: 1.4rem;
+}
+.paragraph-div{
+    display: flex;
+    align-items: center;
 }

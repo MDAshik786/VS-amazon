@@ -1,9 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff} from "react-icons/fi";
 import { ACTION } from '../Reducer__/FormReducer';
+import axios from 'axios';
+import { userApiUrl } from '../Utils__/apiUrl';
 const LoginPassword = ({state,dispatch}) => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const email = location.state.email
   const handelOnChange = (e) => {
     dispatch({
       type:ACTION.HANDELONCHANGE,
@@ -14,6 +19,21 @@ const LoginPassword = ({state,dispatch}) => {
     dispatch({
       type:ACTION.VISIBLE
     })
+  }
+  const loginPasswordVerification = async () => {
+    try{
+      const response = await axios.post(`${userApiUrl}/password`,{email ,password:state.password},{
+        headers:{
+          "content-Type" : "application/json",
+         },
+      })
+      console.log(response.data,"pass")
+      if(response.data === 'verified')
+      navigate("/",{state:{loginVerification:true}})
+    }
+    catch(e){
+      console.log(e)
+    }
   }
   return (
     <div>
@@ -40,7 +60,7 @@ const LoginPassword = ({state,dispatch}) => {
            {state.passwordVisible ? <FiEyeOff className='eye-icon' onClick={passwordVisible}/> : <FiEye className='eye-icon' name='visible' onClick={passwordVisible}/> }    
             </div>
           </div>
-          <button className="countinue-button">Sign in</button>
+          <button className="countinue-button" onClick={loginPasswordVerification}>Sign in</button>
           <p className="paragraph">
             <a className="link">Forgot Password</a>
           </p>

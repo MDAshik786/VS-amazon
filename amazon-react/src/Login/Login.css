@@ -45,10 +45,11 @@
 .email-input,.password-input,.name-input {
   width: 100%;
   padding: 0.5rem;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   border: 1px solid  rgb(193, 192, 192);
   outline: none;
   border-radius: 0.4rem;
+  letter-spacing: 0.5px;
 }
 .email-input::placeholder,.password-input::placeholder,.name-input::placeholder{
   font-size: 0.9rem;

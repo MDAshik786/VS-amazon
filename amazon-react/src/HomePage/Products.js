@@ -3,10 +3,13 @@ import "./Products.css";
 import { ACTION } from "../Reducer__/FormReducer";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { apiUrl } from "../Utils__/apiUrl";
 import axios from "axios";
+import ProductCount from "./ProductCount";
 const Products = ({ state, dispatch }) => {
+  const location = useLocation()
+  const loginVerification = location?.state?.loginVerification;
   const getData = async () => {
     try {
       const response = await axios.get(`${apiUrl}/get`);
@@ -34,25 +37,17 @@ const Products = ({ state, dispatch }) => {
       });
     }
   }, []);
-  const moveToCart = (id) => {};
-
-  const handelOnClick = (e, key) => {
-    const { name } = e.target;
-    dispatch({
-      type: ACTION.COUNTNAME,
-      payload: { name, key },
-    });
+  const moveToCart = (id) => {
+    console.log(loginVerification, id)
+    if(loginVerification){
+    }
+    else{
+      navigate("/loginemail")
+    }
   };
 
-  const handleQuanttiy = (key, e) => {
-    dispatch({
-      type: ACTION.PRODUCTCOUNT,
-      payload: { value: e.target.value, key },
-    });
-  };
   const checkWishList = (key) => {
-    console.log("first");
-
+    if(loginVerification){
     if (!localStorage.getItem("wishItems")) {
       localStorage.setItem("wishItems", JSON.stringify({}));
     }
@@ -70,6 +65,9 @@ const Products = ({ state, dispatch }) => {
       type: ACTION.WISHLIST,
       payload: { data: res },
     });
+  }
+  else
+  navigate("/loginemail")
   };
   const singlePage = (product) => {
     navigate("/single", { state: { product } });
@@ -108,35 +106,8 @@ const Products = ({ state, dispatch }) => {
                   <span className="symbol-icon">₹</span>
                   <span className="price-rate">{product.priceIndia}.00</span>
                 </div>
-                <div className="number-container">
-                  <button
-                    className="symbol"
-                    name="decrease"
-                    onClick={(e) => handelOnClick(e, product.id)}
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    className="number"
-                    value={
-                      state.productCount[product.id] == null
-                        ? 1
-                        : state.productCount[product.id]
-                    }
-                    onBlur={(e) =>
-                      e.target.value == "" ? (e.target.value = 1) : null
-                    }
-                    onChange={(e) => handleQuanttiy(product.id, e)}
-                  />
-                  <button
-                    className="symbol"
-                    name="increase"
-                    onClick={(e) => handelOnClick(e, product.id)}
-                  >
-                    +
-                  </button>
-                </div>
+                <ProductCount state={state} dispatch={dispatch} product={product}/>
+                
                 <div
                   id={`added-to-cart-${product.id}`}
                   className="added-to-cart"
@@ -164,7 +135,7 @@ const Products = ({ state, dispatch }) => {
                   ) : (
                     <AiOutlineHeart className="wishlist-img" />
                   )}
-                </div>
+                </div>    
               </div>
             );
           })}

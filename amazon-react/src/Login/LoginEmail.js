@@ -1,15 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { ACTION, InitialValue } from "../Reducer__/FormReducer";
+import axios from "axios";
+import { userApiUrl } from "../Utils__/apiUrl";
 
 const LoginEmail = ({state,dispatch}) => {
-
+   const navigate = useNavigate()
   const handelOnChange = (e) => {
     dispatch({
       type: ACTION.HANDELONCHANGE,
       payload:{value:e.target.value,name:e.target.name}
     })
+  }
+  const loginEmailVerification = async() => {
+    try{
+      const response = await axios.post(`${userApiUrl}/email`,{email:state.email},{
+       headers:{
+        "content-Type" : "application/json",
+       },
+      })
+      console.log(response.data)
+      if(response.data === 'verified')
+      navigate("/loginpassword",{state:{loginEmail:true,email:state.email}})
+    }
+    catch(e){
+      console.log(e)
+    }
   }
  console.log(state,"state") 
   return (
@@ -35,7 +52,7 @@ const LoginEmail = ({state,dispatch}) => {
               onChange={handelOnChange}
             />
           </div>
-          <button className="countinue-button">Continue</button>
+          <button className="countinue-button" onClick={loginEmailVerification}>Continue</button>
           <p className="paragraph">
             By countinuing, you agree to Amazon's{" "}
             <a className="link">Condition to Use</a> and{" "}
