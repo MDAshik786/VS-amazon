@@ -49,7 +49,7 @@ const SingleData = ({ state, dispatch }) => {
 
   return (
     <>
-      <Header />
+      <Header state={state}/>
       <div className="single-main-box">
         <div className="single-container">
           <div className="simg-container">

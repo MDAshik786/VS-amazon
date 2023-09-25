@@ -13,7 +13,6 @@ const Products = ({ state, dispatch }) => {
   const getData = async () => {
     try {
       const response = await axios.get(`${apiUrl}/get`);
-      console.log(response.data, "responsedata");
       dispatch({
         type: ACTION.GETDATA,
         payload: { data: response.data },
@@ -25,27 +24,63 @@ const Products = ({ state, dispatch }) => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("aa");
     getData();
-
-    const savedWishlist = localStorage.getItem("wishlist");
-    console.log(savedWishlist, "save  ");
+    state.productCount =''
     if (localStorage.getItem("wishItems")) {
       dispatch({
         type: ACTION.WISHLIST,
         payload: { data: JSON.parse(localStorage.getItem("wishItems")) },
       });
     }
+
+    if(localStorage.getItem("addToCart")){
+      dispatch({
+        type:ACTION.ADDTOCART,
+        payload:{data:JSON.parse(localStorage.getItem("addToCart"))}
+      })
+    }
   }, []);
-  const moveToCart = (id) => {
-    console.log(loginVerification, id)
+  const moveToCart = (product,quantity) => {
+      let productQuantity = 1
+      if(quantity)
+      productQuantity = quantity
+
     if(loginVerification){
+      if (localStorage.getItem("addToCart") === null) {
+        localStorage.setItem("addToCart", JSON.stringify([]));
+        let prevState = JSON.parse(localStorage.getItem("addToCart"));
+        console.log("prevState 1",prevState);
+      }
+     const identifyId = JSON.parse(localStorage.getItem("addToCart")).filter((data) => 
+              data.productId === product.id
+     )
+      let object = {
+        productId:product.id,
+        name:product.name,
+        image:product.image,
+        priceCents:product.priceCents,
+        priceIndia:product.priceIndia,
+        ratingstar:product.ratingstar,
+        ratingcount:product.ratingcount,
+        totalQuantity:product.quantity,
+        userQuantity:productQuantity,
+        description:product.description,
+        size:product.size,
+      }
+      let prevState = JSON.parse(localStorage.getItem("addToCart"));
+      console.log("prevState 2",prevState);
+      localStorage.setItem("addToCart",JSON.stringify([...prevState,object]))
+      let res = JSON.parse(localStorage.getItem("addToCart"));
+      console.log(res,"resss")
+      dispatch({
+        type:ACTION.ADDTOCART,
+        payload:{data:res}
+      })
     }
     else{
       navigate("/loginemail")
     }
   };
-
   const checkWishList = (key) => {
     if(loginVerification){
     if (!localStorage.getItem("wishItems")) {
@@ -60,7 +95,6 @@ const Products = ({ state, dispatch }) => {
       })
     );
     let res = JSON.parse(localStorage.getItem("wishItems"));
-    console.log(res);
     dispatch({
       type: ACTION.WISHLIST,
       payload: { data: res },
@@ -121,8 +155,7 @@ const Products = ({ state, dispatch }) => {
                 </div>
                 <button
                   className="add-to-cart-button button-primary"
-                  //   data-product-id={product.id}
-                  onClick={() => moveToCart(product.id)}
+                  onClick={() => moveToCart(product,state.productCount[product.id])}
                 >
                   Add to Cart
                 </button>

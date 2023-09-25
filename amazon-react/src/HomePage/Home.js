@@ -6,7 +6,7 @@ import Products from './Products'
 const Home = ({state, dispatch}) => {
   return (
     <div>
-        <Header/>
+        <Header state={state}/>
 
         <Products state={state} dispatch={dispatch}/>
     </div>

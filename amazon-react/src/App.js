@@ -15,7 +15,7 @@ function App() {
   const [state, dispatch] = useReducer(FormReducer, InitialValue);
   return (<Routes>
     <Route path='/' element={<Home state={state} dispatch={dispatch}/>}/>
-    <Route path='/cart' element={<Cart/>}/>
+    <Route path='/cart' element={<Cart state={state} dispatch={dispatch}/>}/>
     <Route path='/loginemail' element={<LoginEmail state={state} dispatch={dispatch}/>}/>
     <Route path='/loginpassword' element={<LoginPassword state={state} dispatch={dispatch}/>}/>
     <Route path='/userlogin' element={<LoginUser state={state} dispatch={dispatch}/>}/>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './Header.css'
-const Header = () => {
+const Header = ({state}) => {
   return (
     <div className="header">
         <div className="left-header">
@@ -22,7 +22,7 @@ const Header = () => {
             </Link>
             <Link to={'/cart'} className="cart">
                 <img src="images/icons/cart-icon.png" alt="" className="img"/>
-                <span className="cart-quantity" id="cq"></span>
+                <span className="cart-quantity" id="cq">{state.addToCart?.length}</span>
                 <span className="cart-text">Cart</span>
             </Link>
         </div>

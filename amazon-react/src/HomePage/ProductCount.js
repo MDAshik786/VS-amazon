@@ -1,20 +1,21 @@
 import React from "react";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../Reducer__/FormReducer";  
 
-const ProductCount = ({state,dispatch,product}) => {
-    const handelOnClick = (e, key) => {
-        const { name } = e.target;
-        dispatch({
-          type: ACTION.COUNTNAME,
-          payload: { name, key },
-        });
-      };
-      const handleQuanttiy = (key, e) => {
-        dispatch({
-          type: ACTION.PRODUCTCOUNT,
-          payload: { value: e.target.value, key },
-        });
-      };
+const ProductCount = ({ state, dispatch, product }) => {
+  product.id = product.productId ? product.productId : product.id
+  const handelOnClick = (e, key) => {
+    const { name } = e.target;
+    dispatch({
+      type: ACTION.COUNTNAME,
+      payload: { name, key },
+    });
+  };
+  const handleQuanttiy = (key, e) => {
+    dispatch({
+      type: ACTION.PRODUCTCOUNT,
+      payload: { value: e.target.value, key },
+    });
+  };
   return (
     <div className="number-container">
       <button
@@ -32,7 +33,11 @@ const ProductCount = ({state,dispatch,product}) => {
             ? 1
             : state.productCount[product.id]
         }
-        onBlur={(e) => ((e.target.value == "" || e.target.value == 0 ) ? (e.target.value = 1) : null)}
+        onBlur={(e) =>
+          e.target.value == "" || e.target.value == 0
+            ? (e.target.value = 1)
+            : null
+        }
         onChange={(e) => handleQuanttiy(product.id, e)}
       />
       <button
