@@ -100,7 +100,7 @@
 }
 .single-main-box{
     display: flex;
-    height: 90vh;
+    min-height: calc(100vh - 5rem);
     align-items: center;
 }
 .amazon-choice-button{

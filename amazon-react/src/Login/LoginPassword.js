@@ -29,7 +29,7 @@ const LoginPassword = ({state,dispatch}) => {
       })
       console.log(response.data,"pass")
       if(response.data === 'verified')
-      navigate("/",{state:{loginVerification:true}})
+      navigate("/",{state:{loginVerification:true,email}})
     }
     catch(e){
       console.log(e)

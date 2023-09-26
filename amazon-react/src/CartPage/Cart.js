@@ -10,21 +10,18 @@ const Cart = ({ state, dispatch }) => {
     });
   }, []);
   const updateQunatityValue = (id) => {
-    console.log("first");
     dispatch({
       type: ACTION.UPDATEQUANTITY,
       payload: { data: id },
     });
   };
   const saveData = (id) => {
-    console.log(id, "id");
     dispatch({
       type: ACTION.SAVEDATA,
       payload: { id },
     });
   };
   const DeleteData = (id) => {
-    console.log(id,"delete")
     dispatch({
       type:ACTION.DELETEPRODUCT,
       payload:{id}
