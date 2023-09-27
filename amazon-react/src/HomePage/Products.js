@@ -24,15 +24,11 @@ const Products = ({ state, dispatch }) => {
   };
 
   const navigate = useNavigate();
+  let favHeart = [];
   useEffect(() => {
     getData();
     state.productCount = "";
-    if (localStorage.getItem("wishItems")) {
-      dispatch({
-        type: ACTION.WISHLIST,
-        payload: { data: JSON.parse(localStorage.getItem("wishItems")) },
-      });
-    }
+   
 
     if (localStorage.getItem("addToCart")) {
       dispatch({
@@ -40,7 +36,9 @@ const Products = ({ state, dispatch }) => {
         payload: { data: JSON.parse(localStorage.getItem("addToCart")) },
       });
     }
+    getAllWishListData();
   }, []);
+
   const moveToCart = (product, quantity) => {
     let productQuantity = 1;
     if (quantity) productQuantity = quantity;
@@ -53,16 +51,14 @@ const Products = ({ state, dispatch }) => {
       let verification = true;
       const addToCartData = JSON.parse(localStorage.getItem("addToCart"));
       addToCartData.map((data) => {
-        if (data.productId === product.id){
-          data.userQuantity = Number(data.userQuantity)+ Number(productQuantity)
+        if (data.productId === product.id) {
+          data.userQuantity =
+            Number(data.userQuantity) + Number(productQuantity);
           verification = false;
         }
-      })
-      if (!verification){
-        localStorage.setItem(
-          "addToCart",
-          JSON.stringify(addToCartData)
-        )
+      });
+      if (!verification) {
+        localStorage.setItem("addToCart", JSON.stringify(addToCartData));
       }
 
       let object = {
@@ -94,70 +90,76 @@ const Products = ({ state, dispatch }) => {
       navigate("/loginemail");
     }
   };
-  const AddToWishList =async (product) => {
-     try{
-      const response = await axios.post(`${wishList}/add/${email}`,{
-        id:product.id,
-        name:product.name,
-        image:product.image,
-        priceCents:product.priceCents,
-        priceIndia:product.priceIndia,
-        totalQuantity:product.totalQuantity,
-        ratingStar:product.ratingStar,
-        ratingcount:product.ratingCount,
-        description:product.description,
-        size:product.size
-      },{
-        headers:{
-          "content-Type" : "application/json",
+  try {
+    state.wishList && state.wishList.map((data) => {
+      favHeart.push(data.id)
+    })
+    console.log("favHeart",favHeart);
+  } catch (error) {
+    
+  }
+  const AddToWishList = async (product) => {
+    try {
+      const response = await axios.post(
+        `${wishList}/add/${email}/${product.id}`,
+        {
+          id: product.id,
+          name: product.name,
+          image: product.image,
+          priceCents: product.priceCents,
+          priceIndia: product.priceIndia,
+          totalQuantity: product.totalQuantity,
+          ratingStar: product.ratingStar,
+          ratingcount: product.ratingCount,
+          description: product.description,
+          size: product.size,
         },
-      })
-      console.log(response.data,"wishList Add Response")
-     }
-     catch(e){
-      console.log(e,"wishList Error")
-     }
-  }
-  const deleteFromWishList = async(id) => {
-   try{
-    const response = await axios.delete(`${wishList}/delete/${email}/${id}`)
-    console.log(response.data)
-   }
-   catch(e){
-    console.log(e,"deleteFromWishList Error")
-   }
-  }
-  const setWishListToLocalStorage = (key) => {
-    console.log(key,"local")
-    let prevState = JSON.parse(localStorage.getItem("wishItems"));
-      localStorage.setItem(
-        "wishItems",
-        JSON.stringify({
-          ...prevState,
-          [key]: prevState[key] === undefined ? true : !prevState[key],
-        })
+        {
+          headers: {
+            "content-Type": "application/json",
+          },
+        }
       );
-  }
-  const checkWishList = (key,product) => {
-    if (loginVerification) {
-      if (!localStorage.getItem("wishItems")) {
-        localStorage.setItem("wishItems", JSON.stringify({}));
-      }
-     
-      let res = JSON.parse(localStorage.getItem("wishItems"));
+    } catch (e) {
+      console.log(e, "wishList Error");
+    }
+  };
+  const deleteFromWishList = async (id) => {
+    try {
+      const response = await axios.delete(`${wishList}/delete/${email}/${id}`);
+      console.log(response.data);
+    } catch (e) {
+      console.log(e, "deleteFromWishList Error");
+    }
+  };
+  const getAllWishListData = async () => {
+    try {
+      const response = await axios.get(`${wishList}/get/${email}`);
+      console.log(response.data, "wishList");
       dispatch({
-        type: ACTION.WISHLIST,
-        payload: { data: res },
+        type: ACTION.GETALLWISHLIST,
+        payload: { data: response.data },
       });
-    } else navigate("/loginemail");
-     if(state.wishList[key]){
-      deleteFromWishList(key)
-      setWishListToLocalStorage(product.id)
-     }
-     else{
-      AddToWishList(product)
-      setWishListToLocalStorage(product.id)
-     }
+    } catch (e) {
+      console.log(e, "getAllDataFromWishList");
+    }
+  };
+  
+  const checkWishList = async (key, product) => {
+    if (!loginVerification) {
+      navigate("/loginemail");
+    } else {
+      if(favHeart.includes(key)){
+        await deleteFromWishList(key);
+        await  getAllWishListData()
+      }
+      else {
+        await AddToWishList(product);
+        getAllWishListData();
+      }
+
+      //  addToFaviroute(key)
+    }
   };
   const singlePage = (product) => {
     navigate("/single", { state: { product } });
@@ -222,9 +224,9 @@ const Products = ({ state, dispatch }) => {
                 </button>
                 <div
                   className="absolute"
-                  onClick={() => checkWishList(product.id,product)}
+                  onClick={() => checkWishList(product.id, product)}
                 >
-                  {state.wishList[product.id] ? (
+                  {favHeart.includes(product.id) ? (
                     <AiFillHeart className="wishlist-img-true" />
                   ) : (
                     <AiOutlineHeart className="wishlist-img" />

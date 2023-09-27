@@ -9,6 +9,7 @@ import { FormReducer, InitialValue } from './Reducer__/FormReducer';
 import LoginUser from './Login/LoginUser';
 import WhisList from './WishList/WhisList';
 import SingleData from './SingleData/SingleData';
+import NavBarList from './HomePage/SignInDropDown';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <Route path='/userlogin' element={<LoginUser state={state} dispatch={dispatch}/>}/>
     <Route path='/list' element={<WhisList state={state} dispatch={dispatch}/>}/>
     <Route path='/single' element={<SingleData state={state} dispatch={dispatch}/>}/>
+    <Route path='/navbar' element={<NavBarList/>}/>
     </Routes>
   );
 }

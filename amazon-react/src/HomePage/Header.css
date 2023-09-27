@@ -12,18 +12,27 @@ a{
     top: 0;
     left: 0;
     right: 0;
-    height: 5rem;
+    height: 4.5rem;
     z-index: 2;
+}
+.left-header{
+    display: flex;
+    gap: 1rem;
 }
 .left-header .logo{
     display: inline;
-    padding: 1.7rem 0.2rem 0 0.2rem ;
+    padding: 1.7rem 1.5rem 0 0.2rem ;
     text-decoration: none;
     text-align: center;
     border: 1px solid rgb(11, 11, 11);
 }
-.left-header .logo:hover{
-    border: 1px solid white;
+.left-header .logo,
+.all-list-container,
+.location-container{
+    border: 1px solid transparent;
+}
+.left-header .logo:hover,.all-list-container:hover,.location-container:hover{
+    border-color: white;
 }
 .left-header .main-logo{
     padding-top: 0.9rem;
@@ -67,40 +76,16 @@ a{
     align-items: center;
 
 }
-.right-header .return{
-    padding: 0.3rem 1rem 0.3rem 1rem ;
-    color: white;
-    
-    
-}
-.right-header .return:hover{
-    border: 1px solid white;
-}
-.right-header.return-text {
-    display: block;
-    font-size: 1.3rem;
-  }
-  
-.right-header .order-text {
-    display: block;
-    font-size: 1.3rem;
-    font-weight: 700;
-  }
+
 .right-header .cart{
-    padding: 0.2rem 1rem 0.2rem 1rem ;
-    color: white;
-    display: flex;
-    align-items: center;
     position: relative;   
 }
-.right-header .cart:hover{
-    border: 1px solid white;
-}
+
 .right-header .cart .img{
-    width: 3.5rem;
+    width: 3rem;
 }
 .right-header .cart .cart-text{
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 700;
 }
 .right-header .cart .cart-quantity{
@@ -108,6 +93,61 @@ a{
   font-size: 1.3rem;
   font-weight: 700;
   position: absolute;
-  top:0rem;
-  left:2.6rem;
+  top:0;
+  left:2.3rem;
+}
+.all-list-container{
+    color: white;
+    padding: 0.5rem 1rem;
+}
+.singn-in,.return-text,.hello{
+    font-size: 0.9rem;
+    
+
+}
+.account-lists,.order-text{
+    padding-top: 0.1rem ;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    display: flex;
+    align-items: center;
+}
+.header .in{
+    color: white;
+    position: absolute;
+    top: 1.2rem;
+    font-weight: 500;
+    font-size: 1rem;
+    padding-left: 0.1rem;
+}
+.left-header .img-container{
+    position: relative;
+}
+.location-container{
+    color: white;
+    display: flex;
+    padding: 0 1rem;
+    flex-direction: column;
+    justify-content: center;
+}
+.loaction-icon{
+    color: white;
+    
+}
+.inside-location{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+.hello{
+    padding: 0 0 0rem 1rem;
+}
+
+.sign-in-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }

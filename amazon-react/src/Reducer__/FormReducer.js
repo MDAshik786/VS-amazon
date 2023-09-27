@@ -11,7 +11,8 @@ export const ACTION = {
   ADDTOCART: "addToCart",
   UPDATEQUANTITY: "updateQuantity",
   SAVEDATA: "saveData",
-  DELETEPRODUCT:"deleteProduct"
+  DELETEPRODUCT:"deleteProduct",
+  GETALLWISHLIST:"getAllWishListProduct",
 };
 // ₹
 export const InitialValue = {
@@ -64,8 +65,17 @@ export const FormReducer = (state, action) => {
     case ACTION.WISHLIST:
       return {
         ...state,
-        wishList: action.payload.data,
+        wishList: {
+          ...state.wishList,
+          [action.payload.id] : state.wishList[action.payload.id] ? !state.wishList[action.payload.id] : true
+        },
       };
+    case ACTION.GETALLWISHLIST:
+      console.log(action.payload.data,"dataaaaaa")
+      return {
+        ...state,
+        wishList : action.payload.data
+      }
     case ACTION.GETDATA:
       return {
         ...state,
