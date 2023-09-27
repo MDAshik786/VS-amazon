@@ -12,7 +12,7 @@ const SignInDropDown = () => {
       <div className="new-customer">
         New customer? <span className="color">start here.</span>
       </div>
-      <hr />
+      <hr className="hr"/>
       <div className="list-account-container">
         <div className="list-container">
           <div className="nav-contents">
@@ -21,7 +21,7 @@ const SignInDropDown = () => {
             <p className="points">Your Wish List</p>
           </div>
         </div>
-        <hr />
+        <hr className="hr"/>
         <div className="account-container">
           <div className="nav-contents">
             <p className="account-heading">Your Account</p>

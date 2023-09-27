@@ -1,13 +1,14 @@
 .nav-container{
-    width: 30rem;
+    width: 25vw;
     position: absolute;
    top: 3.7rem;
    background-color: white;
    box-shadow: 0 0 10px grey;
-   left: -15rem;
+   left: -10rem;
    padding: 1rem;
-   border-radius: 1rem;
-   color: git;
+   border-radius: 0.4rem;
+   color: black;
+
 }
 
 .nav-container::before {
@@ -17,7 +18,7 @@
     height: 1rem;
     background-color: white;
     top: -7.6px;
-    right: 6.1rem;
+    right: 10rem;
     transform: rotate(45deg);
 }
 .sign-in-button-con{
@@ -59,7 +60,7 @@
 .list-heading,.account-heading{
     text-align: left;
     font-weight: 500;
-    
+    font-size: 1rem;
 }
 .nav-contents{
     padding:  0 1rem;
@@ -67,9 +68,13 @@
     flex-direction: column;
     gap: 0.5rem;
     justify-content: center;
+    font-size: 0.9rem;
 
 }
 .nav-contents .points{
     color: #007185;
 
+}
+.hr{
+    border: 0.1px solid rgb(223, 223, 223);
 }
