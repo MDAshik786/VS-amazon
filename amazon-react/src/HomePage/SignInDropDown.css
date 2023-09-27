@@ -1,13 +1,13 @@
 .nav-container{
     width: 30rem;
-
-    /* background-color: aqua;   */
     position: absolute;
-   top: 3.4rem;
+   top: 3.7rem;
    background-color: white;
    box-shadow: 0 0 10px grey;
    left: -15rem;
    padding: 1rem;
+   border-radius: 1rem;
+   color: git;
 }
 
 .nav-container::before {
@@ -44,6 +44,7 @@
     font-size: 0.9rem;
     text-align: center;
     padding: 0.7rem 0;
+    color: black;
 }
 .list-account-container{
     display: flex;
