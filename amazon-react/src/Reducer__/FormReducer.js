@@ -25,6 +25,7 @@ export const InitialValue = {
   currency: true,
   addToCart: [],
   updatedQuantity: {},
+  
 };
 export const FormReducer = (state, action) => {
 
@@ -71,7 +72,6 @@ export const FormReducer = (state, action) => {
         },
       };
     case ACTION.GETALLWISHLIST:
-      console.log(action.payload.data,"dataaaaaa")
       return {
         ...state,
         wishList : action.payload.data

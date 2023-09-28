@@ -1,7 +1,7 @@
 import React from "react";
 import { ACTION } from "../Reducer__/FormReducer";  
 
-const ProductCount = ({ state, dispatch, product }) => {
+const ProductCount = ({ state, dispatch, product,quantity }) => {
   product.id = product.productId ? product.productId : product.id
   const handelOnClick = (e, key) => {
     const { name } = e.target;
@@ -30,7 +30,7 @@ const ProductCount = ({ state, dispatch, product }) => {
         className="number"
         value={
           state.productCount[product.id] == null
-            ? 1
+            ? quantity || 1
             : state.productCount[product.id]
         }
         onBlur={(e) =>

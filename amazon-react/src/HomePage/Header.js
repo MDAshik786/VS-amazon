@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { MdLocationPin } from "react-icons/md";
 import SignInDropDown from "./SignInDropDown";
-const Header = ({ state }) => {
+const Header = ({state }) => {
   const [isAcive, setIsActive] = useState(false);
+ 
+  const loginData = JSON.parse(localStorage.getItem('datas'))
   return (
     <div className="header">
       <div className="left-header">
@@ -42,7 +44,7 @@ const Header = ({ state }) => {
             <div className="all-list-container">
               <p className="singn-in">Hello, sign in</p>
               <p className="account-lists">Account & Lists
-              <span class="material-symbols-outlined">arrow_drop_down</span>
+              <span className="material-symbols-outlined">arrow_drop_down</span>
               </p>
             </div>
             {isAcive && <SignInDropDown />}
@@ -54,7 +56,7 @@ const Header = ({ state }) => {
             <p className="order-text">& Orders</p>
           </div>
         </Link>
-        <Link to={"/cart"} className="cart">
+        <Link to={`/cart/${loginData?.email}`} className="cart" >
           <div className="all-list-container">
             <img src="images/icons/cart-icon.png" alt="" className="img" />
             <span className="cart-quantity" id="cq">

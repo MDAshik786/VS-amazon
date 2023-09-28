@@ -4,13 +4,12 @@ import { ACTION } from "../Reducer__/FormReducer";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { useLocation, useNavigate } from "react-router";
-import { apiUrl, wishList } from "../Utils__/apiUrl";
+import { apiUrl, cart, wishList } from "../Utils__/apiUrl";
 import axios from "axios";
 import ProductCount from "./ProductCount";
-const Products = ({ state, dispatch }) => {
-  const location = useLocation();
-  const loginVerification = location?.state?.loginVerification;
-  const email = location?.state?.email;
+const Products = ({ state, dispatch}) => {
+  
+  
   const getData = async () => {
     try {
       const response = await axios.get(`${apiUrl}/get`);
@@ -22,86 +21,51 @@ const Products = ({ state, dispatch }) => {
       console.log(e);
     }
   };
-
+  const loginData = JSON.parse(localStorage.getItem("datas"))
   const navigate = useNavigate();
+
   let favHeart = [];
   useEffect(() => {
     getData();
     state.productCount = "";
-   
 
-    if (localStorage.getItem("addToCart")) {
-      dispatch({
-        type: ACTION.ADDTOCART,
-        payload: { data: JSON.parse(localStorage.getItem("addToCart")) },
-      });
-    }
     getAllWishListData();
   }, []);
-
+  const addAProduct = async (id, quantity) => {
+    try {
+      const response = await axios.post(
+        `${cart}/add/${loginData?.email}`,
+        { productId: id, quantity },
+        {
+          headers: {
+            "content-Type": "application/json",
+          },
+        }
+      );
+    } catch (e) {
+      console.log(e, "addToCart Error");
+    }
+  };
   const moveToCart = (product, quantity) => {
     let productQuantity = 1;
     if (quantity) productQuantity = quantity;
 
-    if (loginVerification) {
-      if (localStorage.getItem("addToCart") === null) {
-        localStorage.setItem("addToCart", JSON.stringify([]));
-        let prevState = JSON.parse(localStorage.getItem("addToCart"));
-      }
-      let verification = true;
-      const addToCartData = JSON.parse(localStorage.getItem("addToCart"));
-      addToCartData.map((data) => {
-        if (data.productId === product.id) {
-          data.userQuantity =
-            Number(data.userQuantity) + Number(productQuantity);
-          verification = false;
-        }
-      });
-      if (!verification) {
-        localStorage.setItem("addToCart", JSON.stringify(addToCartData));
-      }
-
-      let object = {
-        productId: product.id,
-        name: product.name,
-        image: product.image,
-        priceCents: product.priceCents,
-        priceIndia: product.priceIndia,
-        ratingstar: product.ratingstar,
-        ratingcount: product.ratingcount,
-        totalQuantity: product.quantity,
-        userQuantity: productQuantity,
-        description: product.description,
-        size: product.size,
-      };
-      if (verification) {
-        let prevState = JSON.parse(localStorage.getItem("addToCart"));
-        localStorage.setItem(
-          "addToCart",
-          JSON.stringify([...prevState, object])
-        );
-        let res = JSON.parse(localStorage.getItem("addToCart"));
-        dispatch({
-          type: ACTION.ADDTOCART,
-          payload: { data: res },
-        });
-      }
+    if (loginData.loginVerification) {
+      addAProduct(product.id, productQuantity);
     } else {
       navigate("/loginemail");
     }
   };
   try {
-    state.wishList && state.wishList.map((data) => {
-      favHeart.push(data.id)
-    })
-    console.log("favHeart",favHeart);
-  } catch (error) {
-    
-  }
+    state.wishList &&
+      state.wishList.map((data) => {
+        favHeart.push(data.id);
+      });
+  } catch (error) {}
   const AddToWishList = async (product) => {
     try {
       const response = await axios.post(
-        `${wishList}/add/${email}/${product.id}`,
+        `${wishList}/add/${loginData?.email}/${product.id}`,
         {
           id: product.id,
           name: product.name,
@@ -126,16 +90,16 @@ const Products = ({ state, dispatch }) => {
   };
   const deleteFromWishList = async (id) => {
     try {
-      const response = await axios.delete(`${wishList}/delete/${email}/${id}`);
+      const response = await axios.delete(`${wishList}/delete/${loginData?.email}/${id}`);
       console.log(response.data);
     } catch (e) {
       console.log(e, "deleteFromWishList Error");
     }
   };
   const getAllWishListData = async () => {
+
     try {
-      const response = await axios.get(`${wishList}/get/${email}`);
-      console.log(response.data, "wishList");
+      const response = await axios.get(`${wishList}/get/${loginData?.email}`);
       dispatch({
         type: ACTION.GETALLWISHLIST,
         payload: { data: response.data },
@@ -144,21 +108,17 @@ const Products = ({ state, dispatch }) => {
       console.log(e, "getAllDataFromWishList");
     }
   };
-  
   const checkWishList = async (key, product) => {
-    if (!loginVerification) {
+    if (!loginData?.loginVerification) {
       navigate("/loginemail");
     } else {
-      if(favHeart.includes(key)){
+      if (favHeart.includes(key)) {
         await deleteFromWishList(key);
-        await  getAllWishListData()
-      }
-      else {
+        await getAllWishListData();
+      } else {
         await AddToWishList(product);
         getAllWishListData();
       }
-
-      //  addToFaviroute(key)
     }
   };
   const singlePage = (product) => {
