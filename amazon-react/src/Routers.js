@@ -38,6 +38,7 @@ const Routers = ({state,dispatch,loginData,setLoginData}) => {
       element={<SingleData state={state} dispatch={dispatch} />}
     />
     <Route path="/navbar" element={<NavBarList />} />
+    
   </Routes>
   )
 }

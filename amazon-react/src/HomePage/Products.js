@@ -3,10 +3,15 @@ import "./Products.css";
 import { ACTION } from "../Reducer__/FormReducer";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import { useLocation, useNavigate } from "react-router";
-import { apiUrl, cart, wishList } from "../Utils__/apiUrl";
+import { useNavigate } from "react-router";
+import { apiUrl, cart } from "../Utils__/apiUrl";
 import axios from "axios";
 import ProductCount from "./ProductCount";
+import {
+  AddToWishList,
+  deleteFromWishList,
+  getAllWishListData,
+} from "../API/WhishListAPI";
 const Products = ({ state, dispatch, loginData, setloginData }) => {
   const getData = async () => {
     try {
@@ -26,7 +31,7 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
     getData();
     state.productCount = "";
     setloginData(JSON.parse(localStorage.getItem("datas")));
-    getAllWishListData();
+    getAllWishListData(dispatch);
   }, []);
   const addAProduct = async (id, quantity) => {
     try {
@@ -52,6 +57,7 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
       console.log(e, "addToCart Error");
     }
   };
+
   const moveToCart = async (product, quantity) => {
     let productQuantity = 1;
     if (quantity) productQuantity = quantity;
@@ -82,70 +88,24 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
       console.log(e, "GetAllDataToCart");
     }
   };
-  const AddToWishList = async (product) => {
-    try {
-      const response = await axios.post(
-        `${wishList}/add/${loginData?.email}/${product.id}`,
-        {
-          id: product.id,
-          name: product.name,
-          image: product.image,
-          priceCents: product.priceCents,
-          priceIndia: product.priceIndia,
-          totalQuantity: product.totalQuantity,
-          ratingStar: product.ratingStar,
-          ratingcount: product.ratingCount,
-          description: product.description,
-          size: product.size,
-        },
-        {
-          headers: {
-            "content-Type": "application/json",
-          },
-        }
-      );
-    } catch (e) {
-      console.log(e, "wishList Error");
-    }
-  };
-  const deleteFromWishList = async (id) => {
-    try {
-      const response = await axios.delete(
-        `${wishList}/delete/${loginData?.email}/${id}`
-      );
-    } catch (e) {
-      console.log(e, "deleteFromWishList Error");
-    }
-  };
-  const getAllWishListData = async () => {
-    try {
-      const response = await axios.get(
-        `${wishList}/get/${JSON.parse(localStorage.getItem("datas")).email}`
-      );
-      dispatch({
-        type: ACTION.GETALLWISHLIST,
-        payload: { data: response.data },
-      });
-    } catch (e) {
-      console.log(e, "getAllDataFromWishList");
-    }
-  };
+
   const checkWishList = async (key, product) => {
     if (!loginData?.loginVerification) {
       navigate("/loginemail");
     } else {
       if (favHeart.includes(key)) {
         await deleteFromWishList(key);
-        getAllWishListData();
+        getAllWishListData(dispatch);
       } else {
         await AddToWishList(product);
-        getAllWishListData();
+        getAllWishListData(dispatch);
       }
     }
   };
   const singlePage = (product) => {
     navigate("/single", { state: { product } });
   };
+  console.log(favHeart);
   return (
     <>
       {/* style={{opacity : state.locationVisible ? "0.1" : ""}} */}

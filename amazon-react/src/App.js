@@ -4,7 +4,7 @@ import { FormReducer, InitialValue } from "./Reducer__/FormReducer";
 import Routers from "./Routers";
 
 function App() {
-  const [state, dispatch] = useReducer(FormReducer, InitialValue);
+const [state, dispatch] = useReducer(FormReducer, InitialValue);
   const [loginData, setLoginData] = useState({
     loginVerification:'',
     email:''

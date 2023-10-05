@@ -1,40 +1,48 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { GrLocation } from "react-icons/gr";
 import { AiFillLock } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-
 import "./SingleData.css";
 import { ACTION } from "../Reducer__/FormReducer";
 import Header from "../HomePage/Header";
 import ProductCount from "../HomePage/ProductCount";
+import {
+  AddToWishList,
+  deleteFromWishList,
+  getAllWishListData,
+} from "../API/WhishListAPI";
 const SingleData = ({ state, dispatch }) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const product = location.state.product;
- const changeTheCurrency = () => {
-   dispatch({
-    type:ACTION.CURRENCY
-   })
- }
-  const checkWishList = (key) => {
-    if (!localStorage.getItem("wishItems")) {
-      localStorage.setItem("wishItems", JSON.stringify({}));
-    }
-    let prevState = JSON.parse(localStorage.getItem("wishItems"));
-    localStorage.setItem(
-      "wishItems",
-      JSON.stringify({
-        ...prevState,
-        [key]: prevState[key] === undefined ? true : !prevState[key],
-      })
-    );
-    let res = JSON.parse(localStorage.getItem("wishItems"));
-    console.log(res);
+  const favHeart = [];
+  const changeTheCurrency = () => {
     dispatch({
-      type: ACTION.WISHLIST,
-      payload: { data: res },
+      type: ACTION.CURRENCY,
     });
+  };
+  try {
+    state.wishList &&
+      state.wishList.map((data) => {
+        favHeart.push(data.id);
+      });
+  } catch (error) {}
+  console.log(favHeart);
+
+  const checkWishList = async (key, product) => {
+    if (!JSON.parse(localStorage.getItem("datas"))?.loginVerification) {
+      navigate("/loginemail");
+    } else {
+      if (favHeart.includes(key)) {
+        await deleteFromWishList(key);
+        getAllWishListData(dispatch);
+      } else {
+        await AddToWishList(product);
+        getAllWishListData(dispatch);
+      }
+    }
   };
   useEffect(() => {
     const savedWishlist = localStorage.getItem("wishlist");
@@ -45,11 +53,12 @@ const SingleData = ({ state, dispatch }) => {
         payload: { data: JSON.parse(localStorage.getItem("wishItems")) },
       });
     }
+    getAllWishListData(dispatch);
   }, []);
 
   return (
     <>
-      <Header state={state} dispatch={dispatch}/>
+      <Header state={state} dispatch={dispatch} />
       <div className="single-main-box">
         <div className="single-container">
           <div className="simg-container">
@@ -60,11 +69,11 @@ const SingleData = ({ state, dispatch }) => {
             <div className="single-rating">
               <img
                 className="product-rating-stars"
-                src={`images/ratings/rating-${product.ratingstar * 10}.png`}
-                alt={`Rating: ${product.ratingstar}`}
+                src={`images/ratings/rating-${product.ratingStar * 10}.png`}
+                alt={`Rating: ${product.ratingStar}`}
               />
               <p className="single-rating-count">
-                {product.ratingcount} rating
+                {product.ratingCount} rating
               </p>
             </div>
             <div className="amazon-choice">
@@ -78,7 +87,6 @@ const SingleData = ({ state, dispatch }) => {
               <button className="deal-day">Deal Of the Day</button>
             </div>
             <div>
-              {" "}
               <div className="single-price">
                 {state.currency ? (
                   <>
@@ -92,7 +100,9 @@ const SingleData = ({ state, dispatch }) => {
                 )}
               </div>
               <span className="link paragraph" onClick={changeTheCurrency}>
-               {state.currency ? "Convert into US dollar." : "Convert to Indian currency."}
+                {state.currency
+                  ? "Convert into US dollar."
+                  : "Convert to Indian currency."}
               </span>
             </div>
             <div className="Fulfilled">
@@ -174,9 +184,9 @@ const SingleData = ({ state, dispatch }) => {
             <p className="bottom-line"></p>
             <div
               className="single-absolute"
-              onClick={() => checkWishList(product.id)}
+              onClick={() => checkWishList(product.id, product)}
             >
-              {state.wishList[product.id] ? (
+              {favHeart.includes(product.id) ? (
                 <AiFillHeart className="single-wishlist-img-true" />
               ) : (
                 <AiOutlineHeart className="single-wishlist-img" />
@@ -229,9 +239,9 @@ const SingleData = ({ state, dispatch }) => {
             </div>
             <button
               className="outside-box-button"
-              onClick={() => checkWishList(product.id)}
+              onClick={() => checkWishList(product.id, product)}
             >
-              {state.wishList[product.id]
+              {favHeart.includes(product.id)
                 ? "Remove from Wish List"
                 : "Add to Wish List"}
             </button>
