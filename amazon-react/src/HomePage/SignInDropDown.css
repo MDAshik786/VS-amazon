@@ -1,80 +1,83 @@
-.nav-container{
-    width: 25vw;
-    position: absolute;
-   top: 3.7rem;
-   background-color: white;
-   box-shadow: 0 0 10px grey;
-   left: -10rem;
-   padding: 1rem;
-   border-radius: 0.4rem;
-   color: black;
-
+.nav-container {
+  width: 25vw;
+  position: absolute;
+  top: 3.7rem;
+  background-color: white;
+  box-shadow: 0 0 10px grey;
+  left: -10rem;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  color: black;
+  z-index: 100;
 }
 
 .nav-container::before {
-    position: absolute;
-    content: '';
-    width: 1rem;
-    height: 1rem;
-    background-color: white;
-    top: -7.6px;
-    right: 33%;
-    transform: rotate(45deg);
+  position: absolute;
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  background-color: white;
+  top: -7.6px;
+  right: 33%;
+  transform: rotate(45deg);
 }
-.sign-in-button-con{
-    display: flex;
-    justify-content: center;
+.sign-in-button-con {
+  display: flex;
+  justify-content: center;
 }
-.sign-button{
-    height: 10%;
-    padding: 0.4rem 20%;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    outline: none;
-    border: none;
-    background-color:  rgb(246, 213, 46);
+.sign-button {
+  height: 20%;
+  padding: 0.4rem 20%;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+  background-color: rgb(246, 213, 46);
 }
-.color{
-    color: #007185;
-    padding-bottom: 4px;
+.sign-button:hover {
+  font-size: 0.9rem;
 }
-.color:hover,.nav-contents .points:hover{
-    text-decoration-line: underline;
+.color {
+  color: #007185;
+  padding-bottom: 4px;
 }
-.new-customer{
-    font-size: 0.9rem;
-    text-align: center;
-    padding: 0.7rem 0;
-    color: black;
+.color:hover,
+.nav-contents .points:hover {
+  text-decoration-line: underline;
 }
-.list-account-container{
-    display: flex;
-    padding: 1rem 2rem;
+.new-customer {
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.7rem 0;
+  color: black;
 }
-.list-container{
-    width: 50%;
+.list-account-container {
+  display: flex;
+  padding: 1rem 2rem;
 }
-.account-container{
-    width: 50%;
+.list-container {
+  width: 50%;
 }
-.list-heading,.account-heading{
-    text-align: left;
-    font-weight: 500;
-    font-size: 1rem;
+.account-container {
+  width: 50%;
 }
-.nav-contents{
-    padding:  0 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    justify-content: center;
-    font-size: 0.9rem;
-
+.list-heading,
+.account-heading {
+  text-align: left;
+  font-weight: 500;
+  font-size: 1rem;
 }
-.nav-contents .points{
-    color: #007185;
-
+.nav-contents {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  font-size: 0.9rem;
 }
-.hr{
-    border: 0.1px solid rgb(223, 223, 223);
+.nav-contents .points {
+  color: #007185;
+}
+.hr-1 {
+  border: 0.1px solid rgb(223, 223, 223);
 }

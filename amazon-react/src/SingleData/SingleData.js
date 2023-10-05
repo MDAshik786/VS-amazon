@@ -49,7 +49,7 @@ const SingleData = ({ state, dispatch }) => {
 
   return (
     <>
-      <Header state={state}/>
+      <Header state={state} dispatch={dispatch}/>
       <div className="single-main-box">
         <div className="single-container">
           <div className="simg-container">
@@ -212,8 +212,8 @@ const SingleData = ({ state, dispatch }) => {
               <a className="link"> Select delivery Location</a>
             </div>
             <p className="stock">In Stock</p>
-            <div>
-              Quantity:{" "}
+            <div className="product-count-container">
+              Quantity:
               <ProductCount
                 state={state}
                 dispatch={dispatch}

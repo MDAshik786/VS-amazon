@@ -7,7 +7,7 @@ import { useLocation } from 'react-router';
 const Home = ({ state, dispatch}) => {
   const location = useLocation();
   const loginVerification = location?.state?.loginVerification;
-
+  const [loginData, setloginData] = useState({});
   const email = location?.state?.email;
   useEffect(() => {
     if (loginVerification) {
@@ -15,13 +15,13 @@ const Home = ({ state, dispatch}) => {
         "datas",
         JSON.stringify({ loginVerification, email })
       );
-      
+      setloginData(JSON.parse(localStorage.getItem("datas"))); 
     }
   }, []);
   return (
     <div>
-      <Header state={state}  />
-      <Products state={state} dispatch={dispatch}   />
+      <Header state={state} dispatch={dispatch} loginData={loginData} setloginData = {setloginData}/>
+      <Products state={state} dispatch={dispatch}  loginData={loginData} setloginData = {setloginData}  />
     </div>
   );
 };

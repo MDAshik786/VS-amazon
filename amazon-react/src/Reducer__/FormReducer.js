@@ -11,8 +11,12 @@ export const ACTION = {
   ADDTOCART: "addToCart",
   UPDATEQUANTITY: "updateQuantity",
   SAVEDATA: "saveData",
-  DELETEPRODUCT:"deleteProduct",
-  GETALLWISHLIST:"getAllWishListProduct",
+  DELETEPRODUCT: "deleteProduct",
+  GETALLWISHLIST: "getAllWishListProduct",
+  ADDTOCARTVISIBLITY: "addtoCartVisibility",
+  SIGNINVISIBILITY: "signInVisiblity",
+  REMOVE: "removed",
+  LOCATIONVISIBLE: "locationVisble",
 };
 // ₹
 export const InitialValue = {
@@ -25,10 +29,11 @@ export const InitialValue = {
   currency: true,
   addToCart: [],
   updatedQuantity: {},
-  
+  signInVisibility: false,
+  addToCartVisibility: {},
+  locationVisible: false,
 };
 export const FormReducer = (state, action) => {
-
   switch (action.type) {
     case ACTION.HANDELONCHANGE:
       return {
@@ -68,14 +73,16 @@ export const FormReducer = (state, action) => {
         ...state,
         wishList: {
           ...state.wishList,
-          [action.payload.id] : state.wishList[action.payload.id] ? !state.wishList[action.payload.id] : true
+          [action.payload.id]: state.wishList[action.payload.id]
+            ? !state.wishList[action.payload.id]
+            : true,
         },
       };
     case ACTION.GETALLWISHLIST:
       return {
         ...state,
-        wishList : action.payload.data
-      }
+        wishList: action.payload.data,
+      };
     case ACTION.GETDATA:
       return {
         ...state,
@@ -102,27 +109,55 @@ export const FormReducer = (state, action) => {
         },
       };
     case ACTION.SAVEDATA:
-      let singleData = state.addToCart
+      let singleData = state.addToCart;
       singleData.map((data) => {
-
-          if(data.productId === action.payload.id)
-           data.userQuantity = state.productCount[action.payload.id] ? Number(state.productCount[action.payload.id]) : 1
-        
-      })
-      localStorage.setItem("addToCart",JSON.stringify(singleData))
+        if (data.productId === action.payload.id)
+          data.userQuantity = state.productCount[action.payload.id]
+            ? Number(state.productCount[action.payload.id])
+            : 1;
+      });
+      localStorage.setItem("addToCart", JSON.stringify(singleData));
       return {
         ...state,
-         addToCart: singleData
-      }
-      case ACTION.DELETEPRODUCT:
-        const deleteProduct = state.addToCart.filter((data) => 
-               data.productId !== action.payload.id
-        )
-        localStorage.setItem("addToCart",JSON.stringify(deleteProduct))
-       return{
+        addToCart: singleData,
+      };
+    case ACTION.DELETEPRODUCT:
+      const deleteProduct = state.addToCart.filter(
+        (data) => data.productId !== action.payload.id
+      );
+      localStorage.setItem("addToCart", JSON.stringify(deleteProduct));
+      return {
         ...state,
-        addToCart:deleteProduct
-       }
+        addToCart: deleteProduct,
+      };
+    case ACTION.SIGNINVISIBILITY:
+      console.log(state.signInVisibility);
+      return {
+        ...state,
+        signInVisibility: true,
+      };
+    case ACTION.ADDTOCARTVISIBLITY:
+      return {
+        ...state,
+        addToCartVisibility: {
+          [action.payload.id]: state.addToCartVisibility[action.payload.id]
+            ? !state.addToCartVisibility[action.payload.id]
+            : true,
+        },
+      };
+    case ACTION.REMOVE:
+      return {
+        ...state,
+        addToCartVisibility: {},
+        signInVisibility: false,
+        locationVisible:false
+      };
+      case ACTION.LOCATIONVISIBLE:
+        return{
+          ...state,
+          locationVisible:true
+        }
+
     default:
       return state;
   }

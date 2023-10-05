@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { ACTION, InitialValue } from "../Reducer__/FormReducer";
+import { ACTION } from "../Reducer__/FormReducer";
 import axios from "axios";
 import { userApiUrl } from "../Utils__/apiUrl";
 

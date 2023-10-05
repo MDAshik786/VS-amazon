@@ -5,24 +5,36 @@ import ProductCount from "../HomePage/ProductCount";
 import axios from "axios";
 import { cart } from "../Utils__/apiUrl";
 import { useLocation, useNavigate, useParams } from "react-router";
+import DateFormate from "../Utils__/DateFormate";
 const Cart = ({ state, dispatch }) => {
-  // const location = useLocation();
-  // const navigate = useNavigate();
+  const [deliveryOption, setDeliveryOption] = useState({});
   const parem = useParams();
   useEffect(() => {
     getAllCartData();
   }, []);
   const getAllCartData = async () => {
+    let obj = {};
     try {
       const response = await axios.get(`${cart}/get/${parem.email}`);
       dispatch({
         type: ACTION.ADDTOCART,
         payload: { data: response.data },
       });
+      response.data.cartItems.map((product) => {
+          setDeliveryOption((deliveryOption)=>{
+            return{
+            ...deliveryOption,
+            [product.id]:1
+            }
+          } );
+        });
     } catch (e) {
       console.log(e, "GetAllDataToCart");
     }
   };
+  const handleClickRadio = (productId, option) => {
+    setDeliveryOption({...deliveryOption, [productId]: option});
+  }
   const updateAProduct = async (id, quantity) => {
     try {
       const response = await axios.put(
@@ -38,6 +50,16 @@ const Cart = ({ state, dispatch }) => {
       console.log(e, "addToCart Error");
     }
   };
+  const deleteAProduct = async (productId) => {
+    try {
+      const response = await axios.delete(
+        `${cart}/delete/${productId}/${parem?.email}`
+      );
+      getAllCartData();
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const updateQunatityValue = (id, quantity) => {
     dispatch({
       type: ACTION.UPDATEQUANTITY,
@@ -45,18 +67,11 @@ const Cart = ({ state, dispatch }) => {
     });
   };
   const saveData = async (id, quantity) => {
-    console.log(id);
     const productCount = state.productCount[id]
       ? state.productCount[id]
       : quantity;
     await updateAProduct(id, productCount);
     getAllCartData();
-  };
-  const DeleteData = (id) => {
-    dispatch({
-      type: ACTION.DELETEPRODUCT,
-      payload: { id },
-    });
   };
   return (
     <>
@@ -116,14 +131,12 @@ const Cart = ({ state, dispatch }) => {
                         <a
                           className="Delete"
                           onClick={
-                            state.updatedQuantity[product.product.productId]
-                              ? () =>
-                                  updateQunatityValue(product.product.productId)
-                              : () => DeleteData(product.product.productId)
+                            state.updatedQuantity[product.product.id]
+                              ? () => updateQunatityValue(product.product.id)
+                              : () => deleteAProduct(product.id)
                           }
                         >
-                          {" "}
-                          {state.updatedQuantity[product.product.productId]
+                          {state.updatedQuantity[product.product.id]
                             ? "Cancel"
                             : "Delete"}
                         </a>
@@ -132,23 +145,48 @@ const Cart = ({ state, dispatch }) => {
                     <div className="delivery-option">
                       <div className="name">Choose a delivery option:</div>
                       <div className="first-radio">
-                        <input type="radio" id="option" name="radio" />
+                        <input
+                          type="radio"
+                          id={`${product.id}_1`}
+                          name={`delivery_option_${product.id}`}
+                          checked={
+                            deliveryOption[product.id] === 1 ? true : false
+                          }
+                          onChange  ={() => handleClickRadio(product.id,1)}
+
+                        />
                         <div className="deliver-text">
-                          <p className="Date">Tuesday, June 21</p>
+                          <div className="Date">{<DateFormate data={6} />}</div>
                           <p className="status">FREE Shipping</p>
                         </div>
                       </div>
                       <div className="first-radio">
-                        <input type="radio" id="option" name="radio" />
+                        <input
+                          type="radio"
+                          id={`${product.id}_2`}
+                          name={`delivery_option_${product.id}`}
+                          checked={
+                            deliveryOption[product.id] === 2 ? true : false
+                          }
+                          onChange={() => handleClickRadio(product.id,2)}
+                        />
                         <div className="deliver-text">
-                          <p className="Date">Tuesday, June 21</p>
+                          <div className="Date">{<DateFormate data={4} />}</div>
                           <p className="status">FREE Shipping</p>
                         </div>
                       </div>
                       <div className="first-radio">
-                        <input type="radio" id="option" name="radio" />
+                        <input
+                          type="radio"
+                          id={`${product.id}_3`}
+                          name={`delivery_option_${product.id}`}
+                          checked={
+                            deliveryOption[product.id] === 3 ? true : false
+                          }
+                          onChange={() => handleClickRadio(product.id,3)}
+                        />
                         <div className="deliver-text">
-                          <p className="Date">Tuesday, June 21</p>
+                          <div className="Date">{<DateFormate data={2} />}</div>
                           <p className="status">FREE Shipping</p>
                         </div>
                       </div>
@@ -170,7 +208,7 @@ const Cart = ({ state, dispatch }) => {
           </div>
           <div className="items-before-tax">
             <p className="item">Total before tax:</p>
-            <div className="before-tax"></div>
+            <div className="before-tax">{state.addToCart.totalCost}.00</div>
           </div>
           <div className="items-tax">
             <p className="item">Estimated tax (10%):</p>
