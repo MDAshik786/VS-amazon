@@ -2,6 +2,7 @@ a {
   text-decoration: none;
 }
 .header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -152,6 +153,6 @@ a {
 }
 .location {
   /* position: relative; */
-  width: 100%;
-  height: calc(100vh -4.5rem);
+  /* width: 100%; */
+  /* height: calc(100vh -4.5rem); */
 }

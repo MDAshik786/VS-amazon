@@ -31,7 +31,7 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
   const getAllCartData = async () => {
     try {
       const response = await axios.get(
-        `${cart}/get/${JSON.parse(localStorage.getItem("datas")).email}`
+        `${cart}/get/${JSON.parse(localStorage.getItem("datas"))?.email}`
       );
       console.log(response.data.cartItems.length);
       dispatch({
@@ -63,10 +63,16 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
             </Link>
           </div>
           <div className="location-container" onClick={addAddress}>
-            <p className="hello">Hello</p>
+            <p className="hello">{JSON.parse(localStorage.getItem("pincodeDetails"))?.name ? "Delivery to" : "Hello"}</p>
             <div className="inside-location">
               <MdLocationPin className="loaction-icon" />
-              <span>Select your address</span>
+              <span>
+                {JSON.parse(localStorage.getItem("pincodeDetails"))?.name ? (
+                  <div>{JSON.parse(localStorage.getItem("pincodeDetails"))?.name } {JSON.parse(localStorage.getItem("pincodeDetails"))?.pincode }</div>
+                ) : (
+                  "Select your address"
+                )}
+              </span>
             </div>
           </div>
         </div>
@@ -109,7 +115,7 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
             </div>
           </Link>
           <Link
-            to={`/cart/${JSON.parse(localStorage.getItem("datas")).email}`}
+            to={`/cart/${JSON.parse(localStorage.getItem("datas"))?.email}`}
             className="cart"
           >
             <div className="all-list-container">
@@ -121,8 +127,11 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
             </div>
           </Link>
         </div>
+        {state?.locationVisible && (
+          <Location state={state} dispatch={dispatch} />
+        )}
       </div>
-      <div className="location">{state.locationVisible && <Location dispatch={dispatch} />}</div>
+      <div className="location"></div>
     </>
   );
 };

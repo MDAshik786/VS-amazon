@@ -15,15 +15,17 @@ export const ACTION = {
   GETALLWISHLIST: "getAllWishListProduct",
   ADDTOCARTVISIBLITY: "addtoCartVisibility",
   SIGNINVISIBILITY: "signInVisiblity",
-  REMOVE: "removed",
+  REMOVE: "removed", 
   LOCATIONVISIBLE: "locationVisble",
 };
-// ₹
+
 export const InitialValue = {
   email: "",
   password: "",
+  pincode:"",
+  pincodeName:"",
   passwordVisible: false,
-  wishList: {},
+  wishList: [],
   getApiData: [],
   productCount: {},
   currency: true,
@@ -36,6 +38,8 @@ export const InitialValue = {
 export const FormReducer = (state, action) => {
   switch (action.type) {
     case ACTION.HANDELONCHANGE:
+      if(action.payload.name ==='pincodeName' )
+      localStorage.setItem('pincodeDetails',JSON.stringify({name:action.payload.value,pincode:action.payload.pincode}))
       return {
         ...state,
         [action.payload.name]: action.payload.value,
@@ -131,7 +135,6 @@ export const FormReducer = (state, action) => {
         addToCart: deleteProduct,
       };
     case ACTION.SIGNINVISIBILITY:
-      console.log(state.signInVisibility);
       return {
         ...state,
         signInVisibility: true,

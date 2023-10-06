@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route, Routes } from 'react-router'
 import LoginUser from "./Login/LoginUser";
-import WhisList from "./WishList/WhisList";
 import SingleData from "./SingleData/SingleData";
 import NavBarList from "./HomePage/SignInDropDown";
 import Cart from "./CartPage/Cart";
 import LoginEmail from "./Login/LoginEmail";
 import LoginPassword from "./Login/LoginPassword";
 import Home from './HomePage/Home';
+import WishList from './WishList/WishList';
 
 const Routers = ({state,dispatch,loginData,setLoginData}) => {
   return (
@@ -31,7 +31,7 @@ const Routers = ({state,dispatch,loginData,setLoginData}) => {
     />
     <Route
       path="/list"
-      element={<WhisList state={state} dispatch={dispatch} />}
+      element={<WishList state={state} dispatch={dispatch} />}
     />
     <Route
       path="/single"

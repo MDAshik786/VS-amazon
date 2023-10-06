@@ -75,7 +75,7 @@ const Cart = ({ state, dispatch }) => {
   };
   return (
     <>
-      <div className="heading">Review your order</div>
+      <div className="heading">Shopping Cart</div>
       <div className="grid-cart-main">
         <div className="left">
           {state?.addToCart.cartItems &&
@@ -83,8 +83,9 @@ const Cart = ({ state, dispatch }) => {
               return (
                 <div className="box" key={product.id}>
                   <div className="date">
-                    Delivery date:<span>Tuesday,August10</span>
+                    Delivery date:<span className="delivery-date">{deliveryOption[product.id] === 1 ? <DateFormate data={6} /> : (deliveryOption[product.id] === 2 ? <DateFormate data={4}/>  : <DateFormate data={2}/>) }</span>
                   </div>
+                  <hr className="list-hr"/>
                   <div className="inside-box-grid">
                     <div className="product-img">
                       <img
@@ -95,6 +96,25 @@ const Cart = ({ state, dispatch }) => {
                     </div>
                     <div className="product-details">
                       <p className="name">{product.product.name}</p>
+                      <div className="cart-rating-count">
+                    <img
+                      className="cart-product-rating-stars"
+                      src={`http://localhost:3000/images/ratings/rating-${
+                        product.product.ratingStar * 10
+                      }.png`}
+                      alt={`Rating: ${product.product.ratingStar}`}
+                    />
+                    <p className="single-rating-count">
+                      {product.product.ratingCount} rating
+                    </p>{" "}
+                  </div>
+                  <div className="description-container">
+              <p className="cart-about-heading">About:</p>
+              <p className="cart-about-content"> {product.product.description}</p>
+              <p className="about-content">
+                {product.product.size === "Not specified" ? "" : product.size}
+              </p>
+            </div>
                       <div className="item-rate">
                         <span className="symbol-icon">₹</span>
                         <p className="price">{product.product.priceIndia}</p>
@@ -172,7 +192,7 @@ const Cart = ({ state, dispatch }) => {
                         />
                         <div className="deliver-text">
                           <div className="Date">{<DateFormate data={4} />}</div>
-                          <p className="status">FREE Shipping</p>
+                          <p className="status">Shipping Charges ₹50</p>
                         </div>
                       </div>
                       <div className="first-radio">
@@ -187,7 +207,7 @@ const Cart = ({ state, dispatch }) => {
                         />
                         <div className="deliver-text">
                           <div className="Date">{<DateFormate data={2} />}</div>
-                          <p className="status">FREE Shipping</p>
+                          <p className="status">Shipping Charges ₹100 </p>
                         </div>
                       </div>
                     </div>

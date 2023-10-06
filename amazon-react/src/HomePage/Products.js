@@ -12,6 +12,7 @@ import {
   deleteFromWishList,
   getAllWishListData,
 } from "../API/WhishListAPI";
+import { moveToCart } from "../API/CartAPI";
 const Products = ({ state, dispatch, loginData, setloginData }) => {
   const getData = async () => {
     try {
@@ -33,61 +34,13 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
     setloginData(JSON.parse(localStorage.getItem("datas")));
     getAllWishListData(dispatch);
   }, []);
-  const addAProduct = async (id, quantity) => {
-    try {
-      const response = await axios.post(
-        `${cart}/add/${loginData?.email}`,
-        { productId: id, quantity },
-        {
-          headers: {
-            "content-Type": "application/json",
-          },
-        }
-      );
-      dispatch({
-        type: ACTION.ADDTOCARTVISIBLITY,
-        payload: { id },
-      });
-      setTimeout(() => {
-        dispatch({
-          type: "remove",
-        });
-      }, 3000);
-    } catch (e) {
-      console.log(e, "addToCart Error");
-    }
-  };
 
-  const moveToCart = async (product, quantity) => {
-    let productQuantity = 1;
-    if (quantity) productQuantity = quantity;
-
-    if (loginData.loginVerification) {
-      await addAProduct(product.id, productQuantity);
-      getAllCartData();
-    } else {
-      navigate("/loginemail");
-    }
-  };
   try {
     state.wishList &&
       state.wishList.map((data) => {
         favHeart.push(data.id);
       });
   } catch (error) {}
-  const getAllCartData = async () => {
-    try {
-      const response = await axios.get(
-        `${cart}/get/${JSON.parse(localStorage.getItem("datas")).email}`
-      );
-      dispatch({
-        type: ACTION.ADDTOCART,
-        payload: { data: response.data },
-      });
-    } catch (e) {
-      console.log(e, "GetAllDataToCart");
-    }
-  };
 
   const checkWishList = async (key, product) => {
     if (!loginData?.loginVerification) {
@@ -105,10 +58,8 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
   const singlePage = (product) => {
     navigate("/single", { state: { product } });
   };
-  console.log(favHeart);
   return (
     <>
-      {/* style={{opacity : state.locationVisible ? "0.1" : ""}} */}
       <div className="grid-main">
         {state.getApiData &&
           state.getApiData.map((product, index) => {
@@ -146,40 +97,48 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
                   product={product}
                 />
 
-                <button
-                  className="add-to-cart-button button-primary"
-                  onClick={() =>
-                    moveToCart(product, state.productCount[product.id])
-                  }
-                  {...(state.addToCartVisibility[product.id] && {
-                    style: {
-                      color: "#198754",
-                      backgroundColor: "white",
-                      border: "none",
-                    },
-                  })}
-                >
-                  {!state.addToCartVisibility[product.id] ? (
-                    "Add To Cart"
-                  ) : (
-                    <div
-                      id={`added-to-cart-${product.id}`}
-                      className="added-to-cart"
-                    >
-                      <img
-                        src="images/icons/checkmark.png"
-                        className="img"
-                        alt="Added"
-                      />
-                      Added
-                    </div>
-                  )}
-                </button>
+                <div className="add-button-container">
+                  {" "}
+                  <button
+                    className="add-to-cart-button button-primary"
+                    onClick={() =>
+                      moveToCart(
+                        product,
+                        state.productCount[product.id],
+                        dispatch,
+                        navigate
+                      )
+                    }
+                    {...(state.addToCartVisibility[product.id] && {
+                      style: {
+                        color: "#198754",
+                        backgroundColor: "white",
+                        border: "none",
+                      },
+                    })}
+                  >
+                    {!state.addToCartVisibility[product.id] ? (
+                      "Add To Cart"
+                    ) : (
+                      <div
+                        id={`added-to-cart-${product.id}`}
+                        className="added-to-cart"
+                      >
+                        <img
+                          src="images/icons/checkmark.png"
+                          className="img"
+                          alt="Added"
+                        />
+                        Added
+                      </div>
+                    )}
+                  </button>
+                </div>
                 <div
                   className="absolute"
                   onClick={() => checkWishList(product.id, product)}
                 >
-                  {loginData.loginVerification &&
+                  {JSON.parse(localStorage.getItem("datas"))?.loginVerification &&
                   favHeart.includes(product.id) ? (
                     <AiFillHeart className="wishlist-img-true" />
                   ) : (

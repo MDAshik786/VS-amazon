@@ -8,11 +8,14 @@ import "./SingleData.css";
 import { ACTION } from "../Reducer__/FormReducer";
 import Header from "../HomePage/Header";
 import ProductCount from "../HomePage/ProductCount";
+// import "../HomePage/Products.css";
 import {
   AddToWishList,
+  checkWishList,
   deleteFromWishList,
   getAllWishListData,
 } from "../API/WhishListAPI";
+import { moveToCart } from "../API/CartAPI";
 const SingleData = ({ state, dispatch }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,24 +32,10 @@ const SingleData = ({ state, dispatch }) => {
         favHeart.push(data.id);
       });
   } catch (error) {}
-  console.log(favHeart);
 
-  const checkWishList = async (key, product) => {
-    if (!JSON.parse(localStorage.getItem("datas"))?.loginVerification) {
-      navigate("/loginemail");
-    } else {
-      if (favHeart.includes(key)) {
-        await deleteFromWishList(key);
-        getAllWishListData(dispatch);
-      } else {
-        await AddToWishList(product);
-        getAllWishListData(dispatch);
-      }
-    }
-  };
+ 
   useEffect(() => {
     const savedWishlist = localStorage.getItem("wishlist");
-    console.log(savedWishlist, "save  ");
     if (localStorage.getItem("wishItems")) {
       dispatch({
         type: ACTION.WISHLIST,
@@ -184,7 +173,7 @@ const SingleData = ({ state, dispatch }) => {
             <p className="bottom-line"></p>
             <div
               className="single-absolute"
-              onClick={() => checkWishList(product.id, product)}
+              onClick={() => checkWishList(product.id, product,navigate,dispatch,favHeart)}
             >
               {favHeart.includes(product.id) ? (
                 <AiFillHeart className="single-wishlist-img-true" />
@@ -230,7 +219,35 @@ const SingleData = ({ state, dispatch }) => {
                 product={product}
               />
             </div>
-            <button className="inside-box-button">Add to Cart</button>
+            <button
+              className="inside-box-button"
+              onClick={() =>
+                moveToCart(product, state.productCount[product.id],dispatch,navigate)
+              }
+              {...(state.addToCartVisibility[product.id] && {
+                style: {
+                  color: "#198754",
+                  backgroundColor: "white",
+                  border: "none",
+                },
+              })}
+            >
+            {!state.addToCartVisibility[product.id] ? (
+                    "Add To Cart"
+                  ) : (
+                    <div
+                      id={`added-to-cart-${product.id}`}
+                      className="added-to-cart"
+                    >
+                      <img
+                        src="images/icons/checkmark.png"
+                        className="img"
+                        alt="Added"
+                      />
+                      Added
+                    </div>
+                  )}
+                </button>
             <button className="inside-box-button">Buy Now</button>
             <div className="paragraph-div">
               {" "}
@@ -239,7 +256,7 @@ const SingleData = ({ state, dispatch }) => {
             </div>
             <button
               className="outside-box-button"
-              onClick={() => checkWishList(product.id, product)}
+              onClick={() =>  (product.id, product,navigate,dispatch,favHeart)}
             >
               {favHeart.includes(product.id)
                 ? "Remove from Wish List"

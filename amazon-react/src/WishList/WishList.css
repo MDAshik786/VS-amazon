@@ -1,0 +1,54 @@
+.wishList-Main-div{
+    padding: 2rem 15rem ;
+    min-height: 100vh;
+}
+.wishlist-div{
+    border: 1px solid rgb(219, 217, 217);
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+.list-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    align-items: center;
+}
+.list-layout{
+    display: flex;
+    gap: 1rem;
+}
+.searchBar{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+}
+.wishlist-searchBar{
+    padding: 0.4rem 0 0.4rem 1.4rem;
+     width: 50%;
+     outline: none;
+     border: 1px solid rgb(212, 210, 210);
+     background-color: whitesmoke;
+     font-size: 1rem;
+}
+.wishlist-searchBar:hover,.wishlist-searchBar:active{
+    width: 100%; 
+
+}
+.list-filter{
+    white-space: nowrap;
+}
+.list-search-icon{
+    position: absolute;
+    padding: 0.1rem;
+    margin: 0.1rem;
+   left: 2px;
+}
+.list{
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+.list-hr{
+    border:1px solid rgb(225, 222, 222);
+}
