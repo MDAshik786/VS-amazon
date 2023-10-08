@@ -1,0 +1,96 @@
+.address-main{
+    position: absolute; 
+    top: 0;
+    left: 0;
+     width: 100%;
+     min-height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: rgba(0, 0, 0, 0.2);
+}
+.address-heading-container{
+    width: 40%;
+    background-color: white;
+    position: absolute;
+    z-index: 1; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.address-heading{
+    font-weight: 500;
+    font-size: 1.4rem;
+    padding: 1.5rem;
+    background-color: rgb(231, 231, 231);
+}
+.address-con{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1    ;
+}
+.address-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.5rem;
+}
+.new-address{
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+.add-country,.add-name,.add-phone,.add-flatnumber,.add-area,.add-landmark,.add-towncity,.add-state{
+    font-weight: 500;
+}
+.input-box{
+    width: 85%;
+    padding: 0.6rem ;
+    border-radius: 0.5rem;
+    border: 1px solid gray;
+    font-size: 1rem;
+    outline: none;
+}
+.address-country,.address-name,.address-phone,.address-pincode,.address-flatnumber,.address-area,.address-landmark,.address-towncity,.address-state{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.town-state-containers{
+    display: flex;
+   
+}
+.town-state-containers .address-towncity,.town-state-containers .address-state{
+   width: 46%;
+ 
+}
+.default-address-container{
+    display: flex;
+    gap: 0.5rem;
+}
+.default-address-input{
+    width: 2.5%;
+    margin-left: 0.1rem;
+    outline: none;
+}
+.address-button{
+    padding: 0.7rem 1rem;
+    width: fit-content;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    outline: none;
+    border: none;
+    background-color: rgb(252, 210, 0);
+}
+.address-cancel-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+      position: absolute;
+      right :4px;
+      top: 4px;
+      margin: 3px;
+      cursor: pointer;
+}

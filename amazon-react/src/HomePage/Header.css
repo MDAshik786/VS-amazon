@@ -103,6 +103,7 @@ a {
 .return-text,
 .hello {
   font-size: 0.9rem;
+  letter-spacing: 0.5px;
 }
 .account-lists,
 .order-text {

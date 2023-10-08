@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import "./SignInDropDown.css";
 import { useNavigate } from "react-router";
+import { moveToCartPage } from "../API/CartAPI";
 
 const SignInDropDown = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   useEffect(() => {}, []);
   const removeUser = () => {
     localStorage.setItem("datas", JSON.stringify({}));
@@ -11,7 +12,7 @@ const SignInDropDown = () => {
   const addUser = () => {
     window.location.href = "/loginemail";
   };
-  const moveToWishList = (navigate) => {
+  const moveToWishList = () => {
     window.location.href = "/list";
   };
   const newUser = () => {
@@ -57,8 +58,11 @@ const SignInDropDown = () => {
           <div className="nav-contents">
             <p className="list-heading">Your List</p>
             <p className="points">Create a Wish List</p>
-            <p className="points" onClick={() => moveToWishList(navigate)}>
+            <p className="points" onClick={() => moveToWishList()}>
               Your Wish List
+            </p>
+            <p className="points" onClick={(e) => moveToCartPage(navigate, e)}>
+              Your Cart
             </p>
           </div>
         </div>

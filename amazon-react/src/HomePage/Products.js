@@ -34,7 +34,7 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
     setloginData(JSON.parse(localStorage.getItem("datas")));
     getAllWishListData(dispatch);
   }, []);
-
+  
   try {
     state.wishList &&
       state.wishList.map((data) => {
@@ -91,11 +91,14 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
                   <span className="symbol-icon">₹</span>
                   <span className="price-rate">{product.priceIndia}.00</span>
                 </div>
-                <ProductCount
-                  state={state}
-                  dispatch={dispatch}
-                  product={product}
-                />
+                <div className="product-count-container">
+                    <span className="quantity-name">Quantity:</span>
+                    <ProductCount
+                      state={state}
+                      dispatch={dispatch}
+                      product={product}
+                    />
+                  </div>
 
                 <div className="add-button-container">
                   {" "}

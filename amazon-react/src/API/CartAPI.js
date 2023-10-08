@@ -2,9 +2,7 @@ import axios from "axios";
 import { cart } from "../Utils__/apiUrl";
 import { ACTION } from "../Reducer__/FormReducer";
 
-
 export const moveToCart = async (product, quantity, dispatch, navigate) => {
-  console.log(product, quantity, dispatch, navigate);
   let productQuantity = 1;
   if (quantity) productQuantity = quantity;
 
@@ -52,3 +50,16 @@ export const getAllCartData = async (dispatch) => {
     console.log(e, "GetAllDataToCart");
   }
 };
+export const moveToCartPage = (navigate, e) => {
+  e.preventDefault();
+  navigate(`/cart/${JSON.parse(localStorage.getItem("datas"))?.email}`);
+};
+
+export const addAShippingValue = async (email, productId, value ) => {
+  try{
+    const response = await axios.put(`${cart}/shipping/${email}/${productId}/${value}`)
+  }
+  catch(e){
+    console.log(e,"addAShippingValue")
+  }
+}

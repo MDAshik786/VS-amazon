@@ -17,6 +17,7 @@ export const ACTION = {
   SIGNINVISIBILITY: "signInVisiblity",
   REMOVE: "removed", 
   LOCATIONVISIBLE: "locationVisble",
+  WISHLISTCONTAINER:"wishListContainer"
 };
 
 export const InitialValue = {
@@ -34,6 +35,8 @@ export const InitialValue = {
   signInVisibility: false,
   addToCartVisibility: {},
   locationVisible: false,
+  shippingCharges:0,
+  wishListContainer:2
 };
 export const FormReducer = (state, action) => {
   switch (action.type) {
@@ -71,16 +74,6 @@ export const FormReducer = (state, action) => {
       return {
         ...state,
         productCount: updatedQuantity,
-      };
-    case ACTION.WISHLIST:
-      return {
-        ...state,
-        wishList: {
-          ...state.wishList,
-          [action.payload.id]: state.wishList[action.payload.id]
-            ? !state.wishList[action.payload.id]
-            : true,
-        },
       };
     case ACTION.GETALLWISHLIST:
       return {
@@ -160,7 +153,11 @@ export const FormReducer = (state, action) => {
           ...state,
           locationVisible:true
         }
-
+       case ACTION.WISHLISTCONTAINER:
+        return{
+          ...state,
+          wishListContainer:action.payload.value
+        }
     default:
       return state;
   }

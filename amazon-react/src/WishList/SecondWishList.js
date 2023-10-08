@@ -7,16 +7,12 @@ import { useNavigate } from "react-router";
 import { AiFillLock } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-const SecondWishList = ({ state, dispatch }) => {
+const SecondWishList = ({ state, dispatch,favHeart }) => {
   const navigate = useNavigate();
-  let favHeart = [];
-  try {
-    state.wishList &&
-      state.wishList.map((data) => {
-        favHeart.push(data.id);
-      });
-  } catch (error) {}
-  console.log(favHeart)
+  
+  const singlePage = (product) => {
+    navigate("/single", { state: { product } });
+  };
   return (
     <div>
       <hr className="list-hr"/>
@@ -26,8 +22,6 @@ const SecondWishList = ({ state, dispatch }) => {
             
             <div key={product.id}>
               <div className="list-product-container">
-                <div className="list-img-container">
-                  <img className="img" src={product.image} alt={product.name} />
                   <div
               className="list-single-absolute"
               onClick={() =>
@@ -46,9 +40,11 @@ const SecondWishList = ({ state, dispatch }) => {
                 <AiOutlineHeart className="single-wishlist-img" />
               )}
             </div>
+                <div className="list-img-container" onClick={() => singlePage(product) }>
+                  <img className="img" src={product.image} alt={product.name} />
                 </div>
-                <div className="list-details">
-                  <p className="list-product-name">{product.name}</p>
+                <div className="list-details" >
+                  <p className="list-product-name" onClick={() => singlePage(product) }>{product.name}</p>
                   <div className="list-rating-count">
                     <img
                       className="product-rating-stars"
@@ -115,7 +111,6 @@ const SecondWishList = ({ state, dispatch }) => {
                   </button>
                   <button className="inside-box-button">Buy Now</button>
                   <div className="paragraph-div">
-                    {" "}
                     <AiFillLock className="lock-icon" />
                     <span className="img-text">Secure Transaction.</span>
                   </div>

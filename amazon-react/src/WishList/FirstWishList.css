@@ -1,0 +1,66 @@
+.firstWishList-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+   
+}
+.first-wishList-Box{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    border-right: 1px solid rgb(219, 217, 217);
+    border-bottom: 1px solid rgb(219, 217, 217);
+    position: relative;
+}
+.first-wishlist-img-container .img{
+    width: 50%;
+    object-fit:contain;
+    
+}
+.first-wishlist-container{
+    position: absolute;
+    left: 4%;
+    top: 3%;
+    border: 1px solid rgb(194, 193, 193);
+    padding: 0.6rem;
+    border-radius: 1.9rem;
+    display: flex;
+
+}
+.first-wishlist-name{
+    height: 15%;
+    padding-left: 0.5rem;
+
+}
+.first-wishList-Box .product-count-container{
+    padding-left: 1rem;
+}
+.first-wishlist-img-container{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+
+}
+.firts-wishlist-product-price{
+font-weight: 500;
+padding-left: 5%;
+}
+.first-wishlist-button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.first-wishlist-add-to-cart{
+    padding: 0 1rem;
+    height: 2.4rem;
+    width: 95%;
+    background-color: rgb(255, 216, 20);
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+}
