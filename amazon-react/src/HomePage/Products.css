@@ -7,37 +7,37 @@
   }
   @media (max-width: 142rem) {
     .grid-main {
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(6, 1fr);
     }
   }
 
   @media (max-width: 114rem) {
     .grid-main {
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
   }
   
   @media (max-width: 92rem) {
     .grid-main {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4 1fr);
     }
   }
   
   @media (max-width: 71rem) {
     .grid-main {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   
   @media (max-width: 57rem) {
     .grid-main {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   
   @media (max-width: 41rem) {
     .grid-main {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
     }
   }
   

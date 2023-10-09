@@ -8,6 +8,7 @@ import { cart } from "../Utils__/apiUrl";
 import axios from "axios";
 import SignInButtonDropDown from "./SignInButtonDropDown";
 import Location from "../Location.js/Location";
+import Address from "../Address/Address";
 const Header = ({ state, dispatch, loginData, setloginData }) => {
   const [isAcive, setIsActive] = useState(false);
   useEffect(() => {
@@ -28,6 +29,7 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
       });
     }, 5000);
   };
+
   const getAllCartData = async () => {
     try {
       const response = await axios.get(
@@ -48,6 +50,10 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
       type: ACTION.LOCATIONVISIBLE,
     });
   };
+
+  const disableScroll= (states) =>{
+    states?.window.scrollTo(0,0);
+  }
   return (
     <>
       <div className="header">
@@ -127,9 +133,9 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
             </div>
           </Link>
         </div>
-        {state?.locationVisible && (
-          <Location state={state} dispatch={dispatch} />
-        )}
+        {state?.locationVisible && 
+          <Address state={state} dispatch={dispatch} />
+        }
       </div>
       <div className="location"></div>
     </>

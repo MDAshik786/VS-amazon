@@ -32,7 +32,7 @@ const WishList = ({ state, dispatch }) => {
       <div className="wishlist-div">
         <div className="list-header">
           <div className="list-layout">
-            <LuLayoutGrid  className="img1" onClick={() => wishListContainers(1)} />
+            <LuLayoutGrid  className="img1 active" onClick={() => wishListContainers(1)} />
             <BsLayoutTextWindowReverse className="img2" onClick={() => wishListContainers(2)} />
           </div>
           <div className="searchBar">
@@ -41,7 +41,7 @@ const WishList = ({ state, dispatch }) => {
             <span className="list-filter">Filter & Sort</span>
           </div>
         </div>
-        {state?.wishListContainer ===1 ?
+        {state?.wishListContainer === 1 ?
         <FirstWishList state={state} dispatch={dispatch} favHeart={favHeart} /> :
         <SecondWishList state={state} dispatch={dispatch} favHeart={favHeart} />
         }

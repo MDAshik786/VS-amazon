@@ -15,7 +15,7 @@
     position: relative;
 }
 .first-wishlist-img-container .img{
-    width: 50%;
+    width: 64%;
     object-fit:contain;
     
 }
@@ -42,6 +42,7 @@
     height: 100%;
     align-items: center;
     justify-content: center;
+    aspect-ratio: 1;
 
 }
 .firts-wishlist-product-price{

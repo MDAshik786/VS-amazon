@@ -60,7 +60,7 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
   };
   return (
     <>
-      <div className="grid-main">
+      <div className="grid-main" >
         {state.getApiData &&
           state.getApiData.map((product, index) => {
             return (

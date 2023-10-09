@@ -1,64 +1,69 @@
-.wishList-Main-div{
-    padding: 2rem 15rem ;
-    min-height: 100vh;
+.wishList-Main-div {
+  padding: 2rem 15rem;
+  min-height: 100vh;
 }
-.wishlist-div{
-    border-top: 1px solid rgb(219, 217, 217);
-    border-radius: 0.5rem;
-    margin-top: 1rem;
-    border-left:1px solid rgb(219, 217, 217);
+.wishlist-div {
+  border-top: 1px solid rgb(219, 217, 217);
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  border-left: 1px solid rgb(219, 217, 217);
 }
 
-.list-header{
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    align-items: center;
-    border-right:1px solid rgb(219, 217, 217);
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  align-items: center;
+  border-right: 1px solid rgb(219, 217, 217);
+  border-bottom: 1px solid rgb(219, 217, 217);
 }
-.list-layout{
-    display: flex;
-    gap: 1.5rem;
+.list-layout {
+  display: flex;
+  gap: 1.5rem;
 }
-.list-layout .img1,.list-layout .img2{
-    width: 1.5rem;
-    height: 1.5rem;
+.list-layout .img1,
+.list-layout .img2 {
+  width: 1.5rem;
+  height: 1.5rem;
 }
-.searchBar{
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    position: relative;
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
 }
-.wishlist-searchBar{
-    padding-left: 2rem;
-    width: 50%;
-    height: 2.5rem;
-    outline: none;
-    border: 1px solid rgb(212, 210, 210);
-    background-color: white;
-    font-size: 1rem;
-    border-radius: 0.5rem;
+.wishlist-searchBar {
+  padding-left: 2rem;
+  width: 50%;
+  height: 2.5rem;
+  outline: none;
+  border: 1px solid rgb(212, 210, 210);
+  background-color: white;
+  font-size: 1rem;
+  border-radius: 0.5rem;
 }
-.wishlist-searchBar:hover,.wishlist-searchBar:active{
-    width: 100%; 
-
+.wishlist-searchBar:hover,
+.wishlist-searchBar:active {
+  width: 100%;
 }
-.list-filter{
-    white-space: nowrap;
+.list-filter {
+  white-space: nowrap;
 }
-.list-search-icon{
-    height: 1.7rem;
-    width: 1.7rem;
-    position: absolute;
-    padding: 0.1rem;
-    margin: 0.1rem;
-    left: 2px;
+.list-search-icon {
+  height: 1.7rem;
+  width: 1.7rem;
+  position: absolute;
+  padding: 0.1rem;
+  margin: 0.1rem;
+  left: 2px;
 }
-.list{
-    font-size: 1.3rem;
-    font-weight: 500;
+.list {
+  font-size: 1.3rem;
+  font-weight: 500;
 }
-.list-hr{
-    border:1px solid rgb(225, 222, 222);
+.list-hr {
+  border: 1px solid rgb(219, 217, 217);
+}
+.list-layout .img1.active{
+    background-color: blue;
 }

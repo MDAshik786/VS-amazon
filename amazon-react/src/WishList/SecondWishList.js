@@ -15,7 +15,7 @@ const SecondWishList = ({ state, dispatch,favHeart }) => {
   };
   return (
     <div>
-      <hr className="list-hr"/>
+      
       {state.wishList &&
         state.wishList.map((product, index) => {
           return (
@@ -132,7 +132,7 @@ const SecondWishList = ({ state, dispatch,favHeart }) => {
                   </button>
                 </div>
               </div>
-              {state.wishList.length-1 !== index && <hr className="list-hr"/>}
+              <hr className="list-hr"/>
               
             </div>
           );
