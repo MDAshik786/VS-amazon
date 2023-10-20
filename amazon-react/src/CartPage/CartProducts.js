@@ -3,23 +3,24 @@ import ProductCount from "../HomePage/ProductCount";
 import DateFormate from "../Utils__/DateFormate";
 import axios from "axios";
 import { cart } from "../Utils__/apiUrl";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { addAShippingValue } from "../API/CartAPI";
 import { useNavigate } from "react-router";
+import { useMain } from "../MainContext";
+import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
 const CartProducts = ({
-  state,
-  dispatch,
   email,
   deliveryOption,
   getAllCartData,
   setDeliveryOption,
 }) => {
+  const mainContext = useMain();
   const navigate = useNavigate();
   const handleClickRadio = async (productId, option) => {
-   await addAShippingValue(email, productId, option)
-    getAllCartData(dispatch)
+    await addAShippingValue(email, productId, option);
+    getAllCartData(mainContext?.dispatch);
   };
-  
+
   const deleteAProduct = async (productId) => {
     try {
       const response = await axios.delete(
@@ -31,14 +32,14 @@ const CartProducts = ({
     }
   };
   const updateQunatityValue = (id, quantity) => {
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.UPDATEQUANTITY,
       payload: { data: id },
     });
   };
   const saveData = async (id, quantity) => {
-    const productCount = state.productCount[id]
-      ? state.productCount[id]
+    const productCount = mainContext?.state.productCount[id]
+      ? mainContext?.state.productCount[id]
       : quantity;
     await updateAProduct(id, productCount);
     getAllCartData();
@@ -60,13 +61,20 @@ const CartProducts = ({
   };
   return (
     <div className="left">
-      {(state?.addToCart.cartItems &&
-        state?.addToCart?.cartItems.length === 0) &&
-          <div className="length-zero-container"><p className="cart-empty-heading">Your Amazon Cart is empty.</p>
-          <button className="view-all-product-button" onClick={() => navigate("/") }>View All Product</button></div>
-      }
-      {state?.addToCart.cartItems &&
-        state?.addToCart?.cartItems.map((product, index) => {
+      {mainContext?.state?.addToCart.cartItems &&
+        mainContext?.state?.addToCart?.cartItems.length === 0 && (
+          <div className="length-zero-container">
+            <p className="cart-empty-heading">Your Amazon Cart is empty.</p>
+            <button
+              className="view-all-product-button"
+              onClick={() => handleNavigate(navigate, '')}
+            >
+              View All Product
+            </button>
+          </div>
+        )}
+      {mainContext?.state?.addToCart.cartItems &&
+        mainContext?.state?.addToCart?.cartItems.map((product, index) => {
           return (
             <div className="box" key={product.id}>
               <div className="date">
@@ -124,10 +132,10 @@ const CartProducts = ({
                     <div className="quantity-container">
                       <span>Quantity: </span>
                       <div>
-                        {state.updatedQuantity[product.product.id] ? (
+                        {mainContext?.state.updatedQuantity[
+                          product.product.id
+                        ] ? (
                           <ProductCount
-                            state={state}
-                            dispatch={dispatch}
                             product={product.product}
                             quantity={product.quantity}
                           />
@@ -139,25 +147,27 @@ const CartProducts = ({
                     <a
                       className="update"
                       onClick={() =>
-                        state.updatedQuantity[product.product?.id] === true
+                        mainContext?.state.updatedQuantity[
+                          product.product?.id
+                        ] === true
                           ? (updateQunatityValue(product.product?.id),
                             saveData(product.product?.id, product.quantity))
                           : updateQunatityValue(product.product?.id)
                       }
                     >
-                      {state.updatedQuantity[product.product.id]
+                      {mainContext?.state.updatedQuantity[product.product.id]
                         ? "Save"
                         : "Update"}
                     </a>
                     <a
                       className="Delete"
                       onClick={
-                        state.updatedQuantity[product.product.id]
+                        mainContext?.state.updatedQuantity[product.product.id]
                           ? () => updateQunatityValue(product.product.id)
                           : () => deleteAProduct(product.id)
                       }
                     >
-                      {state.updatedQuantity[product.product.id]
+                      {mainContext?.state.updatedQuantity[product.product.id]
                         ? "Cancel"
                         : "Delete"}
                     </a>

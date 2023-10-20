@@ -4,6 +4,7 @@ import { ACTION } from "../Reducer__/FormReducer";
 import { RxCross2 } from "react-icons/rx";
 import { getPinCode } from "../API/PinCode";
 import { useNavigate } from "react-router";
+import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
 const Location = ({ state, dispatch }) => {
   const navigate = useNavigate();
   const removeLocation = () => {
@@ -17,9 +18,6 @@ const Location = ({ state, dispatch }) => {
       payload: { value: e.target.value, name: e.target.name },
     });
   };
-  const moveToSignInPage = () => {
-    navigate("/loginemail");
-  };
   return (
     <div className="pincode-main">
       <div className="location-main" onClick={removeLocation} />
@@ -30,7 +28,7 @@ const Location = ({ state, dispatch }) => {
           Select a delivery location to see product availability and delivery
           options
         </p>
-        <button className="location-signIn" onClick={moveToSignInPage}>
+        <button className="location-signIn" onClick={(e) => handleNavigate(navigate, "loginemail", e)}>
           Sign In to see your addresses
         </button>
         <div className="pincode-name">

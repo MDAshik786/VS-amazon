@@ -5,49 +5,45 @@ import { AiFillLock } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import "./SingleData.css";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import Header from "../HomePage/Header";
 import ProductCount from "../HomePage/ProductCount";
-// import "../HomePage/Products.css";
-import {
-  AddToWishList,
-  checkWishList,
-  deleteFromWishList,
-  getAllWishListData,
-} from "../API/WhishListAPI";
+import "../HomePage/Products.css";
+import { checkWishList, getAllWishListData } from "../API/WhishListAPI";
 import { moveToCart } from "../API/CartAPI";
-const SingleData = ({ state, dispatch }) => {
+import { useMain } from "../MainContext";
+const SingleData = () => {
+  const mainContext = useMain();
   const navigate = useNavigate();
   const location = useLocation();
-  const product = location.state.product;
+  const product = location?.state?.product;
   const favHeart = [];
   const changeTheCurrency = () => {
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.CURRENCY,
     });
   };
   try {
-    state.wishList &&
-      state.wishList.map((data) => {
-        favHeart.push(data.id);
+    mainContext?.state?.wishList &&
+      mainContext?.state?.wishList.map((data) => {
+        favHeart?.push(data.id);
       });
   } catch (error) {}
 
- 
-  useEffect(() => {
-    const savedWishlist = localStorage.getItem("wishlist");
-    if (localStorage.getItem("wishItems")) {
-      dispatch({
-        type: ACTION.WISHLIST,
-        payload: { data: JSON.parse(localStorage.getItem("wishItems")) },
-      });
-    }
-    getAllWishListData(dispatch);
-  }, []);
+  // useEffect(() => {
+  //   const savedWishlist = localStorage.getItem("wishlist");
+  //   if (localStorage.getItem("wishItems")) {
+  //     mainContext?.dispatch({
+  //       type: ACTION.WISHLIST,
+  //       payload: { data: JSON.parse(localStorage.getItem("wishItems")) },
+  //     });
+  //   }
+  //   getAllWishListData(mainContext?.dispatch);
+  // }, []);
 
   return (
     <>
-      <Header state={state} dispatch={dispatch} />
+      <Header />
       <div className="single-main-box">
         <div className="single-container">
           <div className="simg-container">
@@ -77,7 +73,7 @@ const SingleData = ({ state, dispatch }) => {
             </div>
             <div>
               <div className="single-price">
-                {state.currency ? (
+                {mainContext?.state.currency ? (
                   <>
                     <span className="single-symbol-icon">₹</span>
                     {product.priceIndia}.00
@@ -89,7 +85,7 @@ const SingleData = ({ state, dispatch }) => {
                 )}
               </div>
               <span className="link paragraph" onClick={changeTheCurrency}>
-                {state.currency
+                {mainContext?.state.currency
                   ? "Convert into US dollar."
                   : "Convert to Indian currency."}
               </span>
@@ -173,7 +169,15 @@ const SingleData = ({ state, dispatch }) => {
             <p className="bottom-line"></p>
             <div
               className="single-absolute"
-              onClick={() => checkWishList(product.id, product,navigate,dispatch,favHeart)}
+              onClick={() =>
+                checkWishList(
+                  product.id,
+                  product,
+                  navigate,
+                  mainContext?.dispatch,
+                  favHeart
+                )
+              }
             >
               {favHeart.includes(product.id) ? (
                 <AiFillHeart className="single-wishlist-img-true" />
@@ -213,18 +217,19 @@ const SingleData = ({ state, dispatch }) => {
             <p className="stock">In Stock</p>
             <div className="product-count-container">
               Quantity:
-              <ProductCount
-                state={state}
-                dispatch={dispatch}
-                product={product}
-              />
+              <ProductCount product={product} />
             </div>
             <button
               className="inside-box-button"
               onClick={() =>
-                moveToCart(product, state.productCount[product.id],dispatch,navigate)
+                moveToCart(
+                  product,
+                  mainContext?.state.productCount[product.id],
+                  mainContext?.dispatch,
+                  navigate
+                )
               }
-              {...(state.addToCartVisibility[product.id] && {
+              {...(mainContext?.state.addToCartVisibility[product.id] && {
                 style: {
                   color: "#198754",
                   backgroundColor: "white",
@@ -232,22 +237,22 @@ const SingleData = ({ state, dispatch }) => {
                 },
               })}
             >
-            {!state.addToCartVisibility[product.id] ? (
-                    "Add To Cart"
-                  ) : (
-                    <div
-                      id={`added-to-cart-${product.id}`}
-                      className="added-to-cart"
-                    >
-                      <img
-                        src="images/icons/checkmark.png"
-                        className="img"
-                        alt="Added"
-                      />
-                      Added
-                    </div>
-                  )}
-                </button>
+              {!mainContext?.state.addToCartVisibility[product.id] ? (
+                "Add To Cart"
+              ) : (
+                <div
+                  id={`added-to-cart-${product.id}`}
+                  className="added-to-cart"
+                >
+                  <img
+                    src="images/icons/checkmark.png"
+                    className="img"
+                    alt="Added"
+                  />
+                  Added
+                </div>
+              )}
+            </button>
             <button className="inside-box-button">Buy Now</button>
             <div className="paragraph-div">
               {" "}
@@ -256,7 +261,9 @@ const SingleData = ({ state, dispatch }) => {
             </div>
             <button
               className="outside-box-button"
-              onClick={() =>  (product.id, product,navigate,dispatch,favHeart)}
+              onClick={() => (
+                product.id, product, navigate, mainContext?.dispatch, favHeart
+              )}
             >
               {favHeart.includes(product.id)
                 ? "Remove from Wish List"

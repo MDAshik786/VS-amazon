@@ -1,43 +1,48 @@
-import React from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
-import { FiEyeOff} from "react-icons/fi";
-import { ACTION } from '../Reducer__/FormReducer';
-import axios from 'axios';
-import { userApiUrl } from '../Utils__/apiUrl';
-const LoginPassword = ({state,dispatch}) => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const email = location.state.email
+import { FiEyeOff } from "react-icons/fi";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
+import axios from "axios";
+import { userApiUrl } from "../Utils__/apiUrl";
+import { useMain } from "../MainContext";
+const LoginPassword = () => {
+  const mainContext = useMain();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location?.state?.email;
   const handelOnChange = (e) => {
-    dispatch({
-      type:ACTION.HANDELONCHANGE,
-      payload:{value:e.target.value,name:e.target.name}
-    })
-  }
+    mainContext?.dispatch({
+      type: ACTION.HANDELONCHANGE,
+      payload: { value: e.target.value, name: e.target.name },
+    });
+  };
   const passwordVisible = () => {
-    dispatch({
-      type:ACTION.VISIBLE
-    })
-  }
+    mainContext?.dispatch({
+      type: ACTION.VISIBLE,
+    });
+  };
   const loginPasswordVerification = async () => {
-    try{
-      const response = await axios.post(`${userApiUrl}/password`,{email ,password:state.password},{
-        headers:{
-          "content-Type" : "application/json",
-         },
-      })
-      console.log(response.data,"pass")
-      if(response.data === 'verified')
-      navigate("/",{state:{loginVerification:true,email}})
+    try {
+      const response = await axios.post(
+        `${userApiUrl}/password`,
+        { email, password: mainContext?.state.password },
+        {
+          headers: {
+            "content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data, "pass");
+      if (response.data === "verified")
+        navigate("/", { state: { loginVerification: true, email } });
+    } catch (e) {
+      console.log(e);
     }
-    catch(e){
-      console.log(e)
-    }
-  }
+  };
   return (
     <div>
-        <Link to={"/"}>
+      <Link to={"/"}>
         <div className="amazon-logo-conatiner">
           <img src="images/amazon-logo.png" alt="" width={100} />
           <span className="in">.in</span>
@@ -48,19 +53,34 @@ const LoginPassword = ({state,dispatch}) => {
           <p className="login-heading">Sign in</p>
           <div>
             <p className="Email-heading">Password:</p>
-           <div className='relative'> <input
-              type={state.passwordVisible ? 'password' : 'Text '}
-              className="password-input"
-              autoFocus
-              name='password'
-              placeholder="Enter Your Password"
-              value={state.password}
-              onChange={handelOnChange}
-            />
-           {state.passwordVisible ? <FiEyeOff className='eye-icon' onClick={passwordVisible}/> : <FiEye className='eye-icon' name='visible' onClick={passwordVisible}/> }    
+            <div className="relative">
+              {" "}
+              <input
+                type={mainContext?.state.passwordVisible ? "password" : "Text "}
+                className="password-input"
+                autoFocus
+                name="password"
+                placeholder="Enter Your Password"
+                value={mainContext?.state.password}
+                onChange={handelOnChange}
+              />
+              {mainContext?.state.passwordVisible ? (
+                <FiEyeOff className="eye-icon" onClick={passwordVisible} />
+              ) : (
+                <FiEye
+                  className="eye-icon"
+                  name="visible"
+                  onClick={passwordVisible}
+                />
+              )}
             </div>
           </div>
-          <button className="countinue-button" onClick={loginPasswordVerification}>Sign in</button>
+          <button
+            className="countinue-button"
+            onClick={loginPasswordVerification}
+          >
+            Sign in
+          </button>
           <p className="paragraph">
             <a className="link">Forgot Password</a>
           </p>
@@ -73,7 +93,7 @@ const LoginPassword = ({state,dispatch}) => {
         </div> */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPassword
+export default LoginPassword;

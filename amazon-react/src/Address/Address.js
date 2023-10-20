@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Address.css";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { RxCross2 } from "react-icons/rx";
 import { addAnAddress } from "../API/AddressAPI";
+import { useMain } from "../MainContext";
 
-const Address = ({ state, dispatch }) => {
+const Address = () => {
+  const MainContext = useMain();
   const [address, setAddress] = useState({
     country: "",
     name: "",
@@ -18,7 +20,7 @@ const Address = ({ state, dispatch }) => {
     defaultAddress: false,
   });
   const removeLocation = () => {
-    dispatch({
+    MainContext?.dispatch({
       type: ACTION.REMOVE,
     });
   };
@@ -33,7 +35,6 @@ const Address = ({ state, dispatch }) => {
   useEffect(() => {
     document.getElementsByClassName("body").className += " overflow-hidden";
   }, []);
-  // document.getElementsByClassName("body").className = "body";
   return (
     <div className="address-main">
       <div className="address-con" onClick={removeLocation}></div>

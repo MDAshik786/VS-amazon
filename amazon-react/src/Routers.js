@@ -8,37 +8,38 @@ import LoginEmail from "./Login/LoginEmail";
 import LoginPassword from "./Login/LoginPassword";
 import Home from './HomePage/Home';
 import WishList from './WishList/WishList';
+import Layout from './Layout';
 
-const Routers = ({state,dispatch,loginData,setLoginData}) => {
+const Routers = ({loginData,setLoginData}) => {
   return (
     <Routes>
-    <Route path="/" element={<Home state={state} dispatch={dispatch} loginData={loginData} setLoginData={setLoginData} />} />
+    <Route path="/" element={<Home  loginData={loginData} setLoginData={setLoginData} />} />
     <Route
       path="/cart/:email"
-      element={<Cart state={state} dispatch={dispatch} />}
+      element={<Cart />}
     />
     <Route
       path="/loginemail"
-      element={<LoginEmail state={state} dispatch={dispatch} />}
+      element={<LoginEmail />}
     />
     <Route
       path="/loginpassword"
-      element={<LoginPassword state={state} dispatch={dispatch} />}
+      element={<LoginPassword />}
     />
     <Route
       path="/userlogin"
-      element={<LoginUser state={state} dispatch={dispatch} />}
+      element={<LoginUser />}
     />
     <Route
       path="/list"
-      element={<WishList state={state} dispatch={dispatch} />}
+      element={<WishList />}
     />
     <Route
       path="/single"
-      element={<SingleData state={state} dispatch={dispatch} />}
+      element={<SingleData />}
     />
     <Route path="/navbar" element={<NavBarList />} />
-    
+    <Route path="/layout" element={<Layout/>} />
   </Routes>
   )
 }

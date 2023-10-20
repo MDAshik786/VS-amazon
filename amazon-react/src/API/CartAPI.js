@@ -1,6 +1,7 @@
 import axios from "axios";
 import { cart } from "../Utils__/apiUrl";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
+import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
 
 export const moveToCart = async (product, quantity, dispatch, navigate) => {
   let productQuantity = 1;
@@ -10,7 +11,7 @@ export const moveToCart = async (product, quantity, dispatch, navigate) => {
     await addAProduct(product.id, productQuantity, dispatch);
     getAllCartData(dispatch);
   } else {
-    navigate("/loginemail");
+    handleNavigate(navigate,"loginemail")
   }
 };
 export const addAProduct = async (id, quantity, dispatch) => {
@@ -52,14 +53,16 @@ export const getAllCartData = async (dispatch) => {
 };
 export const moveToCartPage = (navigate, e) => {
   e.preventDefault();
+  
   navigate(`/cart/${JSON.parse(localStorage.getItem("datas"))?.email}`);
 };
 
-export const addAShippingValue = async (email, productId, value ) => {
-  try{
-    const response = await axios.put(`${cart}/shipping/${email}/${productId}/${value}`)
+export const addAShippingValue = async (email, productId, value) => {
+  try {
+    const response = await axios.put(
+      `${cart}/shipping/${email}/${productId}/${value}`
+    );
+  } catch (e) {
+    console.log(e, "addAShippingValue");
   }
-  catch(e){
-    console.log(e,"addAShippingValue")
-  }
-}
+};

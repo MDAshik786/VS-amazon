@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./Products.css";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router";
@@ -13,11 +13,14 @@ import {
   getAllWishListData,
 } from "../API/WhishListAPI";
 import { moveToCart } from "../API/CartAPI";
-const Products = ({ state, dispatch, loginData, setloginData }) => {
+import { useMain } from "../MainContext";
+import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
+const Products = ({ loginData, setloginData }) => {
+  const mainContext = useMain();
   const getData = async () => {
     try {
       const response = await axios.get(`${apiUrl}/get`);
-      dispatch({
+      mainContext?.dispatch({
         type: ACTION.GETDATA,
         payload: { data: response.data },
       });
@@ -30,28 +33,27 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
   let favHeart = [];
   useEffect(() => {
     getData();
-    state.productCount = "";
     setloginData(JSON.parse(localStorage.getItem("datas")));
-    getAllWishListData(dispatch);
+    getAllWishListData(mainContext?.dispatch);
   }, []);
-  
+
   try {
-    state.wishList &&
-      state.wishList.map((data) => {
+    mainContext?.state?.wishList &&
+      mainContext?.state?.wishList.map((data) => {
         favHeart.push(data.id);
       });
   } catch (error) {}
 
   const checkWishList = async (key, product) => {
     if (!loginData?.loginVerification) {
-      navigate("/loginemail");
+     handleNavigate(navigate, "loginemail")
     } else {
       if (favHeart.includes(key)) {
         await deleteFromWishList(key);
-        getAllWishListData(dispatch);
+        getAllWishListData(mainContext?.dispatch);
       } else {
         await AddToWishList(product);
-        getAllWishListData(dispatch);
+        getAllWishListData(mainContext?.dispatch);
       }
     }
   };
@@ -60,9 +62,9 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
   };
   return (
     <>
-      <div className="grid-main" >
-        {state.getApiData &&
-          state.getApiData.map((product, index) => {
+      <div className="grid-main">
+        {mainContext?.state?.getApiData &&
+          mainContext?.state?.getApiData.map((product, index) => {
             return (
               <div className="container" key={index}>
                 <div
@@ -92,13 +94,9 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
                   <span className="price-rate">{product.priceIndia}.00</span>
                 </div>
                 <div className="product-count-container">
-                    <span className="quantity-name">Quantity:</span>
-                    <ProductCount
-                      state={state}
-                      dispatch={dispatch}
-                      product={product}
-                    />
-                  </div>
+                  <span className="quantity-name">Quantity:</span>
+                  <ProductCount product={product} />
+                </div>
 
                 <div className="add-button-container">
                   {" "}
@@ -107,12 +105,14 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
                     onClick={() =>
                       moveToCart(
                         product,
-                        state.productCount[product.id],
-                        dispatch,
+                        mainContext?.state?.productCount[product.id],
+                        mainContext?.dispatch,
                         navigate
                       )
                     }
-                    {...(state.addToCartVisibility[product.id] && {
+                    {...(mainContext?.state?.addToCartVisibility[
+                      product.id
+                    ] && {
                       style: {
                         color: "#198754",
                         backgroundColor: "white",
@@ -120,7 +120,7 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
                       },
                     })}
                   >
-                    {!state.addToCartVisibility[product.id] ? (
+                    {!mainContext?.state?.addToCartVisibility[product.id] ? (
                       "Add To Cart"
                     ) : (
                       <div
@@ -141,8 +141,8 @@ const Products = ({ state, dispatch, loginData, setloginData }) => {
                   className="absolute"
                   onClick={() => checkWishList(product.id, product)}
                 >
-                  {JSON.parse(localStorage.getItem("datas"))?.loginVerification &&
-                  favHeart.includes(product.id) ? (
+                  {JSON.parse(localStorage.getItem("datas"))
+                    ?.loginVerification && favHeart.includes(product.id) ? (
                     <AiFillHeart className="wishlist-img-true" />
                   ) : (
                     <AiOutlineHeart className="wishlist-img" />

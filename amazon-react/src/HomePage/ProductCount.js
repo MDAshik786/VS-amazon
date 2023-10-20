@@ -1,17 +1,19 @@
 import React from "react";
-import { ACTION } from "../Reducer__/FormReducer";  
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
+import { useMain } from "../MainContext";
 
-const ProductCount = ({ state, dispatch, product,quantity }) => {
-  product.id = product.productId ? product.productId : product.id
+const ProductCount = ({ product, quantity }) => {
+  const mainContext = useMain();
+  product.id = product.productId ? product.productId : product.id;
   const handelOnClick = (e, key) => {
     const { name } = e.target;
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.COUNTNAME,
       payload: { name, key },
     });
   };
   const handleQuanttiy = (key, e) => {
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.PRODUCTCOUNT,
       payload: { value: e.target.value, key },
     });
@@ -29,9 +31,9 @@ const ProductCount = ({ state, dispatch, product,quantity }) => {
         type="number"
         className="number"
         value={
-          state.productCount[product.id] == null
+          mainContext?.state?.productCount[product.id] == null
             ? quantity || 1
-            : state.productCount[product.id]
+            : mainContext?.state?.productCount[product.id]
         }
         onBlur={(e) =>
           e.target.value == "" || e.target.value == 0

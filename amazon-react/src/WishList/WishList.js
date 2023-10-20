@@ -6,23 +6,25 @@ import { BiSearchAlt } from "react-icons/bi";
 import { getAllWishListData } from "../API/WhishListAPI";
 import SecondWishList from "./SecondWishList";
 import FirstWishList from "./FirstWishList";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
+import { useMain } from "../MainContext";
 
-const WishList = ({ state, dispatch }) => {
+const WishList = () => {
+  const mainContext = useMain();
   useEffect(() => {
-    getAllWishListData(dispatch);
+    getAllWishListData(mainContext?.dispatch);
   }, []);
- const wishListContainers = (value) => {
-  console.log(value)
-  dispatch({
-    type:ACTION.WISHLISTCONTAINER,
-    payload:{value}
-  })
- }
+  const wishListContainers = (value) => {
+    console.log(value);
+    mainContext?.dispatch({
+      type: ACTION.WISHLISTCONTAINER,
+      payload: { value },
+    });
+  };
   let favHeart = [];
   try {
-    state.wishList &&
-      state.wishList.map((data) => {
+    mainContext?.state.wishList &&
+      mainContext?.state.wishList.map((data) => {
         favHeart.push(data.id);
       });
   } catch (error) {}
@@ -32,8 +34,14 @@ const WishList = ({ state, dispatch }) => {
       <div className="wishlist-div">
         <div className="list-header">
           <div className="list-layout">
-            <LuLayoutGrid  className="img1 active" onClick={() => wishListContainers(1)} />
-            <BsLayoutTextWindowReverse className="img2" onClick={() => wishListContainers(2)} />
+            <LuLayoutGrid
+              className="img1 active"
+              onClick={() => wishListContainers(1)}
+            />
+            <BsLayoutTextWindowReverse
+              className="img2"
+              onClick={() => wishListContainers(2)}
+            />
           </div>
           <div className="searchBar">
             <input type="text" className="wishlist-searchBar" />
@@ -41,10 +49,11 @@ const WishList = ({ state, dispatch }) => {
             <span className="list-filter">Filter & Sort</span>
           </div>
         </div>
-        {state?.wishListContainer === 1 ?
-        <FirstWishList state={state} dispatch={dispatch} favHeart={favHeart} /> :
-        <SecondWishList state={state} dispatch={dispatch} favHeart={favHeart} />
-        }
+        {mainContext?.state?.wishListContainer === 1 ? (
+          <FirstWishList favHeart={favHeart} />
+        ) : (
+          <SecondWishList favHeart={favHeart} />
+        )}
       </div>
     </div>
   );

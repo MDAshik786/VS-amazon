@@ -6,15 +6,17 @@ import { checkWishList } from "../API/WhishListAPI";
 import { useNavigate } from "react-router";
 import ProductCount from "../HomePage/ProductCount";
 import { moveToCart } from "../API/CartAPI";
+import { useMain } from "../MainContext";
 
-const FirstWishList = ({state, dispatch, favHeart}) => {
+const FirstWishList = ({favHeart}) => {
+  const mainContext = useMain()
   const navigate = useNavigate()
   return (
     <>
       <hr className="list-hr"/>
       <div className="firstWishList-grid">
-      {state.wishList &&
-        state.wishList.map((product, index) => {
+      {mainContext?.state.wishList &&
+        mainContext?.state.wishList.map((product, index) => {
           return (
             
               <div className="first-wishList-Box" key={product.id}>
@@ -25,7 +27,7 @@ const FirstWishList = ({state, dispatch, favHeart}) => {
                   product.id,
                   product,
                   navigate,
-                  dispatch,
+                  mainContext?.dispatch,
                   favHeart
                 )
               } 
@@ -51,28 +53,26 @@ const FirstWishList = ({state, dispatch, favHeart}) => {
                   <div className="product-count-container">
                     Quantity:
                     <ProductCount 
-                      state={state}
-                      dispatch={dispatch}
                       product={product}
                     />
                   </div>
                   <div className="first-wishlist-button-container"><button className="first-wishlist-add-to-cart"  onClick={() =>{
                       moveToCart(
                         product,
-                        state.productCount[product.id],
-                        dispatch,
+                        mainContext?.state.productCount[product.id],
+                        mainContext?.dispatch,
                         navigate
                       )
-                      checkWishList(product.id,product,navigate,dispatch,favHeart)
+                      checkWishList(product.id,product,navigate,mainContext?.dispatch,favHeart)
                       }
                     }
-                    {...(state.addToCartVisibility[product.id] && {
+                    {...(mainContext?.state.addToCartVisibility[product.id] && {
                       style: {
                         color: "#198754",
                         backgroundColor: "white",
                         border: "none",
                       },
-                    })}> {!state.addToCartVisibility[product.id] ? (
+                    })}> {!mainContext?.state.addToCartVisibility[product.id] ? (
                       "Add To Cart"
                     ) : (
                       <div

@@ -1,42 +1,49 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import axios from "axios";
 import { userApiUrl } from "../Utils__/apiUrl";
+import { useMain } from "../MainContext";
 
-const LoginEmail = ({state,dispatch}) => {
-   const navigate = useNavigate()
+const LoginEmail = () => {
+  const navigate = useNavigate();
+  const mainContext = useMain();
   const handelOnChange = (e) => {
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.HANDELONCHANGE,
-      payload:{value:e.target.value,name:e.target.name}
-    })
-  }
-  const loginEmailVerification = async() => {
-    try{
-      const response = await axios.post(`${userApiUrl}/email`,{email:state.email},{
-       headers:{
-        "content-Type" : "application/json",
-       },
-      })
-      console.log(response.data)
-      if(response.data === 'verified')
-      navigate("/loginpassword",{state:{loginEmail:true,email:state.email}})
+      payload: { value: e.target.value, name: e.target.name },
+    });
+  };
+  const loginEmailVerification = async () => {
+    try {
+      const response = await axios.post(
+        `${userApiUrl}/email`,
+        { email: mainContext?.state.email },
+        {
+          headers: {
+            "content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      if (response.data === "verified")
+        navigate("/loginpassword", {
+          state: { loginEmail: true, email: mainContext?.state.email },
+        });
+    } catch (e) {
+      console.log(e);
     }
-    catch(e){
-      console.log(e)
-    }
-  }
- console.log(state,"state") 
+  };
+  console.log(mainContext?.state, "mainContext?.state");
   return (
     <>
-        <Link to={"/"}>
-          <div className="amazon-logo-conatiner">
-            <img src="images/amazon-logo.png" alt="" width={100} />
-            <span className="in">.in</span>
-          </div>
-        </Link>
+      <Link to={"/"}>
+        <div className="amazon-logo-conatiner">
+          <img src="images/amazon-logo.png" alt="" width={100} />
+          <span className="in">.in</span>
+        </div>
+      </Link>
       <div className="login-container-outside">
         <div className="login-container">
           <p className="login-heading">Sign in</p>
@@ -48,11 +55,13 @@ const LoginEmail = ({state,dispatch}) => {
               autoFocus
               name="email"
               placeholder="Please Enter a Email"
-              value={state.email}
+              value={mainContext?.state.email}
               onChange={handelOnChange}
             />
           </div>
-          <button className="countinue-button" onClick={loginEmailVerification}>Continue</button>
+          <button className="countinue-button" onClick={loginEmailVerification}>
+            Continue
+          </button>
           <p className="paragraph">
             By countinuing, you agree to Amazon's{" "}
             <a className="link">Condition to Use</a> and{" "}
@@ -70,9 +79,12 @@ const LoginEmail = ({state,dispatch}) => {
           </div>
         </div>
         <div className="create-user-container">
-         <div className="center"> <span className="small-line"></span>
-          <span className="new">New to Amazon?</span>
-          <span className="small-line"></span></div>
+          <div className="center">
+            {" "}
+            <span className="small-line"></span>
+            <span className="new">New to Amazon?</span>
+            <span className="small-line"></span>
+          </div>
           <button className="create-button">Create your Amazon account</button>
         </div>
       </div>

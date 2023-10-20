@@ -7,17 +7,18 @@ import { useNavigate } from "react-router";
 import { AiFillLock } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-const SecondWishList = ({ state, dispatch,favHeart }) => {
+import { useMain } from "../MainContext";
+const SecondWishList = ({ favHeart }) => {
   const navigate = useNavigate();
-  
+  const mainContext = useMain()
   const singlePage = (product) => {
-    navigate("/single", { state: { product } });
+    navigate("/single", {state: { product } });
   };
   return (
     <div>
       
-      {state.wishList &&
-        state.wishList.map((product, index) => {
+      {mainContext?.state.wishList &&
+        mainContext?.state.wishList.map((product, index) => {
           return (
             
             <div key={product.id}>
@@ -29,7 +30,7 @@ const SecondWishList = ({ state, dispatch,favHeart }) => {
                   product.id,
                   product,
                   navigate,
-                  dispatch,
+                  mainContext?.dispatch,
                   favHeart
                 )
               } 
@@ -70,8 +71,6 @@ const SecondWishList = ({ state, dispatch,favHeart }) => {
                   <div className="product-count-container">
                     Quantity:
                     <ProductCount
-                      state={state}
-                      dispatch={dispatch}
                       product={product}
                     />
                   </div>
@@ -80,12 +79,12 @@ const SecondWishList = ({ state, dispatch,favHeart }) => {
                     onClick={() =>
                       moveToCart(
                         product,
-                        state.productCount[product.id],
-                        dispatch,
+                        mainContext?.state.productCount[product.id],
+                        mainContext?.dispatch,
                         navigate
                       )
                     }
-                    {...(state.addToCartVisibility[product.id] && {
+                    {...(mainContext?.state.addToCartVisibility[product.id] && {
                       style: {
                         color: "#198754",
                         backgroundColor: "white",
@@ -93,7 +92,7 @@ const SecondWishList = ({ state, dispatch,favHeart }) => {
                       },
                     })}
                   >
-                    {!state.addToCartVisibility[product.id] ? (
+                    {!mainContext?.state.addToCartVisibility[product.id] ? (
                       "Add To Cart"
                     ) : (
                       <div
@@ -121,7 +120,7 @@ const SecondWishList = ({ state, dispatch,favHeart }) => {
                         product.id,
                         product,
                         navigate,
-                        dispatch,
+                        mainContext?.dispatch,
                         favHeart
                       )
                     }

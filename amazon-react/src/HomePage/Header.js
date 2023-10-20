@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import { MdLocationPin } from "react-icons/md";
 import SignInDropDown from "./SignInDropDown";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { cart } from "../Utils__/apiUrl";
 import axios from "axios";
 import SignInButtonDropDown from "./SignInButtonDropDown";
-import Location from "../Location.js/Location";
 import Address from "../Address/Address";
-const Header = ({ state, dispatch, loginData, setloginData }) => {
+import { useMain } from "../MainContext";
+const Header = ({ loginData, setloginData }) => {
+  const mainContext = useMain();
   const [isAcive, setIsActive] = useState(false);
+
   useEffect(() => {
     getAllCartData();
     !JSON.parse(localStorage?.getItem("datas"))?.loginVerification &&
@@ -19,12 +21,12 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
 
   const callSignIn = () => {
     console.log("first");
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.SIGNINVISIBILITY,
     });
     setTimeout(() => {
       console.log("second");
-      dispatch({
+      mainContext?.dispatch({
         type: ACTION.REMOVE,
       });
     }, 5000);
@@ -36,7 +38,7 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
         `${cart}/get/${JSON.parse(localStorage.getItem("datas"))?.email}`
       );
       console.log(response.data.cartItems.length);
-      dispatch({
+      mainContext?.dispatch({
         type: ACTION.ADDTOCART,
         payload: { data: response.data },
       });
@@ -46,14 +48,11 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
   };
   const addAddress = () => {
     console.log("Pin");
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.LOCATIONVISIBLE,
     });
   };
 
-  const disableScroll= (states) =>{
-    states?.window.scrollTo(0,0);
-  }
   return (
     <>
       <div className="header">
@@ -69,12 +68,22 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
             </Link>
           </div>
           <div className="location-container" onClick={addAddress}>
-            <p className="hello">{JSON.parse(localStorage.getItem("pincodeDetails"))?.name ? "Delivery to" : "Hello"}</p>
+            <p className="hello">
+              {JSON.parse(localStorage.getItem("pincodeDetails"))?.name
+                ? "Delivery to"
+                : "Hello"}
+            </p>
             <div className="inside-location">
               <MdLocationPin className="loaction-icon" />
               <span>
                 {JSON.parse(localStorage.getItem("pincodeDetails"))?.name ? (
-                  <div>{JSON.parse(localStorage.getItem("pincodeDetails"))?.name } {JSON.parse(localStorage.getItem("pincodeDetails"))?.pincode }</div>
+                  <div>
+                    {JSON.parse(localStorage.getItem("pincodeDetails"))?.name}{" "}
+                    {
+                      JSON.parse(localStorage.getItem("pincodeDetails"))
+                        ?.pincode
+                    }
+                  </div>
                 ) : (
                   "Select your address"
                 )}
@@ -104,14 +113,16 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
                   </span>
                 </p>
               </div>
-              {!state.signInVisibility && isAcive && (
+              {!mainContext?.state.signInVisibility && isAcive && (
                 <SignInDropDown
                   loginData={loginData}
                   setloginData={setloginData}
                 />
               )}
               {!JSON.parse(localStorage?.getItem("datas"))?.loginVerification &&
-                state?.signInVisibility && <SignInButtonDropDown />}
+                mainContext?.state?.signInVisibility && (
+                  <SignInButtonDropDown />
+                )}
             </div>
           </Link>
           <Link to={"/"} className="return">
@@ -127,15 +138,13 @@ const Header = ({ state, dispatch, loginData, setloginData }) => {
             <div className="all-list-container">
               <img src="images/icons/cart-icon.png" alt="" className="img" />
               <span className="cart-quantity" id="cq">
-                {state?.addToCart?.cartItems?.length || 0}
+                {mainContext?.state?.addToCart?.cartItems?.length || 0}
               </span>
               <span className="cart-text">Cart</span>
             </div>
           </Link>
         </div>
-        {state?.locationVisible && 
-          <Address state={state} dispatch={dispatch} />
-        }
+        {mainContext?.state?.locationVisible && <Address />}
       </div>
       <div className="location"></div>
     </>

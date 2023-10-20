@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
 import axios from "axios";
 import { userApiUrl } from "../Utils__/apiUrl";
-const LoginUser = ({ state, dispatch }) => {
+import { useMain } from "../MainContext";
+const LoginUser = () => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
     name: "",
     phone: "",
   });
+  const mainContext = useMain();
   const navigate = useNavigate();
   const passwordVisible = () => {
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.VISIBLE,
     });
   };
@@ -26,23 +28,22 @@ const LoginUser = ({ state, dispatch }) => {
     });
   };
   const adduser = async () => {
-    try{
+    try {
       const response = await axios.post(userApiUrl, {
-        email:userData.email,
-        password:userData.password,
-        name:userData.name,
-        phone:userData.phone
+        email: userData.email,
+        password: userData.password,
+        name: userData.name,
+        phone: userData.phone,
       });
-      if(response.data === 'Added')
-      navigate('/',{state:{Varification:true}})
+      if (response.data === "Added")
+        navigate("/", { state: { Varification: true } });
+    } catch (e) {
+      console.log(e);
     }
-    catch(e){
-      console.log(e)
-    }
-  }
+  };
   const addUserDetails = () => {
     adduser();
-  }
+  };
   return (
     <div>
       <Link to={"/"}>
@@ -95,7 +96,11 @@ const LoginUser = ({ state, dispatch }) => {
             <div className="relative">
               {" "}
               <input
-                type={!state.passwordVisible ? "password" : "Text "}
+                type={
+                  !mainContext?.mainContext?.state.passwordVisible
+                    ? "password"
+                    : "Text "
+                }
                 className="password-input"
                 name="password"
                 placeholder="Enter Your Password"
@@ -105,7 +110,7 @@ const LoginUser = ({ state, dispatch }) => {
               <span className="error">
                 Passwords must be at least 6 characters.
               </span>
-              {!state.passwordVisible ? (
+              {!mainContext?.mainContext?.state.passwordVisible ? (
                 <FiEyeOff className="eye-icon" onClick={passwordVisible} />
               ) : (
                 <FiEye
@@ -116,7 +121,9 @@ const LoginUser = ({ state, dispatch }) => {
               )}
             </div>
           </div>
-          <button className="countinue-button" onClick={addUserDetails}>Continue</button>
+          <button className="countinue-button" onClick={addUserDetails}>
+            Continue
+          </button>
           <p className="bottom-line"></p>
           <p className="paragraph">
             Already have an account?
