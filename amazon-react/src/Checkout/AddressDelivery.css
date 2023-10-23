@@ -1,0 +1,62 @@
+.delivery-headings{
+    display:flex ;
+    justify-content: space-between;
+}
+.close-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.crossicons{
+    font-size: 1.2rem;
+}
+.delivery-options{
+    border: 1px solid rgb(197, 197, 197);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.checkout-options{
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.checkout-option-container{
+    padding: 0 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.radio-types{
+    width: 1.1rem;
+    height: 1.1rem;
+}
+.edit-address{
+    color: #007185;
+    font-size:0.9rem;
+}
+.checkout-name{
+    font-weight: 500;
+}
+.hr-line{
+    border: 1px solid rgb(197, 197, 197);
+}
+.locations{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.locations img{
+    aspect-ratio: 1;
+    object-fit: contain;
+    width:2rem;
+}
+.checkout-location-heading{
+    font-size: 1.3rem;
+    word-spacing: 2px;
+}

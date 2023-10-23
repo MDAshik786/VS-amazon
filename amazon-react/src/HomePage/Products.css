@@ -59,11 +59,13 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    aspect-ratio: 1;
 }
 .grid-main .img-container .img:hover,.grid-main .img-container .img:active {
   width: 90%;
   height: 90%;
   object-fit: contain;
+  aspect-ratio: 1;
 }
 
 .grid-main .container{

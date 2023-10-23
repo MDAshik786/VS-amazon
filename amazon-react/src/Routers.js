@@ -27,6 +27,7 @@ const Routers = ({ loginData, setLoginData }) => {
       <Route path="/navbar" element={<NavBarList />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/layout" element={<Layout />} />
+      <Route path="/checkout" element={<Checkout />} />
     </Routes>
   );
 };

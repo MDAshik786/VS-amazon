@@ -1,11 +1,11 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import "./SignInDropDown.css";
 import { useNavigate } from "react-router";
 import { moveToCartPage } from "../API/CartAPI";
 import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
 
 const SignInDropDown = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {}, []);
   const removeUser = () => {
     localStorage.setItem("datas", JSON.stringify({}));
@@ -19,7 +19,7 @@ const SignInDropDown = () => {
             JSON.parse(localStorage?.getItem("datas"))?.loginVerification &&
             JSON.parse(localStorage?.getItem("datas"))?.email
               ? removeUser
-              : (e) => handleNavigate(navigate,"loginemail", e)
+              : (e) => handleNavigate(navigate, "loginemail", e)
           }
         >
           {JSON.parse(localStorage.getItem("datas"))?.loginVerification &&
@@ -35,7 +35,10 @@ const SignInDropDown = () => {
         ) ? (
           <span>
             New customer?{" "}
-            <span className="color" onClick={(e) => handleNavigate(navigate,"userlogin", e,)}>
+            <span
+              className="color"
+              onClick={(e) => handleNavigate(navigate, "userlogin", e)}
+            >
               start here.
             </span>
           </span>
@@ -50,7 +53,10 @@ const SignInDropDown = () => {
           <div className="nav-contents">
             <p className="list-heading">Your List</p>
             <p className="points">Create a Wish List</p>
-            <p className="points" onClick={(e) => handleNavigate(navigate,e, "list")}>
+            <p
+              className="points"
+              onClick={(e) => handleNavigate(navigate,"list", e)}
+            >
               Your Wish List
             </p>
             <p className="points" onClick={(e) => moveToCartPage(navigate, e)}>
@@ -70,7 +76,7 @@ const SignInDropDown = () => {
                 JSON.parse(localStorage.getItem("datas"))?.loginVerification &&
                 JSON.parse(localStorage.getItem("datas"))?.email
                   ? removeUser
-                  : (e) => handleNavigate(navigate,"loginemail", e)
+                  : (e) => handleNavigate(navigate, "loginemail", e)
               }
             >
               {JSON.parse(localStorage.getItem("datas"))?.loginVerification &&
