@@ -1,3 +1,5 @@
+import { address } from "../../Utils__/apiUrl";
+
 export const ACTION = {
   GETDATA: "getdata",
   HANDELONCHANGE: "handelOnChange",
@@ -17,7 +19,9 @@ export const ACTION = {
   SIGNINVISIBILITY: "signInVisiblity",
   REMOVE: "removed", 
   LOCATIONVISIBLE: "locationVisble",
-  WISHLISTCONTAINER:"wishListContainer"
+  WISHLISTCONTAINER:"wishListContainer",
+  CHECKOUTVISIBILITY : "checkoutVisibility",
+   ADDRESSVISIBLE:"addressVisible"
 };
 
 export const InitialValue = {
@@ -36,7 +40,13 @@ export const InitialValue = {
   addToCartVisibility: {},
   locationVisible: false,
   shippingCharges:0,
-  wishListContainer:2
+  wishListContainer:2,
+  addressVisible:false,
+  checkoutVisiblity:{
+    address:true,
+    payment:false,
+    item:false
+  }
 };
 export const FormReducer = (state, action) => {
   switch (action.type) {
@@ -158,7 +168,45 @@ export const FormReducer = (state, action) => {
           ...state,
           wishListContainer:action.payload.value
         }
-    default:
+        case ACTION.ADDRESSVISIBLE:
+          return{
+            ...state,
+            addressVisible:!state?.addressVisible
+          }
+        case ACTION.CHECKOUTVISIBILITY:
+          const value = action?.payload?.value;
+        
+          const resetVisibility = (property) => ({
+            address: false,
+            payment: false,
+            item: false,
+          });
+        
+          const newCheckoutVisibility = {
+            address: false,
+            payment: false,
+            item: false,
+          };
+        
+          if (value === 'address') {
+            newCheckoutVisibility.address = !state?.checkoutVisiblity?.address;
+          } else if (value === 'payment') {
+            newCheckoutVisibility.payment = !state?.checkoutVisiblity?.payment;
+          } else if (value === 'item') {
+            newCheckoutVisibility.item = !state?.checkoutVisiblity?.item;
+          }
+        
+          const updatedCheckoutVisibility = {
+            ...resetVisibility(),
+            ...newCheckoutVisibility,
+          };
+        
+          return {
+            ...state,
+            checkoutVisiblity: updatedCheckoutVisibility,
+          };
+        
+  default:
       return state;
   }
 };

@@ -1,4 +1,5 @@
-import { ACTION } from "../Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
+
 
 export const getPinCode = async(pincode,dispatch) => {
 

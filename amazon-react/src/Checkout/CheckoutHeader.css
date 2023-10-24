@@ -8,6 +8,7 @@
 .container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     max-width:75rem;
     width: 100%;
     margin: auto;
@@ -16,6 +17,7 @@
 .checkout-logo{
      width: 8rem;
     object-fit: contain;
+    padding-top: 1rem;
    
 }
 .lock-img-container{
@@ -30,6 +32,6 @@
    display: flex;
    align-items: center;
 }
-.checkout-heading{
+.checkout-head-heading{
     font-size: 1.5rem;
 }

@@ -1,19 +1,22 @@
 import React from "react";
 import "./Location.css";
-import { ACTION } from "../Reducer__/FormReducer";
+
 import { RxCross2 } from "react-icons/rx";
 import { getPinCode } from "../API/PinCode";
 import { useNavigate } from "react-router";
 import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
-const Location = ({ state, dispatch }) => {
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
+import { useMain } from "../MainContext";
+const Location = () => {
+  const mainContext = useMain()
   const navigate = useNavigate();
   const removeLocation = () => {
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.REMOVE,
     });
   };
   const handelOnChange = (e) => {
-    dispatch({
+    mainContext?.dispatch({
       type: ACTION.HANDELONCHANGE,
       payload: { value: e.target.value, name: e.target.name },
     });
@@ -40,13 +43,13 @@ const Location = ({ state, dispatch }) => {
           <input
             className="pincode-input"
             type="number"
-            value={state.pincode}
+            value={mainContext?.state?.pincode}
             name="pincode"
             onChange={handelOnChange}
           />
           <button
             className="apply-button"
-            onClick={() => getPinCode(state?.pincode, dispatch)}
+            onClick={() => getPinCode(mainContext?.state?.pincode, mainContext?.dispatch)}
           >
             Apply
           </button>

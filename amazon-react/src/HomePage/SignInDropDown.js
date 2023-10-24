@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import "./SignInDropDown.css";
 import { useNavigate } from "react-router";
-import { moveToCartPage } from "../API/CartAPI";
-import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
+
+import { handleNavigate, moveToCartPage } from "../Function/ComponentFunctions/NavigateFunction";
 
 const SignInDropDown = () => {
   const navigate = useNavigate();

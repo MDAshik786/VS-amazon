@@ -13,6 +13,9 @@ body{
 }
 button {
   position: relative;
+ 
+  outline: none;
+  border: none;
 }
 button:hover,button:active{
   opacity: 1.3;

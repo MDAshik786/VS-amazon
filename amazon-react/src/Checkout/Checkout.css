@@ -3,6 +3,8 @@
    max-width: 75rem;
    padding: 1rem;
    margin: 0 auto;
+   display: flex;
+   justify-content: space-between;
 }
 .address-name-container{
    display: flex;
@@ -18,8 +20,28 @@
 }
 .checkout-address-container{
    width: 30%;
-   word-spacing: 0.1rem
+   word-spacing: 0.1rem;
+   line-height: 1.2rem;
 }
 .checkout-heading{
    font-size: 1.1rem;
+   letter-spacing: 0.3px;
+}
+.place-your-order-container{
+   border: 1px solid rgb(197, 197, 197);
+   border-radius: 0.5rem 0.5rem 0 0;
+   padding: 1rem;
+   font-size: 1rem;
+   display: flex;
+   align-items: center;
+   font-weight: 500;
+   gap: 1.6rem;
+}
+.total-order-cost,.total-costs{
+   color: #B12704;
+}
+.total-price-container{
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
 }

@@ -9,6 +9,7 @@ import axios from "axios";
 import SignInButtonDropDown from "./SignInButtonDropDown";
 import Address from "../Address/Address";
 import { useMain } from "../MainContext";
+import Location from "../Location.js/Location";
 const Header = ({ loginData, setloginData }) => {
   const mainContext = useMain();
   const [isAcive, setIsActive] = useState(false);
@@ -47,7 +48,6 @@ const Header = ({ loginData, setloginData }) => {
     }
   };
   const addAddress = () => {
-    console.log("Pin");
     mainContext?.dispatch({
       type: ACTION.LOCATIONVISIBLE,
     });
@@ -144,7 +144,7 @@ const Header = ({ loginData, setloginData }) => {
             </div>
           </Link>
         </div>
-        {mainContext?.state?.locationVisible && <Address />}
+        {mainContext?.state?.locationVisible && <Location />}
       </div>
       <div className="location"></div>
     </>

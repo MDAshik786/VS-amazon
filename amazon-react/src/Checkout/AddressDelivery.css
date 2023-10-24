@@ -1,4 +1,4 @@
-.delivery-headings{
+.delivery-headings,.payments-container{
     display:flex ;
     justify-content: space-between;
 }
@@ -13,12 +13,12 @@
 }
 .delivery-options{
     border: 1px solid rgb(197, 197, 197);
-    border-radius: 0.5rem;
+    border-radius: 0.5rem 0.5rem 0 0;
     padding: 1rem;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 .checkout-options{
     padding: 0.5rem;
@@ -26,11 +26,21 @@
     flex-direction: column;
     gap: 0.3rem;
 }
+.checkouts-button-container{
+  background-color: #F0F2F2;
+  padding: 1rem;
+  border-bottom: 1px solid rgb(197, 197, 197);
+  border-left: 1px solid rgb(197, 197, 197);
+  border-right: 1px solid rgb(197, 197, 197);
+  border-radius: 0 0 0.5rem 0.5rem;
+}
 .checkout-option-container{
-    padding: 0 0.5rem;
+    padding: 0.5rem;
     display: flex;
     gap: 0.5rem;
     align-items: center;
+    background-color: #FCF5EE;
+    border: 1px solid #FBD8B4;
 }
 .radio-types{
     width: 1.1rem;
@@ -44,7 +54,7 @@
     font-weight: 500;
 }
 .hr-line{
-    border: 1px solid rgb(197, 197, 197);
+    border: 1px solid rgb(216, 216, 216);
 }
 .locations{
     display: flex;
@@ -59,4 +69,22 @@
 .checkout-location-heading{
     font-size: 1.3rem;
     word-spacing: 2px;
+}
+.add-new-address-container{
+     display: flex;
+     gap: 0.6rem;
+}
+.add-new-address-container img{
+    width: 1.1rem;
+}
+.new-addresss,.color-blue{
+    color: #007185;
+}
+.addresss-buttons,.payment-buttons,.place-order-button,.place-order-buttons{
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background-color:rgb(255, 216, 20);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 0.5rem;
 }

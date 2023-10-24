@@ -4,9 +4,10 @@ import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { RxCross2 } from "react-icons/rx";
 import { addAnAddress } from "../API/AddressAPI";
 import { useMain } from "../MainContext";
+import { handleAddressVisiblity } from "../Function/ComponentFunctions/CheckoutFunctions";
 
 const Address = () => {
-  const MainContext = useMain();
+  const mainContext = useMain();
   const [address, setAddress] = useState({
     country: "",
     name: "",
@@ -20,7 +21,7 @@ const Address = () => {
     defaultAddress: false,
   });
   const removeLocation = () => {
-    MainContext?.dispatch({
+    mainContext?.dispatch({
       type: ACTION.REMOVE,
     });
   };
@@ -37,9 +38,9 @@ const Address = () => {
   }, []);
   return (
     <div className="address-main">
-      <div className="address-con" onClick={removeLocation}></div>
+      <div className="address-con" onClick={() => handleAddressVisiblity(mainContext?.dispatch)}></div>
       <div className="address-heading-container">
-        <RxCross2 className="address-cancel-icon" onClick={removeLocation} />
+        <RxCross2 className="address-cancel-icon" onClick={() => handleAddressVisiblity(mainContext?.dispatch)} />
         <p className="address-heading">Enter a new delivery address</p>
         <div className="address-container">
           <p className="new-address">Add a new address</p>

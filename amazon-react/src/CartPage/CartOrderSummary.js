@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { useMain } from '../MainContext';
+import { ACTION } from '../MainContext/Reducer__/FormReducer';
 
 const CartOrderSummary = () => {
   const mainContext = useMain()
@@ -29,11 +30,11 @@ const CartOrderSummary = () => {
           </div>
           <div className="items-tax">
             <p className="item">Estimated tax (5%):</p>
-            <p className="item-tax-percentage"><span className="symbol-icon">₹</span>{(mainContext?.state.addToCart.totalCost + shippingCharge) * 0.05 }</p>
+            <p className="item-tax-percentage"><span className="symbol-icon">₹</span>{((mainContext?.state.addToCart.totalCost + shippingCharge) * 0.05 ).toFixed(2) || 0}</p>
           </div>
           <div className="order-total">
             <p className="item">Order total:</p>
-            <p className="order-rate"><span className="symbol-icon-1">₹</span>{((mainContext?.state.addToCart.totalCost + shippingCharge) * 0.05) + (mainContext?.state.addToCart.totalCost + shippingCharge)  }</p>
+            <p className="order-rate"><span className="symbol-icon-1">₹</span>{(((mainContext?.state.addToCart.totalCost + shippingCharge) * 0.05) + (mainContext?.state.addToCart.totalCost + shippingCharge)).toFixed(2)  }</p>
           </div>
           <div className="order-container">
             <button className="order-button">Place Your Order</button>

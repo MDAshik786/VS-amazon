@@ -38,10 +38,11 @@ export const addAProduct = async (id, quantity, dispatch) => {
     console.log(e, "addToCart Error");
   }
 };
+
 export const getAllCartData = async (dispatch) => {
   try {
     const response = await axios.get(
-      `${cart}/get/${JSON.parse(localStorage.getItem("datas")).email}`
+      `${cart}/get/${JSON.parse(localStorage.getItem("datas"))?.email}`
     );
     dispatch({
       type: ACTION.ADDTOCART,
@@ -51,18 +52,47 @@ export const getAllCartData = async (dispatch) => {
     console.log(e, "GetAllDataToCart");
   }
 };
-export const moveToCartPage = (navigate, e) => {
-  e.preventDefault();
-  
-  navigate(`/cart/${JSON.parse(localStorage.getItem("datas"))?.email}`);
-};
+
 
 export const addAShippingValue = async (email, productId, value) => {
+  console.log(email, productId, value)
   try {
     const response = await axios.put(
       `${cart}/shipping/${email}/${productId}/${value}`
     );
   } catch (e) {
     console.log(e, "addAShippingValue");
+  }
+};
+export const updateAProduct = async (id, quantity, email) => {
+  try {
+    const response = await axios.put(
+      `${cart}/update/${email}`,
+      { productId: id, quantity },
+      {
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
+  } catch (e) {
+    console.log(e, "addToCart Error");
+  }
+};
+export const saveData = async (id, quantity, email,state, dispatch ) => {
+  const productCount =  state.productCount[id]
+    ? state.productCount[id]
+    : quantity;
+  await updateAProduct(id, productCount, email)
+  getAllCartData(dispatch);
+};
+export const deleteAProduct = async (productId, email) => {
+  try {
+    const response = await axios.delete(
+      `${cart}/delete/${productId}/${email}`
+    );
+    getAllCartData();
+  } catch (e) {
+    console.log(e);
   }
 };

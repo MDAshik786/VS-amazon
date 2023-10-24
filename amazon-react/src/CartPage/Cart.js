@@ -7,24 +7,15 @@ import { useParams } from "react-router";
 import CartOrderSummary from "./CartOrderSummary";
 import CartProducts from "./CartProducts";
 import { useMain } from "../MainContext";
+import { getAllCartData } from "../API/CartAPI";
 const Cart = () => {
   const mainContext = useMain();
   const [deliveryOption, setDeliveryOption] = useState({});
   const parem = useParams();
   useEffect(() => {
-    getAllCartData();
+    getAllCartData(mainContext?.dispatch);
   }, []);
-  const getAllCartData = async () => {
-    try {
-      const response = await axios.get(`${cart}/get/${parem.email}`);
-      mainContext?.dispatch({
-        type: ACTION.ADDTOCART,
-        payload: { data: response.data },
-      });
-    } catch (e) {
-      console.log(e, "GetAllDataToCart");
-    }
-  };
+  
 
   return (
     <>

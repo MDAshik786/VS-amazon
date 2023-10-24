@@ -6,7 +6,7 @@ const CheckoutHeader = () => {
       <div className="container">
         <img src="images/amazon-logo.png" alt="" className="checkout-logo" />
 
-        <p className="checkout-heading">Checkout</p>
+        <p className="checkout-head-heading">Checkout</p>
 
         <div className="lock-img-container">
           <img src="images/lock.png" alt="" className="lock-img" />

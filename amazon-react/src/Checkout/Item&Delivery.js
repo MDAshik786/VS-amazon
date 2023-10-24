@@ -1,42 +1,26 @@
-import React from "react";
-import ProductCount from "../HomePage/ProductCount";
+import React, { useEffect, useState } from "react";
+import "./Item&Delivery.css";
 import DateFormate from "../Utils__/DateFormate";
-import axios from "axios";
-import { cart } from "../Utils__/apiUrl";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import { addAShippingValue, deleteAProduct, saveData } from "../API/CartAPI";
-import { useNavigate } from "react-router";
+import { addAShippingValue, deleteAProduct, getAllCartData, saveData, updateAProduct } from "../API/CartAPI";
 import { useMain } from "../MainContext";
-import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
+import ProductCount from "../HomePage/ProductCount";
+import PlaceYourOrder from "./PlaceYourOrder";
 import { handleClickRadio, updateQunatityValue } from "../Function/ComponentFunctions/CartFunction";
-const CartProducts = ({
-  email,
-  deliveryOption,
-  getAllCartData,
-  setDeliveryOption,
-}) => {
-  
-  const mainContext = useMain();
-  const navigate = useNavigate();
+const ItemAndDelivery = () => {
+    const mainContext = useMain()
+  const [deliveryOption, setDeliveryOption] = useState({}); 
+  useEffect(() => {
+    getAllCartData(mainContext?.dispatch);
+  }, []);
+ 
   return (
-    <div className="left">
-      {mainContext?.state?.addToCart.cartItems &&
-        mainContext?.state?.addToCart?.cartItems.length === 0 && (
-          <div className="length-zero-container">
-            <p className="cart-empty-heading">Your Amazon Cart is empty.</p>
-            <button
-              className="view-all-product-button"
-              onClick={() => handleNavigate(navigate, '')}
-            >
-              View All Product
-            </button>
-          </div>
-        )}
-      {mainContext?.state?.addToCart.cartItems &&
+    <div className="items-and-delivery-container">
+        <h3 className="checkout-heading">3 Review items and delivery</h3>
+       {mainContext?.state?.addToCart.cartItems &&
         mainContext?.state?.addToCart?.cartItems.map((product, index) => {
           return (
-            <div className="box" key={product.id}>
-              <div className="date">
+            <div className="items-containers" key={product.id}>
+              <div className="checkout-date">
                 Delivery date:
                 <span className="delivery-date">
                   {deliveryOption[product.id] === 1 ? (
@@ -48,18 +32,18 @@ const CartProducts = ({
                   )}
                 </span>
               </div>
-              <hr className="list-hr" />
-              <div className="inside-box-grid">
-                <div className="product-img">
+              
+              <div className="items-container">
+                <div className="checkout-product-img">
                   <img
                     className="img"
                     src={`http://localhost:3000/${product.product.image}`}
                     alt={product.product.name}
                   />
                 </div>
-                <div className="product-details">
-                  <p className="name">{product.product.name}</p>
-                  <div className="cart-rating-count">
+                <div className="checkout-product-details">
+                  <p className="productName">{product.product.name}</p>
+                  <div className="checkout-rating-count">
                     <img
                       className="cart-product-rating-stars"
                       src={`http://localhost:3000/images/ratings/rating-${
@@ -67,13 +51,13 @@ const CartProducts = ({
                       }.png`}
                       alt={`Rating: ${product.product.ratingStar}`}
                     />
-                    <p className="single-rating-count">
+                    <p className="checkout-rating-count">
                       {product.product.ratingCount} rating
                     </p>{" "}
                   </div>
                   <div className="description-container">
                     <p className="cart-about-heading">About:</p>
-                    <p className="cart-about-content">
+                    <p className="checkout-about-content">
                       {" "}
                       {product.product.description}
                     </p>
@@ -110,7 +94,7 @@ const CartProducts = ({
                           product.product?.id
                         ] === true
                           ? (updateQunatityValue(product.product?.id, mainContext?.dispatch),
-                            saveData(product.product?.id, product.quantity, JSON.parse(localStorage.getItem("datas"))?.email, mainContext?.state, mainContext?.dispatch))
+                            saveData(product.product?.id, product.quantity, JSON.parse(localStorage?.getItem("datas"))?.email, mainContext?.state, mainContext?.dispatch))
                           : updateQunatityValue(product.product?.id, mainContext?.dispatch)
                       }
                     >
@@ -122,8 +106,8 @@ const CartProducts = ({
                       className="Delete"
                       onClick={
                         mainContext?.state.updatedQuantity[product.product.id]
-                          ? () => updateQunatityValue(product.product.id, mainContext?.dispatch)
-                          : () => deleteAProduct(product.id,JSON.parse(localStorage.getItem("datas"))?.email )
+                          ? () => updateQunatityValue(product.product?.id, mainContext?.dispatch)
+                          : () => deleteAProduct(product.id, JSON.parse(localStorage?.getItem("datas"))?.email)
                       }
                     >
                       {mainContext?.state.updatedQuantity[product.product.id]
@@ -134,7 +118,7 @@ const CartProducts = ({
                 </div>
                 <div className="delivery-option">
                   <div className="name">Choose a delivery option:</div>
-                  <div className="first-radio">
+                  <div className="checkout-radios">
                     <input
                       type="radio"
                       id={`${product.id}_1`}
@@ -144,10 +128,10 @@ const CartProducts = ({
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={6} />}</div>
-                      <p className="status">FREE Shipping</p>
+                      <p className="checkout-status">FREE Shipping</p>
                     </div>
                   </div>
-                  <div className="first-radio">
+                  <div className="checkout-radios">
                     <input
                       type="radio"
                       id={`${product.id}_2`}
@@ -157,10 +141,10 @@ const CartProducts = ({
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={4} />}</div>
-                      <p className="status">Shipping Charges ₹50</p>
+                      <p className="checkout-status">Shipping Charges ₹50</p>
                     </div>
                   </div>
-                  <div className="first-radio">
+                  <div className="checkout-radios">
                     <input
                       type="radio"
                       id={`${product.id}_3`}
@@ -170,7 +154,7 @@ const CartProducts = ({
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={2} />}</div>
-                      <p className="status">Shipping Charges ₹100 </p>
+                      <p className="checkout-status">Shipping Charges ₹100 </p>
                     </div>
                   </div>
                 </div>
@@ -178,8 +162,9 @@ const CartProducts = ({
             </div>
           );
         })}
+        <PlaceYourOrder/>
     </div>
   );
 };
 
-export default CartProducts;
+export default ItemAndDelivery;
