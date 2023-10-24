@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import axios from "axios";
-import { userApiUrl } from "../Utils__/apiUrl";
+
 import { useMain } from "../MainContext";
+import { loginEmailVerification } from "../API/LogIn&SignIn";
 
 const LoginEmail = () => {
   const navigate = useNavigate();
@@ -15,27 +15,6 @@ const LoginEmail = () => {
       payload: { value: e.target.value, name: e.target.name },
     });
   };
-  const loginEmailVerification = async () => {
-    try {
-      const response = await axios.post(
-        `${userApiUrl}/email`,
-        { email: mainContext?.state.email },
-        {
-          headers: {
-            "content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response.data);
-      if (response.data === "verified")
-        navigate("/loginpassword", {
-          state: { loginEmail: true, email: mainContext?.state.email },
-        });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  console.log(mainContext?.state, "mainContext?.state");
   return (
     <>
       <Link to={"/"}>
@@ -59,7 +38,7 @@ const LoginEmail = () => {
               onChange={handelOnChange}
             />
           </div>
-          <button className="countinue-button" onClick={loginEmailVerification}>
+          <button className="countinue-button" onClick={() => loginEmailVerification(navigate, mainContext?.state)}>
             Continue
           </button>
           <p className="paragraph">

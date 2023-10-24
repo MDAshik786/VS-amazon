@@ -6,6 +6,7 @@ import { FiEyeOff } from "react-icons/fi";
 import axios from "axios";
 import { userApiUrl } from "../Utils__/apiUrl";
 import { useMain } from "../MainContext";
+import { adduser } from "../API/LogIn&SignIn";
 const LoginUser = () => {
   const [userData, setUserData] = useState({
     email: "",
@@ -27,23 +28,8 @@ const LoginUser = () => {
       [name]: value,
     });
   };
-  const adduser = async () => {
-    try {
-      const response = await axios.post(userApiUrl, {
-        email: userData.email,
-        password: userData.password,
-        name: userData.name,
-        phone: userData.phone,
-      });
-      if (response.data === "Added")
-        navigate("/", { state: { Varification: true } });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const addUserDetails = () => {
-    adduser();
-  };
+
+
   return (
     <div>
       <Link to={"/"}>
@@ -121,7 +107,7 @@ const LoginUser = () => {
               )}
             </div>
           </div>
-          <button className="countinue-button" onClick={addUserDetails}>
+          <button className="countinue-button" onClick={() => adduser(navigate,userData)}>
             Continue
           </button>
           <p className="bottom-line"></p>
