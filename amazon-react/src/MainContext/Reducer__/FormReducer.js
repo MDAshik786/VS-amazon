@@ -1,5 +1,3 @@
-import { address } from "../../Utils__/apiUrl";
-
 export const ACTION = {
   GETDATA: "getdata",
   HANDELONCHANGE: "handelOnChange",
@@ -17,18 +15,21 @@ export const ACTION = {
   GETALLWISHLIST: "getAllWishListProduct",
   ADDTOCARTVISIBLITY: "addtoCartVisibility",
   SIGNINVISIBILITY: "signInVisiblity",
-  REMOVE: "removed", 
+  REMOVE: "removed",
   LOCATIONVISIBLE: "locationVisble",
-  WISHLISTCONTAINER:"wishListContainer",
-  CHECKOUTVISIBILITY : "checkoutVisibility",
-   ADDRESSVISIBLE:"addressVisible"
+  WISHLISTCONTAINER: "wishListContainer",
+  CHECKOUTVISIBILITY: "checkoutVisibility",
+  ADDRESSVISIBLE: "addressVisible",
+  BUTTONVISIBILITY: "buttonVisibility",
+  ERROR:"error",
+  CLEARDATA:"clearData"
 };
 
 export const InitialValue = {
   email: "",
   password: "",
-  pincode:"",
-  pincodeName:"",
+  pincode: "",
+  pincodeName: "",
   passwordVisible: false,
   wishList: [],
   getApiData: [],
@@ -39,20 +40,34 @@ export const InitialValue = {
   signInVisibility: false,
   addToCartVisibility: {},
   locationVisible: false,
-  shippingCharges:0,
-  wishListContainer:2,
-  addressVisible:false,
-  checkoutVisiblity:{
-    address:true,
-    payment:false,
-    item:false
-  }
+  shippingCharges: 0,
+  wishListContainer: 2,
+  addressVisible: false,
+  buttonLoading: false,
+  error: {
+    pincode: "",
+    email:'',
+    password:''
+
+  },
+  checkoutVisiblity: {
+    address: true,
+    payment: false,
+    item: false,
+  },
 };
 export const FormReducer = (state, action) => {
   switch (action.type) {
     case ACTION.HANDELONCHANGE:
-      if(action.payload.name ==='pincodeName' )
-      localStorage.setItem('pincodeDetails',JSON.stringify({name:action.payload.value,pincode:action.payload.pincode}))
+      console.log(action.payload.name )
+      if (action.payload.name === "pincodeName")
+        localStorage.setItem(
+          "pincodeDetails",
+          JSON.stringify({
+            name: action.payload.value,
+            pincode: action.payload.pincode,
+          })
+          );
       return {
         ...state,
         [action.payload.name]: action.payload.value,
@@ -156,57 +171,81 @@ export const FormReducer = (state, action) => {
         ...state,
         addToCartVisibility: {},
         signInVisibility: false,
-        locationVisible:false
+        locationVisible: false,
       };
-      case ACTION.LOCATIONVISIBLE:
+    case ACTION.LOCATIONVISIBLE:
+      return {
+        ...state,
+        locationVisible: true,
+      };
+    case ACTION.WISHLISTCONTAINER:
+      return {
+        ...state,
+        wishListContainer: action.payload.value,
+      };
+    case ACTION.ADDRESSVISIBLE:
+      return {
+        ...state,
+        addressVisible: !state?.addressVisible,
+      };
+    case ACTION.CHECKOUTVISIBILITY:
+      const value = action?.payload?.value;
+
+      const resetVisibility = (property) => ({
+        address: false,
+        payment: false,
+        item: false,
+      });
+
+      const newCheckoutVisibility = {
+        address: false,
+        payment: false,
+        item: false,
+      };
+
+      if (value === "address") {
+        newCheckoutVisibility.address = !state?.checkoutVisiblity?.address;
+      } else if (value === "payment") {
+        newCheckoutVisibility.payment = !state?.checkoutVisiblity?.payment;
+      } else if (value === "item") {
+        newCheckoutVisibility.item = !state?.checkoutVisiblity?.item;
+      }
+
+      const updatedCheckoutVisibility = {
+        ...resetVisibility(),
+        ...newCheckoutVisibility,
+      };
+
+      return {
+        ...state,
+        checkoutVisiblity: updatedCheckoutVisibility,
+      };
+    case ACTION.BUTTONVISIBILITY:
+      return {
+        ...state,
+        buttonLoading: action.payload.value,
+      };
+    case ACTION.ERROR:
+     
+      const {name,errors} = action.payload
+      console.log(name, errors)
+      return{
+        ...state,
+        error:{
+          ...state?.error,
+           [name]:errors
+        }
+      }
+      case ACTION.CLEARDATA:
         return{
           ...state,
-          locationVisible:true
-        }
-       case ACTION.WISHLISTCONTAINER:
-        return{
-          ...state,
-          wishListContainer:action.payload.value
-        }
-        case ACTION.ADDRESSVISIBLE:
-          return{
-            ...state,
-            addressVisible:!state?.addressVisible
+          [action.payload.name]:'',
+          error:{
+            ...state?.error,
+            [action.payload.name] :''
           }
-        case ACTION.CHECKOUTVISIBILITY:
-          const value = action?.payload?.value;
-        
-          const resetVisibility = (property) => ({
-            address: false,
-            payment: false,
-            item: false,
-          });
-        
-          const newCheckoutVisibility = {
-            address: false,
-            payment: false,
-            item: false,
-          };
-        
-          if (value === 'address') {
-            newCheckoutVisibility.address = !state?.checkoutVisiblity?.address;
-          } else if (value === 'payment') {
-            newCheckoutVisibility.payment = !state?.checkoutVisiblity?.payment;
-          } else if (value === 'item') {
-            newCheckoutVisibility.item = !state?.checkoutVisiblity?.item;
-          }
-        
-          const updatedCheckoutVisibility = {
-            ...resetVisibility(),
-            ...newCheckoutVisibility,
-          };
-        
-          return {
-            ...state,
-            checkoutVisiblity: updatedCheckoutVisibility,
-          };
-        
-  default:
+        }
+    default:
       return state;
   }
 };

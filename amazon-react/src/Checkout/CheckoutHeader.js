@@ -3,7 +3,7 @@ import "./CheckoutHeader.css";
 const CheckoutHeader = () => {
   return (
     <div className="checkout-head-main">
-      <div className="container">
+      <div className="checkout-header-container ">
         <img src="images/amazon-logo.png" alt="" className="checkout-logo" />
 
         <p className="checkout-head-heading">Checkout</p>

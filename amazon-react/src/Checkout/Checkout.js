@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CheckoutHeader from "./CheckoutHeader";
 import "./Checkout.css";
 
@@ -11,9 +11,16 @@ import OrderPriceContainer from "./OrderPriceContainer";
 import ConfirmItemAndDelivery from "./ConfirmItemAndDelivery";
 import { useMain } from "../MainContext";
 import Address from "../Address/Address";
+import { getAllAddress } from "../API/AddressAPI";
 const Checkout = () => {
+  const [address, setAddress] = useState([])
   const mainContext = useMain();
-
+   useEffect(() => {
+   const data = getAllAddress(JSON.parse(localStorage.getItem("datas"))?.email)
+   data.then(response => {
+     setAddress(response)
+   })
+   },[])
   return (
     <>
       <CheckoutHeader />
@@ -22,7 +29,7 @@ const Checkout = () => {
           {!mainContext?.state?.checkoutVisiblity?.address ? (
             <ConfirmAddress />
           ) : (
-            <AddressDelivery />
+            <AddressDelivery address={address} />
           )}
           <hr className="hr-line" />
           {!mainContext?.state?.checkoutVisiblity?.payment ? (

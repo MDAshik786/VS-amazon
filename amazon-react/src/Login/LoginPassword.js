@@ -36,7 +36,7 @@ const LoginPassword = () => {
           <div>
             <p className="Email-heading">Password:</p>
             <div className="relative">
-              {" "}
+              
               <input
                 type={mainContext?.state.passwordVisible ? "password" : "Text "}
                 className="password-input"
@@ -46,6 +46,7 @@ const LoginPassword = () => {
                 value={mainContext?.state.password}
                 onChange={handelOnChange}
               />
+              {mainContext?.state?.error?.password && <span className="error-msg">{mainContext?.state?.error?.password}</span>}
               {mainContext?.state.passwordVisible ? (
                 <FiEyeOff className="eye-icon" onClick={passwordVisible} />
               ) : (
@@ -59,7 +60,7 @@ const LoginPassword = () => {
           </div>
           <button
             className="countinue-button"
-            onClick={() => loginPasswordVerification(navigate, mainContext?.state, email)}
+            onClick={() => loginPasswordVerification(navigate, mainContext?.state, email, mainContext?.dispatch)}
           >
             Sign in
           </button>

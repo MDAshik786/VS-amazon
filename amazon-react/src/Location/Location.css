@@ -50,12 +50,14 @@
   justify-content: center;
 }
 .pincode-input {
-  width: 70%;
+  width: 95%;
   border: 1px solid rgb(211, 208, 208);
   outline: none;
   padding: 0 0.5rem;
   font-size: 1.1rem;
   border-radius: 0.5rem;
+  height: 2.2rem;
+  
 }
 .box-con {
   display: flex;
@@ -72,8 +74,14 @@
   display: flex;
   align-items: center;
 }
+.apply-button img{
+  height: 1.8rem;
+}
 .pincode-content {
   padding: 0 0.6rem;
+}
+.pincode-container{
+  width: 100%;
 }
 .location-main {
   position: fixed;

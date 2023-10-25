@@ -37,8 +37,9 @@ const LoginEmail = () => {
               value={mainContext?.state.email}
               onChange={handelOnChange}
             />
+            <span className="error-msg">{mainContext?.state?.error?.email}</span>
           </div>
-          <button className="countinue-button" onClick={() => loginEmailVerification(navigate, mainContext?.state)}>
+          <button className="countinue-button" onClick={() => loginEmailVerification(navigate, mainContext?.state, mainContext?.dispatch)}>
             Continue
           </button>
           <p className="paragraph">

@@ -15,7 +15,7 @@ export const addAnAddress = async (email,addressData) => {
             landmark : addressData.landmark,
             city : addressData.city,
             state : addressData.state,
-            defaultAddress : addressData.defaultAddress
+            defaultValue : addressData.defaultAddress
         },
         {
             headers:{
@@ -31,7 +31,7 @@ export const addAnAddress = async (email,addressData) => {
 export const getAllAddress = async (email) => {
     try{
         const response = await axios.get(`${address}/${email}`)
-        console.log(response.data)
+        return response.data
     }
     catch(e){
         console.log(e)

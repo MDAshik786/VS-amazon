@@ -1,6 +1,14 @@
 import axios from "axios";
 import { userApiUrl } from "../Utils__/apiUrl";
-export const loginEmailVerification = async (navigate, state) => {
+import { formValidation } from "../Function/ComponentFunctions/ValidationFunction";
+import { ACTION } from "../MainContext/Reducer__/FormReducer";
+export const loginEmailVerification = async (navigate, state, dispatch) => {
+  const response = formValidation("email",state?.email)
+  response !== true && dispatch({
+    type:ACTION.ERROR,
+    payload:{name:"email",errors:response }
+  })
+    if(response === true  ){         
   try {
     const response = await axios.post(
       `${userApiUrl}/email`,
@@ -19,8 +27,15 @@ export const loginEmailVerification = async (navigate, state) => {
   } catch (e) {
     console.log(e);
   }
+}
 };
-export const loginPasswordVerification = async (navigate, state, email) => {
+export const loginPasswordVerification = async (navigate, state, email, dispatch) => {
+  const response = formValidation("password",state?.password)
+  response !== true && dispatch({
+    type:ACTION.ERROR,
+    payload:{name:"password",errors:response }
+  })
+    if(response === true  ){
   try {
     const response = await axios.post(
       `${userApiUrl}/password`,
@@ -37,6 +52,7 @@ export const loginPasswordVerification = async (navigate, state, email) => {
   } catch (e) {
     console.log(e);
   }
+}
 };
 export const adduser = async (navigate,userData) => {
   try {

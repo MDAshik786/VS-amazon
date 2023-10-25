@@ -7,3 +7,7 @@ export const moveToCartPage = (navigate, e) => {
     
     navigate(`/cart/${JSON.parse(localStorage.getItem("datas"))?.email}`);
   };
+  export const handleChangePage = (value, product, navigate,e) => {
+    e.preventDefault()
+    navigate(`/${value}`, { state: { product } });
+  };

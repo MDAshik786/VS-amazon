@@ -7,9 +7,9 @@ import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { cart } from "../Utils__/apiUrl";
 import axios from "axios";
 import SignInButtonDropDown from "./SignInButtonDropDown";
-import Address from "../Address/Address";
+
 import { useMain } from "../MainContext";
-import Location from "../Location.js/Location";
+import Location from "../Location/Location";
 const Header = ({ loginData, setloginData }) => {
   const mainContext = useMain();
   const [isAcive, setIsActive] = useState(false);
