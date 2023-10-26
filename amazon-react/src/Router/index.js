@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import LoginUser from "./Login/LoginUser";
-import SingleData from "./SingleData/SingleData";
-import NavBarList from "./HomePage/SignInDropDown";
-import Cart from "./CartPage/Cart";
-import LoginEmail from "./Login/LoginEmail";
-import LoginPassword from "./Login/LoginPassword";
-import Home from "./HomePage/Home";
-import WishList from "./WishList/WishList";
-import Layout from "./Layout";
-import Checkout from "./Checkout/Checkout";
+import LoginUser from "../Login/UserSignUp";
+import SingleData from "../SingleData";
+import NavBarList from "../HomePage/SignInDropDown";
+import Cart from "../CartPage/CartMain";
+import LoginEmail from "../Login/LoginEmail";
+import LoginPassword from "../Login/LoginPassword";
+import Home from "../HomePage/Home";
+import WishList from "../WishList/WishList";
+import Layout from "../Layout";
+import Checkout from "../Checkout/Checkout";
 
 const Routers = ({ loginData, setLoginData }) => {
   return (

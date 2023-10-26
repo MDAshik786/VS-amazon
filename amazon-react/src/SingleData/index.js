@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import { GrLocation } from "react-icons/gr";
 import { AiFillLock } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import "./SingleData.css";
+import "./index.css";
 import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import Header from "../HomePage/Header";
 import ProductCount from "../HomePage/ProductCount";
 import "../HomePage/Products.css";
-import { checkWishList, getAllWishListData } from "../API/WhishListAPI";
-import { moveToCart } from "../API/CartAPI";
+import { checkWishList } from "../API Function/WishListAPI";
+import { moveToCart } from "../API Function/CartAPI";
 import { useMain } from "../MainContext";
 const SingleData = () => {
   const mainContext = useMain();

@@ -1,12 +1,15 @@
 import React from "react";
 import "./Location.css";
 import { RxCross2 } from "react-icons/rx";
-import { getPinCode } from "../API/PinCode";
+import { getPinCode } from "../API Function/PinCodeAPI";
 import { useNavigate } from "react-router";
 import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
 import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { useMain } from "../MainContext";
-import { clearAllPinCodeData, removeLocation } from "../Function/ComponentFunctions/PinCodeFunction";
+import {
+  clearAllPinCodeData,
+  removeLocation,
+} from "../Function/ComponentFunctions/PinCodeFunction";
 const Location = () => {
   const mainContext = useMain();
   const navigate = useNavigate();
@@ -16,7 +19,6 @@ const Location = () => {
       type: ACTION.HANDELONCHANGE,
       payload: { value: e.target.value, name: e.target.name },
     });
-    
   };
   return (
     <div className="pincode-main">
@@ -46,16 +48,16 @@ const Location = () => {
           <hr className="hr" />
         </div>
         <div className="box-con">
-         <div className="pincode-container">
-         <input
-            className="pincode-input"
-            type="number"
-            value={mainContext?.state?.pincode}
-            name="pincode"
-            onChange={handelOnChange}
-          />
-          <p className="error-msg">{mainContext?.state?.error?.pincode}</p>
-         </div>
+          <div className="pincode-container">
+            <input
+              className="pincode-input"
+              type="number"
+              value={mainContext?.state?.pincode}
+              name="pincode"
+              onChange={handelOnChange}
+            />
+            <p className="error-msg">{mainContext?.state?.error?.pincode}</p>
+          </div>
           <button
             className="apply-button"
             onClick={() =>
@@ -68,9 +70,7 @@ const Location = () => {
               "Apply"
             )}
           </button>
-          
         </div>
-      
       </div>
     </div>
   );

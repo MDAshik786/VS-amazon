@@ -2,6 +2,10 @@
 .payments-container {
   display: flex;
   justify-content: space-between;
+
+}
+.delivery-headings{
+  padding-bottom: 1rem;
 }
 .close-container {
   display: flex;
@@ -42,6 +46,7 @@
   align-items: center;
   background-color: #fcf5ee;
   border: 1px solid #fbd8b4;
+  border-radius: 0.3rem;
 }
 .user-address-containers {
   display: flex;

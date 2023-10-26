@@ -1,7 +1,7 @@
 import axios from "axios";
-import { cart } from "../Utils__/apiUrl";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
+import { cart } from "../../Utils__/apiUrl";
+import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { handleNavigate } from "../../Function/ComponentFunctions/NavigateFunction";
 
 export const moveToCart = async (product, quantity, dispatch, navigate) => {
   let productQuantity = 1;
@@ -11,7 +11,7 @@ export const moveToCart = async (product, quantity, dispatch, navigate) => {
     await addAProduct(product.id, productQuantity, dispatch);
     getAllCartData(dispatch);
   } else {
-    handleNavigate(navigate,"loginemail")
+    handleNavigate(navigate, "loginemail");
   }
 };
 export const addAProduct = async (id, quantity, dispatch) => {
@@ -53,9 +53,8 @@ export const getAllCartData = async (dispatch) => {
   }
 };
 
-
 export const addAShippingValue = async (email, productId, value) => {
-  console.log(email, productId, value)
+  console.log(email, productId, value);
   try {
     const response = await axios.put(
       `${cart}/shipping/${email}/${productId}/${value}`
@@ -79,18 +78,16 @@ export const updateAProduct = async (id, quantity, email) => {
     console.log(e, "addToCart Error");
   }
 };
-export const saveData = async (id, quantity, email,state, dispatch ) => {
-  const productCount =  state.productCount[id]
+export const saveData = async (id, quantity, email, state, dispatch) => {
+  const productCount = state.productCount[id]
     ? state.productCount[id]
     : quantity;
-  await updateAProduct(id, productCount, email)
+  await updateAProduct(id, productCount, email);
   getAllCartData(dispatch);
 };
 export const deleteAProduct = async (productId, email) => {
   try {
-    const response = await axios.delete(
-      `${cart}/delete/${productId}/${email}`
-    );
+    const response = await axios.delete(`${cart}/delete/${productId}/${email}`);
     getAllCartData();
   } catch (e) {
     console.log(e);

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
+import "../index.css";
+import { ACTION } from "../../MainContext/Reducer__/FormReducer";
 
-import { useMain } from "../MainContext";
-import { loginEmailVerification } from "../API/LogIn&SignIn";
+import { useMain } from "../../MainContext";
+import { loginEmailVerification } from "../../API Function/Login&SignIn";
 
 const LoginEmail = () => {
   const navigate = useNavigate();
@@ -37,9 +37,20 @@ const LoginEmail = () => {
               value={mainContext?.state.email}
               onChange={handelOnChange}
             />
-            <span className="error-msg">{mainContext?.state?.error?.email}</span>
+            <span className="error-msg">
+              {mainContext?.state?.error?.email}
+            </span>
           </div>
-          <button className="countinue-button" onClick={() => loginEmailVerification(navigate, mainContext?.state, mainContext?.dispatch)}>
+          <button
+            className="countinue-button"
+            onClick={() =>
+              loginEmailVerification(
+                navigate,
+                mainContext?.state,
+                mainContext?.dispatch
+              )
+            }
+          >
             Continue
           </button>
           <p className="paragraph">

@@ -18,6 +18,11 @@
    justify-content: space-between;
 
 }
+.total-delivery-address{
+   display: flex;
+   flex-direction: column;
+   
+}
 .checkout-address-container{
    width: 30%;
    word-spacing: 0.1rem;

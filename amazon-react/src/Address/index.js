@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Address.css";
+import "./index.css";
 import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { RxCross2 } from "react-icons/rx";
-import { addAnAddress } from "../API/AddressAPI";
+import { addAnAddress } from "../API Function/AddressAPI";
 import { useMain } from "../MainContext";
 import { handleAddressVisibility } from "../Function/ComponentFunctions/CheckoutFunctions";
 

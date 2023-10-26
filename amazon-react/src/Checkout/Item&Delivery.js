@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "./Item&Delivery.css";
 import DateFormate from "../Utils__/DateFormate";
-import { addAShippingValue, deleteAProduct, getAllCartData, saveData, updateAProduct } from "../API/CartAPI";
+import {
+  addAShippingValue,
+  deleteAProduct,
+  getAllCartData,
+  saveData,
+  updateAProduct,
+} from "../API Function/CartAPI";
 import { useMain } from "../MainContext";
 import ProductCount from "../HomePage/ProductCount";
 import PlaceYourOrder from "./PlaceYourOrder";
-import { handleClickRadio, updateQunatityValue } from "../Function/ComponentFunctions/CartFunction";
+import {
+  handleClickRadio,
+  updateQunatityValue,
+} from "../Function/ComponentFunctions/CartFunction";
 const ItemAndDelivery = () => {
-    const mainContext = useMain()
-  const [deliveryOption, setDeliveryOption] = useState({}); 
+  const mainContext = useMain();
+  const [deliveryOption, setDeliveryOption] = useState({});
   useEffect(() => {
     getAllCartData(mainContext?.dispatch);
   }, []);
- 
+
   return (
     <div className="items-and-delivery-container">
-        <h3 className="checkout-heading">3 Review items and delivery</h3>
-       {mainContext?.state?.addToCart.cartItems &&
+      <h3 className="checkout-heading">3 Review items and delivery</h3>
+      {mainContext?.state?.addToCart.cartItems &&
         mainContext?.state?.addToCart?.cartItems.map((product, index) => {
           return (
             <div className="items-containers" key={product.id}>
@@ -32,7 +41,7 @@ const ItemAndDelivery = () => {
                   )}
                 </span>
               </div>
-              
+
               <div className="items-container">
                 <div className="checkout-product-img">
                   <img
@@ -93,9 +102,21 @@ const ItemAndDelivery = () => {
                         mainContext?.state.updatedQuantity[
                           product.product?.id
                         ] === true
-                          ? (updateQunatityValue(product.product?.id, mainContext?.dispatch),
-                            saveData(product.product?.id, product.quantity, JSON.parse(localStorage?.getItem("datas"))?.email, mainContext?.state, mainContext?.dispatch))
-                          : updateQunatityValue(product.product?.id, mainContext?.dispatch)
+                          ? (updateQunatityValue(
+                              product.product?.id,
+                              mainContext?.dispatch
+                            ),
+                            saveData(
+                              product.product?.id,
+                              product.quantity,
+                              JSON.parse(localStorage?.getItem("datas"))?.email,
+                              mainContext?.state,
+                              mainContext?.dispatch
+                            ))
+                          : updateQunatityValue(
+                              product.product?.id,
+                              mainContext?.dispatch
+                            )
                       }
                     >
                       {mainContext?.state.updatedQuantity[product.product.id]
@@ -106,8 +127,17 @@ const ItemAndDelivery = () => {
                       className="Delete"
                       onClick={
                         mainContext?.state.updatedQuantity[product.product.id]
-                          ? () => updateQunatityValue(product.product?.id, mainContext?.dispatch)
-                          : () => deleteAProduct(product.id, JSON.parse(localStorage?.getItem("datas"))?.email)
+                          ? () =>
+                              updateQunatityValue(
+                                product.product?.id,
+                                mainContext?.dispatch
+                              )
+                          : () =>
+                              deleteAProduct(
+                                product.id,
+                                JSON.parse(localStorage?.getItem("datas"))
+                                  ?.email
+                              )
                       }
                     >
                       {mainContext?.state.updatedQuantity[product.product.id]
@@ -124,7 +154,9 @@ const ItemAndDelivery = () => {
                       id={`${product.id}_1`}
                       name={`delivery_option_${product.id}`}
                       checked={product?.defaultValue === 1 ? true : false}
-                      onChange={() => handleClickRadio(product.id, 1, mainContext?.dispatch)}
+                      onChange={() =>
+                        handleClickRadio(product.id, 1, mainContext?.dispatch)
+                      }
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={6} />}</div>
@@ -137,7 +169,9 @@ const ItemAndDelivery = () => {
                       id={`${product.id}_2`}
                       name={`delivery_option_${product.id}`}
                       checked={product?.defaultValue === 2 ? true : false}
-                      onChange={() => handleClickRadio(product.id, 2, mainContext?.dispatch)}
+                      onChange={() =>
+                        handleClickRadio(product.id, 2, mainContext?.dispatch)
+                      }
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={4} />}</div>
@@ -150,7 +184,9 @@ const ItemAndDelivery = () => {
                       id={`${product.id}_3`}
                       name={`delivery_option_${product.id}`}
                       checked={product?.defaultValue === 3 ? true : false}
-                      onChange={() => handleClickRadio(product.id, 3, mainContext?.dispatch)}
+                      onChange={() =>
+                        handleClickRadio(product.id, 3, mainContext?.dispatch)
+                      }
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={2} />}</div>
@@ -162,7 +198,7 @@ const ItemAndDelivery = () => {
             </div>
           );
         })}
-        <PlaceYourOrder/>
+      <PlaceYourOrder />
     </div>
   );
 };

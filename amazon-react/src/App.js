@@ -1,8 +1,8 @@
 import React, { useReducer, useState } from "react";
 import "./App.css";
 
-import Routers from "./Routers";
-import {MainProvider} from "./MainContext/index";
+import Routers from "./Router";
+import { MainProvider } from "./MainContext/index";
 
 function App() {
   const [loginData, setLoginData] = useState({
@@ -12,11 +12,7 @@ function App() {
   return (
     <>
       <MainProvider>
-        <Routers
-
-          loginData={loginData}
-          setLoginData={setLoginData}
-        />
+        <Routers loginData={loginData} setLoginData={setLoginData} />
       </MainProvider>
     </>
   );

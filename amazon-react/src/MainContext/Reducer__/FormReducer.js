@@ -1,5 +1,6 @@
 export const ACTION = {
   GETDATA: "getdata",
+  FILTERDATA: 'filterData',
   HANDELONCHANGE: "handelOnChange",
   EMAIL: "email",
   PASSWORD: "password",
@@ -21,11 +22,12 @@ export const ACTION = {
   CHECKOUTVISIBILITY: "checkoutVisibility",
   ADDRESSVISIBLE: "addressVisible",
   BUTTONVISIBILITY: "buttonVisibility",
-  ERROR:"error",
-  CLEARDATA:"clearData"
+  ERROR: "error",
+  CLEARDATA: "clearData",
 };
 
 export const InitialValue = {
+  searchInput:'',
   email: "",
   password: "",
   pincode: "",
@@ -33,6 +35,7 @@ export const InitialValue = {
   passwordVisible: false,
   wishList: [],
   getApiData: [],
+  filterData:[],
   productCount: {},
   currency: true,
   addToCart: [],
@@ -46,9 +49,8 @@ export const InitialValue = {
   buttonLoading: false,
   error: {
     pincode: "",
-    email:'',
-    password:''
-
+    email: "",
+    password: "",
   },
   checkoutVisiblity: {
     address: true,
@@ -59,7 +61,7 @@ export const InitialValue = {
 export const FormReducer = (state, action) => {
   switch (action.type) {
     case ACTION.HANDELONCHANGE:
-      console.log(action.payload.name )
+      console.log(action.payload.name);
       if (action.payload.name === "pincodeName")
         localStorage.setItem(
           "pincodeDetails",
@@ -67,7 +69,7 @@ export const FormReducer = (state, action) => {
             name: action.payload.value,
             pincode: action.payload.pincode,
           })
-          );
+        );
       return {
         ...state,
         [action.payload.name]: action.payload.value,
@@ -109,6 +111,12 @@ export const FormReducer = (state, action) => {
       return {
         ...state,
         getApiData: action.payload.data,
+      };
+      case ACTION.FILTERDATA:
+    
+      return {
+        ...state,
+        filterData: action.payload.data,
       };
     case ACTION.ADDTOCART:
       return {
@@ -205,8 +213,14 @@ export const FormReducer = (state, action) => {
 
       if (value === "address") {
         newCheckoutVisibility.address = !state?.checkoutVisiblity?.address;
+        if(!newCheckoutVisibility.address){
+          newCheckoutVisibility.payment = true;
+        }
       } else if (value === "payment") {
         newCheckoutVisibility.payment = !state?.checkoutVisiblity?.payment;
+        if(!newCheckoutVisibility.payment){
+          newCheckoutVisibility.item = true;
+        }
       } else if (value === "item") {
         newCheckoutVisibility.item = !state?.checkoutVisiblity?.item;
       }
@@ -226,25 +240,24 @@ export const FormReducer = (state, action) => {
         buttonLoading: action.payload.value,
       };
     case ACTION.ERROR:
-     
-      const {name,errors} = action.payload
-      console.log(name, errors)
-      return{
+      const { name, errors } = action.payload;
+      console.log(name, errors);
+      return {
         ...state,
-        error:{
+        error: {
           ...state?.error,
-           [name]:errors
-        }
-      }
-      case ACTION.CLEARDATA:
-        return{
-          ...state,
-          [action.payload.name]:'',
-          error:{
-            ...state?.error,
-            [action.payload.name] :''
-          }
-        }
+          [name]: errors,
+        },
+      };
+    case ACTION.CLEARDATA:
+      return {
+        ...state,
+        [action.payload.name]: "",
+        error: {
+          ...state?.error,
+          [action.payload.name]: "",
+        },
+      };
     default:
       return state;
   }

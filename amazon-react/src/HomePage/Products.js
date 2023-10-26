@@ -1,25 +1,17 @@
 import React, { useEffect } from "react";
 import "./Products.css";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router";
-import { apiUrl, cart } from "../Utils__/apiUrl";
-import axios from "axios";
 import ProductCount from "./ProductCount";
-import {
-  AddToWishList,
-  checkWishList,
-  deleteFromWishList,
-  getAllWishListData,
-} from "../API/WhishListAPI";
-import { moveToCart } from "../API/CartAPI";
+import { checkWishList, getAllWishListData } from "../API Function/WishListAPI";
+import { moveToCart } from "../API Function/CartAPI";
 import { useMain } from "../MainContext";
-import { handleChangePage, handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
-import { getData } from "../API/Product";
-const Products = ({ loginData, setloginData }) => {
+import { handleChangePage } from "../Function/ComponentFunctions/NavigateFunction";
+import { getData } from "../API Function/ProductAPI";
+const Products = ({ setloginData }) => {
   const mainContext = useMain();
-  
+
   const navigate = useNavigate();
 
   let favHeart = [];
@@ -29,6 +21,9 @@ const Products = ({ loginData, setloginData }) => {
     getAllWishListData(mainContext?.dispatch);
   }, []);
 
+  useEffect(() => {
+    getData(mainContext?.dispatch);
+  }, [mainContext?.state?.searchInput?.length === 0]);
   try {
     mainContext?.state?.wishList &&
       mainContext?.state?.wishList.map((data) => {
@@ -36,24 +31,28 @@ const Products = ({ loginData, setloginData }) => {
       });
   } catch (error) {}
 
- 
- 
+  const allData = mainContext?.state?.getApiData;
+
   return (
     <>
       <div className="grid-main">
-        {mainContext?.state?.getApiData &&
-          mainContext?.state?.getApiData.map((product, index) => {
+        {allData &&
+          allData?.map((product, index) => {
             return (
               <div className="container" key={index}>
                 <div
                   className="img-container"
-                  onClick={(e) => handleChangePage("single", product, navigate,e)}
+                  onClick={(e) =>
+                    handleChangePage("single", product, navigate, e)
+                  }
                 >
                   <img className="img" src={product.image} alt={product.name} />
                 </div>
                 <div
                   className="product-name"
-                  onClick={(e) => handleChangePage("single", product,navigate,e)}
+                  onClick={(e) =>
+                    handleChangePage("single", product, navigate, e)
+                  }
                 >
                   {product.name}
                 </div>
@@ -117,7 +116,15 @@ const Products = ({ loginData, setloginData }) => {
                 </div>
                 <div
                   className="absolute"
-                  onClick={() => checkWishList(product.id, product, navigate,mainContext?.dispatch,favHeart)}
+                  onClick={() =>
+                    checkWishList(
+                      product.id,
+                      product,
+                      navigate,
+                      mainContext?.dispatch,
+                      favHeart
+                    )
+                  }
                 >
                   {JSON.parse(localStorage.getItem("datas"))
                     ?.loginVerification && favHeart.includes(product.id) ? (

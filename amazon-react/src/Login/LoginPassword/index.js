@@ -2,9 +2,9 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import { useMain } from "../MainContext";
-import { loginPasswordVerification } from "../API/LogIn&SignIn";
+import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { useMain } from "../../MainContext";
+import { loginPasswordVerification } from "../../API Function/Login&SignIn";
 const LoginPassword = () => {
   const mainContext = useMain();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const LoginPassword = () => {
       type: ACTION.VISIBLE,
     });
   };
- 
+
   return (
     <div>
       <Link to={"/"}>
@@ -36,7 +36,6 @@ const LoginPassword = () => {
           <div>
             <p className="Email-heading">Password:</p>
             <div className="relative">
-              
               <input
                 type={mainContext?.state.passwordVisible ? "password" : "Text "}
                 className="password-input"
@@ -46,7 +45,11 @@ const LoginPassword = () => {
                 value={mainContext?.state.password}
                 onChange={handelOnChange}
               />
-              {mainContext?.state?.error?.password && <span className="error-msg">{mainContext?.state?.error?.password}</span>}
+              {mainContext?.state?.error?.password && (
+                <span className="error-msg">
+                  {mainContext?.state?.error?.password}
+                </span>
+              )}
               {mainContext?.state.passwordVisible ? (
                 <FiEyeOff className="eye-icon" onClick={passwordVisible} />
               ) : (
@@ -60,7 +63,14 @@ const LoginPassword = () => {
           </div>
           <button
             className="countinue-button"
-            onClick={() => loginPasswordVerification(navigate, mainContext?.state, email, mainContext?.dispatch)}
+            onClick={() =>
+              loginPasswordVerification(
+                navigate,
+                mainContext?.state,
+                email,
+                mainContext?.dispatch
+              )
+            }
           >
             Sign in
           </button>

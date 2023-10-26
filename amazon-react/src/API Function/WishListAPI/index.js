@@ -1,7 +1,7 @@
 import axios from "axios";
-import { wishList } from "../Utils__/apiUrl";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
+import { wishList } from "../../Utils__/apiUrl";
+import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { handleNavigate } from "../../Function/ComponentFunctions/NavigateFunction";
 // export const favHeart = [];
 export const AddToWishList = async (product) => {
   try {
@@ -69,7 +69,7 @@ export const checkWishList = async (
   favHeart
 ) => {
   if (!JSON.parse(localStorage.getItem("datas"))?.loginVerification) {
-   handleNavigate(navigate, "loginemail")
+    handleNavigate(navigate, "loginemail");
   } else {
     console.log(favHeart, product);
     if (favHeart.includes(key)) {

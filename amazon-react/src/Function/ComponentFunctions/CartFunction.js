@@ -1,8 +1,8 @@
-import { addAShippingValue, getAllCartData } from "../../API/CartAPI";
+import { addAShippingValue, getAllCartData } from "../../API Function/CartAPI";
 import { ACTION } from "../../MainContext/Reducer__/FormReducer";
 
 export const handleClickRadio = async (productId, option, dispatch) => {
-    console.log(productId,option)
+  console.log(productId, option);
   await addAShippingValue(
     JSON.parse(localStorage.getItem("datas"))?.email,
     productId,

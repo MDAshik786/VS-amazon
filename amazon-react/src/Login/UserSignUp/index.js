@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__/FormReducer";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
 import axios from "axios";
-import { userApiUrl } from "../Utils__/apiUrl";
-import { useMain } from "../MainContext";
-import { adduser } from "../API/LogIn&SignIn";
-const LoginUser = () => {
+import { userApiUrl } from "../../Utils__/apiUrl";
+import { useMain } from "../../MainContext";
+import { adduser } from "../../API Function/Login&SignIn";
+const UserSingUp = () => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -28,7 +28,6 @@ const LoginUser = () => {
       [name]: value,
     });
   };
-
 
   return (
     <div>
@@ -107,7 +106,10 @@ const LoginUser = () => {
               )}
             </div>
           </div>
-          <button className="countinue-button" onClick={() => adduser(navigate,userData)}>
+          <button
+            className="countinue-button"
+            onClick={() => adduser(navigate, userData)}
+          >
             Continue
           </button>
           <p className="bottom-line"></p>
@@ -126,4 +128,4 @@ const LoginUser = () => {
   );
 };
 
-export default LoginUser;
+export default UserSingUp;

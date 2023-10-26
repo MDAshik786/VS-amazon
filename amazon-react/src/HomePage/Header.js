@@ -4,52 +4,26 @@ import "./Header.css";
 import { MdLocationPin } from "react-icons/md";
 import SignInDropDown from "./SignInDropDown";
 import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import { cart } from "../Utils__/apiUrl";
-import axios from "axios";
 import SignInButtonDropDown from "./SignInButtonDropDown";
-
 import { useMain } from "../MainContext";
 import Location from "../Location/Location";
+import { handleKeys } from "../Function/ComponentFunctions/HandleFunction";
+import { getAllCartData } from "../API Function/CartAPI";
+import { addAddress, callSignIn } from "../API Function/HeaderAPI";
 const Header = ({ loginData, setloginData }) => {
   const mainContext = useMain();
   const [isAcive, setIsActive] = useState(false);
 
   useEffect(() => {
-    getAllCartData();
+    getAllCartData(mainContext?.dispatch);
     !JSON.parse(localStorage?.getItem("datas"))?.loginVerification &&
-      callSignIn();
+      callSignIn(mainContext?.dispatch);
   }, []);
 
-  const callSignIn = () => {
-    console.log("first");
+  const handleOnChange = (e) => {
     mainContext?.dispatch({
-      type: ACTION.SIGNINVISIBILITY,
-    });
-    setTimeout(() => {
-      console.log("second");
-      mainContext?.dispatch({
-        type: ACTION.REMOVE,
-      });
-    }, 5000);
-  };
-
-  const getAllCartData = async () => {
-    try {
-      const response = await axios.get(
-        `${cart}/get/${JSON.parse(localStorage.getItem("datas"))?.email}`
-      );
-      console.log(response.data.cartItems.length);
-      mainContext?.dispatch({
-        type: ACTION.ADDTOCART,
-        payload: { data: response.data },
-      });
-    } catch (e) {
-      console.log(e, "GetAllDataToCart");
-    }
-  };
-  const addAddress = () => {
-    mainContext?.dispatch({
-      type: ACTION.LOCATIONVISIBLE,
+      type: ACTION.HANDELONCHANGE,
+      payload: { name: e.target.name, value: e.target.value },
     });
   };
 
@@ -67,7 +41,10 @@ const Header = ({ loginData, setloginData }) => {
               <span className="in">.in</span>
             </Link>
           </div>
-          <div className="location-container" onClick={addAddress}>
+          <div
+            className="location-container"
+            onClick={() => addAddress(mainContext?.dispatch)}
+          >
             <p className="hello">
               {JSON.parse(localStorage.getItem("pincodeDetails"))?.name
                 ? "Delivery to"
@@ -92,7 +69,22 @@ const Header = ({ loginData, setloginData }) => {
           </div>
         </div>
         <div className="middle-header">
-          <input type="text" className="search-input" placeholder="Search" />
+          <input
+            type="text"
+            className="search-input"
+            name="searchInput"
+            placeholder="Search"
+            value={mainContext?.state?.searchInput}
+            onChange={handleOnChange}
+            onKeyDown={(e) =>
+              handleKeys(
+                e,
+                mainContext?.state?.searchInput,
+                mainContext?.state?.getApiData,
+                mainContext?.dispatch
+              )
+            }
+          />
           <button className="search-bar">
             <img src="images//icons/search-icon.png" className="img" />
           </button>

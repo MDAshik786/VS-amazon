@@ -3,7 +3,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-   box-shadow: 0px 0px 10px  gray;    
+   box-shadow: 0px 0px 10px  gray;   
+   background-color: whitesmoke; 
 }
 .checkout-header-container {
     display: flex;

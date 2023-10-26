@@ -3,7 +3,7 @@ import "./WishList.css";
 import { BsLayoutTextWindowReverse } from "react-icons/bs";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiSearchAlt } from "react-icons/bi";
-import { getAllWishListData } from "../API/WhishListAPI";
+import { getAllWishListData } from "../API Function/WishListAPI";
 import SecondWishList from "./SecondWishList";
 import FirstWishList from "./FirstWishList";
 import { ACTION } from "../MainContext/Reducer__/FormReducer";

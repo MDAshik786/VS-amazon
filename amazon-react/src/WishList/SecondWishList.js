@@ -1,8 +1,8 @@
 import React from "react";
 import "./SecondWishList.css";
 import ProductCount from "../HomePage/ProductCount";
-import { moveToCart } from "../API/CartAPI";
-import { checkWishList } from "../API/WhishListAPI";
+import { moveToCart } from "../API Function/CartAPI";
+import { checkWishList } from "../API Function/WishListAPI";
 import { useNavigate } from "react-router";
 import { AiFillLock } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -10,42 +10,48 @@ import { AiFillHeart } from "react-icons/ai";
 import { useMain } from "../MainContext";
 const SecondWishList = ({ favHeart }) => {
   const navigate = useNavigate();
-  const mainContext = useMain()
+  const mainContext = useMain();
   const singlePage = (product) => {
-    navigate("/single", {state: { product } });
+    navigate("/single", { state: { product } });
   };
   return (
     <div>
-      
       {mainContext?.state.wishList &&
         mainContext?.state.wishList.map((product, index) => {
           return (
-            
             <div key={product.id}>
               <div className="list-product-container">
-                  <div
-              className="list-single-absolute"
-              onClick={() =>
-                checkWishList(
-                  product.id,
-                  product,
-                  navigate,
-                  mainContext?.dispatch,
-                  favHeart
-                )
-              } 
-            >
-              {favHeart.includes(product.id) ? (
-                <AiFillHeart className="single-wishlist-img-true" />
-              ) : (
-                <AiOutlineHeart className="single-wishlist-img" />
-              )}
-            </div>
-                <div className="list-img-container" onClick={() => singlePage(product) }>
+                <div
+                  className="list-single-absolute"
+                  onClick={() =>
+                    checkWishList(
+                      product.id,
+                      product,
+                      navigate,
+                      mainContext?.dispatch,
+                      favHeart
+                    )
+                  }
+                >
+                  {favHeart.includes(product.id) ? (
+                    <AiFillHeart className="single-wishlist-img-true" />
+                  ) : (
+                    <AiOutlineHeart className="single-wishlist-img" />
+                  )}
+                </div>
+                <div
+                  className="list-img-container"
+                  onClick={() => singlePage(product)}
+                >
                   <img className="img" src={product.image} alt={product.name} />
                 </div>
-                <div className="list-details" >
-                  <p className="list-product-name" onClick={() => singlePage(product) }>{product.name}</p>
+                <div className="list-details">
+                  <p
+                    className="list-product-name"
+                    onClick={() => singlePage(product)}
+                  >
+                    {product.name}
+                  </p>
                   <div className="list-rating-count">
                     <img
                       className="product-rating-stars"
@@ -70,9 +76,7 @@ const SecondWishList = ({ favHeart }) => {
                   <p className="stock">In Stock</p>
                   <div className="product-count-container">
                     Quantity:
-                    <ProductCount
-                      product={product}
-                    />
+                    <ProductCount product={product} />
                   </div>
                   <button
                     className="inside-box-button"
@@ -131,8 +135,7 @@ const SecondWishList = ({ favHeart }) => {
                   </button>
                 </div>
               </div>
-              <hr className="list-hr"/>
-              
+              <hr className="list-hr" />
             </div>
           );
         })}

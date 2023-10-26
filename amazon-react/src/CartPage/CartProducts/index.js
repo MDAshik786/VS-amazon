@@ -1,21 +1,27 @@
 import React from "react";
-import ProductCount from "../HomePage/ProductCount";
-import DateFormate from "../Utils__/DateFormate";
+import ProductCount from "../../HomePage/ProductCount";
+import DateFormate from "../../Utils__/DateFormate";
 import axios from "axios";
-import { cart } from "../Utils__/apiUrl";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import { addAShippingValue, deleteAProduct, saveData } from "../API/CartAPI";
+import { cart } from "../../Utils__/apiUrl";
+import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import {
+  addAShippingValue,
+  deleteAProduct,
+  saveData,
+} from "../../API Function/CartAPI";
 import { useNavigate } from "react-router";
-import { useMain } from "../MainContext";
-import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
-import { handleClickRadio, updateQunatityValue } from "../Function/ComponentFunctions/CartFunction";
+import { useMain } from "../../MainContext";
+import { handleNavigate } from "../../Function/ComponentFunctions/NavigateFunction";
+import {
+  handleClickRadio,
+  updateQunatityValue,
+} from "../../Function/ComponentFunctions/CartFunction";
 const CartProducts = ({
   email,
   deliveryOption,
   getAllCartData,
   setDeliveryOption,
 }) => {
-  
   const mainContext = useMain();
   const navigate = useNavigate();
   return (
@@ -26,7 +32,7 @@ const CartProducts = ({
             <p className="cart-empty-heading">Your Amazon Cart is empty.</p>
             <button
               className="view-all-product-button"
-              onClick={() => handleNavigate(navigate, '')}
+              onClick={() => handleNavigate(navigate, "")}
             >
               View All Product
             </button>
@@ -109,9 +115,21 @@ const CartProducts = ({
                         mainContext?.state.updatedQuantity[
                           product.product?.id
                         ] === true
-                          ? (updateQunatityValue(product.product?.id, mainContext?.dispatch),
-                            saveData(product.product?.id, product.quantity, JSON.parse(localStorage.getItem("datas"))?.email, mainContext?.state, mainContext?.dispatch))
-                          : updateQunatityValue(product.product?.id, mainContext?.dispatch)
+                          ? (updateQunatityValue(
+                              product.product?.id,
+                              mainContext?.dispatch
+                            ),
+                            saveData(
+                              product.product?.id,
+                              product.quantity,
+                              JSON.parse(localStorage.getItem("datas"))?.email,
+                              mainContext?.state,
+                              mainContext?.dispatch
+                            ))
+                          : updateQunatityValue(
+                              product.product?.id,
+                              mainContext?.dispatch
+                            )
                       }
                     >
                       {mainContext?.state.updatedQuantity[product.product.id]
@@ -122,8 +140,16 @@ const CartProducts = ({
                       className="Delete"
                       onClick={
                         mainContext?.state.updatedQuantity[product.product.id]
-                          ? () => updateQunatityValue(product.product.id, mainContext?.dispatch)
-                          : () => deleteAProduct(product.id,JSON.parse(localStorage.getItem("datas"))?.email )
+                          ? () =>
+                              updateQunatityValue(
+                                product.product.id,
+                                mainContext?.dispatch
+                              )
+                          : () =>
+                              deleteAProduct(
+                                product.id,
+                                JSON.parse(localStorage.getItem("datas"))?.email
+                              )
                       }
                     >
                       {mainContext?.state.updatedQuantity[product.product.id]
@@ -140,7 +166,9 @@ const CartProducts = ({
                       id={`${product.id}_1`}
                       name={`delivery_option_${product.id}`}
                       checked={product?.defaultValue === 1 ? true : false}
-                      onChange={() => handleClickRadio(product.id, 1, mainContext?.dispatch)}
+                      onChange={() =>
+                        handleClickRadio(product.id, 1, mainContext?.dispatch)
+                      }
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={6} />}</div>
@@ -153,7 +181,9 @@ const CartProducts = ({
                       id={`${product.id}_2`}
                       name={`delivery_option_${product.id}`}
                       checked={product?.defaultValue === 2 ? true : false}
-                      onChange={() => handleClickRadio(product.id, 2, mainContext?.dispatch)}
+                      onChange={() =>
+                        handleClickRadio(product.id, 2, mainContext?.dispatch)
+                      }
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={4} />}</div>
@@ -166,7 +196,9 @@ const CartProducts = ({
                       id={`${product.id}_3`}
                       name={`delivery_option_${product.id}`}
                       checked={product?.defaultValue === 3 ? true : false}
-                      onChange={() => handleClickRadio(product.id, 3, mainContext?.dispatch)}
+                      onChange={() =>
+                        handleClickRadio(product.id, 3, mainContext?.dispatch)
+                      }
                     />
                     <div className="deliver-text">
                       <div className="Date">{<DateFormate data={2} />}</div>
