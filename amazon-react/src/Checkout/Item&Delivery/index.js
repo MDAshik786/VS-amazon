@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import "./Item&Delivery.css";
-import DateFormate from "../Utils__/DateFormate";
+import "./index.css";
+import DateFormate from "../../Utils__/DateFormate";
 import {
   addAShippingValue,
   deleteAProduct,
   getAllCartData,
   saveData,
   updateAProduct,
-} from "../API Function/CartAPI";
-import { useMain } from "../MainContext";
-import ProductCount from "../HomePage/ProductCount";
-import PlaceYourOrder from "./PlaceYourOrder";
+} from "../../API Function/CartAPI";
+import { useMain } from "../../MainContext";
+import ProductCount from "../../HomePage/ProductCount";
+import PlaceYourOrder from "../PlaceYourOrder";
 import {
   handleClickRadio,
   updateQunatityValue,
-} from "../Function/ComponentFunctions/CartFunction";
+} from "../../Function/ComponentFunctions/CartFunction";
 const ItemAndDelivery = () => {
   const mainContext = useMain();
   const [deliveryOption, setDeliveryOption] = useState({});

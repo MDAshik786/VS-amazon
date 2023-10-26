@@ -1,6 +1,6 @@
 import axios from "axios";
 import { wishList } from "../../Utils__/apiUrl";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 import { handleNavigate } from "../../Function/ComponentFunctions/NavigateFunction";
 // export const favHeart = [];
 export const AddToWishList = async (product) => {

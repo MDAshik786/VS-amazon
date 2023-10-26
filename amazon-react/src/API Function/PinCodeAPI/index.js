@@ -1,7 +1,7 @@
 import { buttonLoading } from "../../Function/ComponentFunctions/HandleFunction";
 import { removeLocation } from "../../Function/ComponentFunctions/PinCodeFunction";
 import { pinCodeValidation } from "../../Function/ComponentFunctions/ValidationFunction";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 
 export const getPinCode = async (pincode, dispatch) => {
   const response = pinCodeValidation(pincode);

@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
-import "./Products.css";
+import "./index.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router";
-import ProductCount from "./ProductCount";
-import { checkWishList, getAllWishListData } from "../API Function/WishListAPI";
-import { moveToCart } from "../API Function/CartAPI";
-import { useMain } from "../MainContext";
-import { handleChangePage } from "../Function/ComponentFunctions/NavigateFunction";
-import { getData } from "../API Function/ProductAPI";
+import ProductCount from "../ProductCount";
+import {
+  checkWishList,
+  getAllWishListData,
+} from "../../API Function/WishListAPI";
+import { moveToCart } from "../../API Function/CartAPI";
+import { useMain } from "../../MainContext";
+import { handleChangePage } from "../../Function/ComponentFunctions/NavigateFunction";
+import { getData } from "../../API Function/ProductAPI";
 const Products = ({ setloginData }) => {
   const mainContext = useMain();
 

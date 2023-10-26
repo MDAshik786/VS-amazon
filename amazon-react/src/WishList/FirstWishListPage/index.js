@@ -1,12 +1,12 @@
 import React from "react";
-import "./FirstWishList.css";
+import "./index.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import { checkWishList } from "../API Function/WishListAPI";
+import { checkWishList } from "../../API Function/WishListAPI";
 import { useNavigate } from "react-router";
-import ProductCount from "../HomePage/ProductCount";
-import { moveToCart } from "../API Function/CartAPI";
-import { useMain } from "../MainContext";
+import ProductCount from "../../HomePage/ProductCount";
+import { moveToCart } from "../../API Function/CartAPI";
+import { useMain } from "../../MainContext";
 
 const FirstWishList = ({ favHeart }) => {
   const mainContext = useMain();

@@ -1,5 +1,5 @@
 import { addAShippingValue, getAllCartData } from "../../API Function/CartAPI";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 
 export const handleClickRadio = async (productId, option, dispatch) => {
   console.log(productId, option);

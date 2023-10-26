@@ -1,5 +1,5 @@
 import React from "react";
-import "./CheckoutHeader.css";
+import "./index.css";
 const CheckoutHeader = () => {
   return (
     <div className="checkout-head-main">

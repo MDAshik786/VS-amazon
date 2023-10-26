@@ -1,22 +1,23 @@
 import React from "react";
-import { useMain } from "../MainContext";
-import "./OrderPriceContainer.css";
-import { handleCheckoutCondition } from "../Function/ComponentFunctions/CheckoutFunctions";
-
+import { useMain } from "../../MainContext";
+import "./index.css";
+import { handleCheckoutCondition } from "../../Function/ComponentFunctions/CheckoutFunctions";
 const OrderPriceContainer = () => {
   const mainContext = useMain();
   const cartItems = mainContext?.state?.addToCart?.cartItems || [];
   const totalCost = mainContext?.state?.addToCart?.totalCost || 0;
   const shippingCharge = cartItems.reduce((acc, data) => {
-    return acc + (data?.defaultValue === 1 ? 0 : data?.defaultValue === 2 ? 50 : 100);
+    return (
+      acc + (data?.defaultValue === 1 ? 0 : data?.defaultValue === 2 ? 50 : 100)
+    );
   }, 0);
 
   const orderTotal = totalCost + shippingCharge;
   const tax = (orderTotal * 0.05).toFixed(2);
 
   const handlePlaceOrder = () => {
-    const  checkoutVisiblity  = mainContext.state?.checkoutVisiblity;
-    const dispatch = mainContext?.dispatch
+    const checkoutVisiblity = mainContext.state?.checkoutVisiblity;
+    const dispatch = mainContext?.dispatch;
     const condition = checkoutVisiblity?.address
       ? "address"
       : checkoutVisiblity?.payment

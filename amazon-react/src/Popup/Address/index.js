@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
 import { RxCross2 } from "react-icons/rx";
-import { addAnAddress } from "../API Function/AddressAPI";
-import { useMain } from "../MainContext";
-import { handleAddressVisibility } from "../Function/ComponentFunctions/CheckoutFunctions";
+import { addAnAddress } from "../../API Function/AddressAPI";
+import { useMain } from "../../MainContext";
+import { handleAddressVisibility } from "../../Function/ComponentFunctions/CheckoutFunctions";
 
 const Address = () => {
   const mainContext = useMain();

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useMain } from "../../MainContext";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 import { handleNavigate } from "../../Function/ComponentFunctions/NavigateFunction";
 import { useNavigate } from "react-router";
 

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import CheckoutHeader from "./CheckoutHeader";
-import "./Checkout.css";
+import CheckoutHeader from "../CheckoutHeader";
+import "./index.css";
 
-import AddressDelivery from "./AddressDelivery";
-import ConfirmAddress from "./ConfirmAddress";
-import Payment from "./Payment";
-import ConfirmPayment from "./ConfirmPayment";
-import ItemAndDelivery from "./Item&Delivery";
-import OrderPriceContainer from "./OrderPriceContainer";
-import ConfirmItemAndDelivery from "./ConfirmItemAndDelivery";
-import { useMain } from "../MainContext";
-import Address from "../Address";
-import { getAllAddress } from "../API Function/AddressAPI";
-import { disableScrolling } from "../Utils__/DisableScroll";
+import AddressDelivery from "../AddressDelivery";
+import ConfirmAddress from "../ConfirmAddress";
+import Payment from "../Payment";
+import ConfirmPayment from "../ConfirmPayment";
+import ItemAndDelivery from "../Item&Delivery";
+import OrderPriceContainer from "../OrderPriceContainer";
+import ConfirmItemAndDelivery from "../ConfirmItemAndDelivery";
+import { useMain } from "../../MainContext";
+import { getAllAddress } from "../../API Function/AddressAPI";
+import Address from "../../Popup/Address";
 const Checkout = () => {
   const [address, setAddress] = useState({
     getAllAddress: [],

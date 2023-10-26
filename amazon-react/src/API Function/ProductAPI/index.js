@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 import { apiUrl } from "../../Utils__/apiUrl";
 
 export const getData = async (dispatch) => {

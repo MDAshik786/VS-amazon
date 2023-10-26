@@ -1,7 +1,7 @@
 import axios from "axios";
 import { userApiUrl } from "../../Utils__/apiUrl";
 import { formValidation } from "../../Function/ComponentFunctions/ValidationFunction";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 export const loginEmailVerification = async (navigate, state, dispatch) => {
   const response = formValidation("email", state?.email);
   response !== true &&

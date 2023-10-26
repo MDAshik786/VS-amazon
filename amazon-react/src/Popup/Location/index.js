@@ -1,15 +1,15 @@
 import React from "react";
-import "./Location.css";
+import "./index.css";
 import { RxCross2 } from "react-icons/rx";
-import { getPinCode } from "../API Function/PinCodeAPI";
+import { getPinCode } from "../../../API Function/PinCodeAPI";
 import { useNavigate } from "react-router";
-import { handleNavigate } from "../Function/ComponentFunctions/NavigateFunction";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import { useMain } from "../MainContext";
+import { handleNavigate } from "../../../Function/ComponentFunctions/NavigateFunction";
+import { ACTION } from "../../../MainContext/Reducer__";
+import { useMain } from "../../../MainContext";
 import {
   clearAllPinCodeData,
   removeLocation,
-} from "../Function/ComponentFunctions/PinCodeFunction";
+} from "../../../Function/ComponentFunctions/PinCodeFunction";
 const Location = () => {
   const mainContext = useMain();
   const navigate = useNavigate();

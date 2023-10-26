@@ -3,7 +3,7 @@ import ProductCount from "../../HomePage/ProductCount";
 import DateFormate from "../../Utils__/DateFormate";
 import axios from "axios";
 import { cart } from "../../Utils__/apiUrl";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 import {
   addAShippingValue,
   deleteAProduct,

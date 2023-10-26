@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./Header.css";
+import "./index.css";
 import { MdLocationPin } from "react-icons/md";
-import SignInDropDown from "./SignInDropDown";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import SignInButtonDropDown from "./SignInButtonDropDown";
-import { useMain } from "../MainContext";
-import Location from "../Location/Location";
-import { handleKeys } from "../Function/ComponentFunctions/HandleFunction";
-import { getAllCartData } from "../API Function/CartAPI";
-import { addAddress, callSignIn } from "../API Function/HeaderAPI";
+import SignInDropDown from "../SignInDropDown";
+import { ACTION } from "../../MainContext/Reducer__";
+import SignInButtonDropDown from "../SignInButtonDropDown";
+import { useMain } from "../../MainContext";
+import { handleKeys } from "../../Function/ComponentFunctions/HandleFunction";
+import { getAllCartData } from "../../API Function/CartAPI";
+import { addAddress, callSignIn } from "../../API Function/HeaderAPI";
+import Location from '../../Popup/Address/index.js'
 const Header = ({ loginData, setloginData }) => {
   const mainContext = useMain();
   const [isAcive, setIsActive] = useState(false);

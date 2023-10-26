@@ -1,8 +1,8 @@
 import React from "react";
-import "./Payment.css";
+import "./index.css";
 import { RxCross2 } from "react-icons/rx";
-import { useMain } from "../MainContext";
-import { handleCheckoutCondition } from "../Function/ComponentFunctions/CheckoutFunctions";
+import { useMain } from "../../MainContext";
+import { handleCheckoutCondition } from "../../Function/ComponentFunctions/CheckoutFunctions";
 const Payment = () => {
   const mainContext = useMain();
   return (

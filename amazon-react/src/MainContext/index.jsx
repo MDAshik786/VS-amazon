@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react'
 import { useContext } from 'react';
-import { FormReducer, InitialValue } from './Reducer__/FormReducer';
+import { FormReducer, InitialValue } from './Reducer__';
 
 const MainContext =  createContext(null)
 export const MainProvider = ({children}) => {

@@ -6,10 +6,11 @@ import NavBarList from "../HomePage/SignInDropDown";
 import Cart from "../CartPage/CartMain";
 import LoginEmail from "../Login/LoginEmail";
 import LoginPassword from "../Login/LoginPassword";
-import Home from "../HomePage/Home";
-import WishList from "../WishList/WishList";
+import Home from "../HomePage/HomeContainer";
+
 import Layout from "../Layout";
-import Checkout from "../Checkout/Checkout";
+import Checkout from "../Checkout/CheckoutContainer";
+import WishList from "../WishList/WishListContainer";
 
 const Routers = ({ loginData, setLoginData }) => {
   return (

@@ -2,9 +2,10 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 import { useMain } from "../../MainContext";
 import { loginPasswordVerification } from "../../API Function/Login&SignIn";
+import Input from "../../CommonUsedComponent/InputComponent";
 const LoginPassword = () => {
   const mainContext = useMain();
   const navigate = useNavigate();
@@ -36,15 +37,8 @@ const LoginPassword = () => {
           <div>
             <p className="Email-heading">Password:</p>
             <div className="relative">
-              <input
-                type={mainContext?.state.passwordVisible ? "password" : "Text "}
-                className="password-input"
-                autoFocus
-                name="password"
-                placeholder="Enter Your Password"
-                value={mainContext?.state.password}
-                onChange={handelOnChange}
-              />
+              
+               <Input type={mainContext?.state.passwordVisible ? "password" : "Text "} className={"password-input"} autoFocus={"autoFocus"} name={"password"}  placeholder={"Enter Your Password"} value={mainContext?.state?.password} onChange={handelOnChange}/>
               {mainContext?.state?.error?.password && (
                 <span className="error-msg">
                   {mainContext?.state?.error?.password}

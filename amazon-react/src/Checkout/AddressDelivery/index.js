@@ -1,14 +1,14 @@
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
-import "./AddressDelivery.css";
+import "./index.css";
 import { Link } from "react-router-dom";
-import { useMain } from "../MainContext";
+import { useMain } from "../../MainContext";
 import {
   addressContainer,
   handelAddressRadio,
   handleAddressVisibility,
   handleCheckoutCondition,
-} from "../Function/ComponentFunctions/CheckoutFunctions";
+} from "../../Function/ComponentFunctions/CheckoutFunctions";
 
 const AddressDelivery = ({ address, setFunction }) => {
   const mainContext = useMain();
@@ -33,9 +33,15 @@ const AddressDelivery = ({ address, setFunction }) => {
         {address?.getAllAddress &&
           address?.getAllAddress?.map((item, index) => (
             <div className="checkout-option-container" key={index}>
-              <input type="radio" className="radio-types" name="item" checked={address?.defaultAddress?.id === item?.id} onChange={() => handelAddressRadio(address,index, setFunction)} />
+              <input
+                type="radio"
+                className="radio-types"
+                name="item"
+                checked={address?.defaultAddress?.id === item?.id}
+                onChange={() => handelAddressRadio(address, index, setFunction)}
+              />
               <div className="checkout-options">
-              {addressContainer(item)}
+                {addressContainer(item)}
                 <span className="edit-address">Edit address</span>
               </div>
             </div>
@@ -53,9 +59,14 @@ const AddressDelivery = ({ address, setFunction }) => {
         </div>
       </div>
       <div className="checkouts-button-container">
-        <button className="addresss-buttons"  onClick={() =>
+        <button
+          className="addresss-buttons"
+          onClick={() =>
             handleCheckoutCondition(mainContext?.dispatch, "address")
-          }>Use this address</button>
+          }
+        >
+          Use this address
+        </button>
       </div>
     </div>
   );

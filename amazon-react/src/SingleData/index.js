@@ -5,13 +5,14 @@ import { AiFillLock } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import "./index.css";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import Header from "../HomePage/Header";
+import { ACTION } from "../MainContext/Reducer__";
+
 import ProductCount from "../HomePage/ProductCount";
-import "../HomePage/Products.css";
+import "../HomePage/HomeHeader/index.css";
 import { checkWishList } from "../API Function/WishListAPI";
 import { moveToCart } from "../API Function/CartAPI";
 import { useMain } from "../MainContext";
+import Header from "../HomePage/HomeHeader";
 const SingleData = () => {
   const mainContext = useMain();
   const navigate = useNavigate();
@@ -30,16 +31,6 @@ const SingleData = () => {
       });
   } catch (error) {}
 
-  // useEffect(() => {
-  //   const savedWishlist = localStorage.getItem("wishlist");
-  //   if (localStorage.getItem("wishItems")) {
-  //     mainContext?.dispatch({
-  //       type: ACTION.WISHLIST,
-  //       payload: { data: JSON.parse(localStorage.getItem("wishItems")) },
-  //     });
-  //   }
-  //   getAllWishListData(mainContext?.dispatch);
-  // }, []);
 
   return (
     <>

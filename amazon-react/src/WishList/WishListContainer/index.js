@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import "./WishList.css";
+import "./index.css";
 import { BsLayoutTextWindowReverse } from "react-icons/bs";
 import { LuLayoutGrid } from "react-icons/lu";
 import { BiSearchAlt } from "react-icons/bi";
-import { getAllWishListData } from "../API Function/WishListAPI";
-import SecondWishList from "./SecondWishList";
-import FirstWishList from "./FirstWishList";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
-import { useMain } from "../MainContext";
+import { getAllWishListData } from "../../API Function/WishListAPI";
+
+import { ACTION } from "../../MainContext/Reducer__";
+import { useMain } from "../../MainContext";
+import FirstWishList from "../FirstWishListPage";
+import SecondWishList from "../SecondWishListPage";
 
 const WishList = () => {
   const mainContext = useMain();

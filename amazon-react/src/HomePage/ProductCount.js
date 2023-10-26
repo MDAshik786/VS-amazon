@@ -1,5 +1,5 @@
 import React from "react";
-import { ACTION } from "../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../MainContext/Reducer__";
 import { useMain } from "../MainContext";
 
 const ProductCount = ({ product, quantity }) => {
@@ -13,9 +13,10 @@ const ProductCount = ({ product, quantity }) => {
     });
   };
   const handleQuanttiy = (key, e) => {
+    const value = e.target.value < 1 ? 1: e.target.value
     mainContext?.dispatch({
       type: ACTION.PRODUCTCOUNT,
-      payload: { value: e.target.value, key },
+      payload: { value, key },
     });
   };
   return (
@@ -36,8 +37,8 @@ const ProductCount = ({ product, quantity }) => {
             : mainContext?.state?.productCount[product.id]
         }
         onBlur={(e) =>
-          e.target.value == "" || e.target.value == 0
-            ? (e.target.value = 1)
+          e.target.value == "" || e.target.value < 1
+            ? (handleQuanttiy(product?.id, e.target.value = 1))
             : null
         }
         onChange={(e) => handleQuanttiy(product.id, e)}

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
-import { ACTION } from "../../MainContext/Reducer__/FormReducer";
+import { ACTION } from "../../MainContext/Reducer__";
 
 import { useMain } from "../../MainContext";
 import { loginEmailVerification } from "../../API Function/Login&SignIn";
+import Input from "../../CommonUsedComponent/InputComponent";
 
 const LoginEmail = () => {
   const navigate = useNavigate();
@@ -28,15 +29,7 @@ const LoginEmail = () => {
           <p className="login-heading">Sign in</p>
           <div>
             <p className="Email-heading">Email:</p>
-            <input
-              type="text"
-              className="email-input"
-              autoFocus
-              name="email"
-              placeholder="Please Enter a Email"
-              value={mainContext?.state.email}
-              onChange={handelOnChange}
-            />
+            <Input type={"text"} className={"email-input"} autoFocus={"autoFocus"} name={"email"}  placeholder={"Please Enter a Email"} value={mainContext?.state.email} onChange={handelOnChange}/>
             <span className="error-msg">
               {mainContext?.state?.error?.email}
             </span>

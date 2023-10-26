@@ -1,13 +1,13 @@
 import React from "react";
-import "./SecondWishList.css";
-import ProductCount from "../HomePage/ProductCount";
-import { moveToCart } from "../API Function/CartAPI";
-import { checkWishList } from "../API Function/WishListAPI";
+import "./index.css";
+import ProductCount from "../../HomePage/ProductCount";
+import { moveToCart } from "../../API Function/CartAPI";
+import { checkWishList } from "../../API Function/WishListAPI";
 import { useNavigate } from "react-router";
 import { AiFillLock } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import { useMain } from "../MainContext";
+import { useMain } from "../../MainContext";
 const SecondWishList = ({ favHeart }) => {
   const navigate = useNavigate();
   const mainContext = useMain();
