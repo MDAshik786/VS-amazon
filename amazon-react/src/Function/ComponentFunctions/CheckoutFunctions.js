@@ -1,7 +1,28 @@
 import { ACTION } from "../../MainContext/Reducer__";
 
-export const handleCheckoutCondition = (dispatch, value) => {
-  dispatch({
+export const handleCheckoutCondition = (dispatch, value,paymentProcess,address) => {
+
+ let condition = true;
+  if (value === 'payment') {
+  
+    if (paymentProcess === '') {
+      condition = false
+      dispatch({
+        type:ACTION.ERROR,
+        payload:{name:"payment", errors:"Choose Any Payment Mathod"}
+      })
+    }
+  }
+  else if(value === 'item'){
+    if(paymentProcess === ''){
+      condition = false;
+      dispatch({
+        type:ACTION.ERROR,
+        payload:{name:"payment", errors:"Choose Any Payment Mathod"}
+      })
+    }
+  }
+  condition && dispatch({
     type: ACTION.CHECKOUTVISIBILITY,
     payload: { value },
   });
@@ -39,3 +60,4 @@ export const addressContainer = (item) => {
     </div>
   );
 };
+

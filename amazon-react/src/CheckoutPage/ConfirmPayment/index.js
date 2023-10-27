@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { useMain } from "../../MainContext";
 import { handleCheckoutCondition } from "../../Function/ComponentFunctions/CheckoutFunctions";
 
-const ConfirmPayment = () => {
+const ConfirmPayment = ({paymentProcess}) => {
   const mainContext = useMain();
   return (
     <div className="chosing-options">
       <h3 className="checkout-heading">2 Payment method</h3>
-      <p className="checkout-address-container">Cash On Delivery</p>
+      <p className="checkout-address-container">{paymentProcess}</p>
       <Link
         className="color-blue"
         onClick={() =>

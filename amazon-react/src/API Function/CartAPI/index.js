@@ -54,7 +54,7 @@ export const getAllCartData = async (dispatch) => {
 };
 
 export const addAShippingValue = async (email, productId, value) => {
-  console.log(email, productId, value);
+ 
   try {
     const response = await axios.put(
       `${cart}/shipping/${email}/${productId}/${value}`
@@ -85,10 +85,10 @@ export const saveData = async (id, quantity, email, state, dispatch) => {
   await updateAProduct(id, productCount, email);
   getAllCartData(dispatch);
 };
-export const deleteAProduct = async (productId, email) => {
+export const deleteAProduct = async (productId, email,dispatch) => {
   try {
     const response = await axios.delete(`${cart}/delete/${productId}/${email}`);
-    getAllCartData();
+    getAllCartData(dispatch);
   } catch (e) {
     console.log(e);
   }

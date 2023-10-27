@@ -1,16 +1,13 @@
 import React from "react";
 import "./index.css";
 import { RxCross2 } from "react-icons/rx";
-import { getPinCode } from "../../../API Function/PinCodeAPI";
+import { useMain } from "../../MainContext";
+import { ACTION } from "../../MainContext/Reducer__";
 import { useNavigate } from "react-router";
-import { handleNavigate } from "../../../Function/ComponentFunctions/NavigateFunction";
-import { ACTION } from "../../../MainContext/Reducer__";
-import { useMain } from "../../../MainContext";
-import {
-  clearAllPinCodeData,
-  removeLocation,
-} from "../../../Function/ComponentFunctions/PinCodeFunction";
-const Location = () => {
+import { handleNavigate } from "../../Function/ComponentFunctions/NavigateFunction";
+import { removeLocation } from "../../Function/ComponentFunctions/PinCodeFunction";
+import { getPinCode } from "../../API Function/PinCodeAPI";
+const LocationAndPinCode = () => {
   const mainContext = useMain();
   const navigate = useNavigate();
 
@@ -76,4 +73,4 @@ const Location = () => {
   );
 };
 
-export default Location;
+export default LocationAndPinCode;

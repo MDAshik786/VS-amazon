@@ -2,7 +2,6 @@ import axios from "axios";
 import { wishList } from "../../Utils__/apiUrl";
 import { ACTION } from "../../MainContext/Reducer__";
 import { handleNavigate } from "../../Function/ComponentFunctions/NavigateFunction";
-// export const favHeart = [];
 export const AddToWishList = async (product) => {
   try {
     const response = await axios.post(
@@ -27,17 +26,11 @@ export const AddToWishList = async (product) => {
         },
       }
     );
-    console.log(response.data);
   } catch (e) {
     console.log(e, "wishList Error");
   }
 };
 export const deleteFromWishList = async (id) => {
-  console.log(
-    `${wishList}/delete/${
-      JSON.parse(localStorage.getItem("datas"))?.email
-    }/${id}`
-  );
   try {
     const response = await axios.delete(
       `${wishList}/delete/${
@@ -71,7 +64,6 @@ export const checkWishList = async (
   if (!JSON.parse(localStorage.getItem("datas"))?.loginVerification) {
     handleNavigate(navigate, "loginemail");
   } else {
-    console.log(favHeart, product);
     if (favHeart.includes(key)) {
       await deleteFromWishList(key);
       getAllWishListData(dispatch);

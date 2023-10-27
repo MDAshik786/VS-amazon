@@ -2,7 +2,7 @@ import axios from "axios";
 import { address } from "../../Utils__/apiUrl";
 
 export const addAnAddress = async (email, addressData) => {
-  console.log(email, addressData);
+ 
   try {
     const response = await axios.post(
       `${address}/${email}`,

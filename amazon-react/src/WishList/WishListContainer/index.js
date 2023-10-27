@@ -16,7 +16,6 @@ const WishList = () => {
     getAllWishListData(mainContext?.dispatch);
   }, []);
   const wishListContainers = (value) => {
-    console.log(value);
     mainContext?.dispatch({
       type: ACTION.WISHLISTCONTAINER,
       payload: { value },

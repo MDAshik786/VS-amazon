@@ -17,6 +17,8 @@ const Checkout = () => {
     getAllAddress: [],
     defaultAddress: {},
   });
+  const [paymentProcess, setpaymentProcess] = useState('')
+
   const mainContext = useMain();
   useEffect(() => {
     const data = getAllAddress(
@@ -47,6 +49,10 @@ const Checkout = () => {
       [name]: value,
     }));
   };
+  const handleRadioPayment = (value) => {
+    setpaymentProcess(value)
+  
+  }
   return (
     <>
       <CheckoutHeader />
@@ -59,19 +65,19 @@ const Checkout = () => {
           )}
           <hr className="hr-line" />
           {!mainContext?.state?.checkoutVisiblity?.payment ? (
-            <ConfirmPayment />
+            <ConfirmPayment paymentProcess={paymentProcess} />
           ) : (
-            <Payment />
+            <Payment paymentProcess={paymentProcess} handleRadioPayment={handleRadioPayment} />
           )}
           <hr className="hr-line" />
           {!mainContext?.state?.checkoutVisiblity?.item ? (
-            <ConfirmItemAndDelivery />
+            <ConfirmItemAndDelivery address={address} paymentProcess={paymentProcess} />
           ) : (
             <ItemAndDelivery />
           )}
         </div>
 
-        <OrderPriceContainer />
+        <OrderPriceContainer address={address} paymentProcess={paymentProcess} />
       </div>
       {mainContext?.state?.addressVisible && <Address />}
     </>

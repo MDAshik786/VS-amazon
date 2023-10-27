@@ -148,7 +148,7 @@ const CartProducts = ({
                           : () =>
                               deleteAProduct(
                                 product.id,
-                                JSON.parse(localStorage.getItem("datas"))?.email
+                                JSON.parse(localStorage.getItem("datas"))?.email, mainContext?.dispatch
                               )
                       }
                     >

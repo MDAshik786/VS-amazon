@@ -2,7 +2,8 @@ import React from "react";
 import { useMain } from "../../MainContext";
 import "./index.css";
 import { handleCheckoutCondition } from "../../Function/ComponentFunctions/CheckoutFunctions";
-const OrderPriceContainer = () => {
+const OrderPriceContainer = ({ address, paymentProcess }) => {
+ 
   const mainContext = useMain();
   const cartItems = mainContext?.state?.addToCart?.cartItems || [];
   const totalCost = mainContext?.state?.addToCart?.totalCost || 0;
@@ -23,7 +24,9 @@ const OrderPriceContainer = () => {
       : checkoutVisiblity?.payment
       ? "payment"
       : "item";
-    handleCheckoutCondition(dispatch, condition);
+    if (condition === "payment")
+      handleCheckoutCondition(dispatch, condition, paymentProcess);
+    else handleCheckoutCondition(dispatch, condition);
   };
 
   return (

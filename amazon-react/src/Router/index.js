@@ -9,7 +9,7 @@ import LoginPassword from "../Login/LoginPassword";
 import Home from "../HomePage/HomeContainer";
 
 import Layout from "../Layout";
-import Checkout from "../Checkout/CheckoutContainer";
+import Checkout from "../CheckoutPage/CheckoutContainer";
 import WishList from "../WishList/WishListContainer";
 
 const Routers = ({ loginData, setLoginData }) => {
@@ -29,6 +29,7 @@ const Routers = ({ loginData, setLoginData }) => {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/layout" element={<Layout />} />
       <Route path="/checkout" element={<Checkout />} />
+      <Route path='/order' element={<Checkout/>}/>
     </Routes>
   );
 };

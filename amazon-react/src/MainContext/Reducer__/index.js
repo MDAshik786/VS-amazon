@@ -24,6 +24,7 @@ export const ACTION = {
   BUTTONVISIBILITY: "buttonVisibility",
   ERROR: "error",
   CLEARDATA: "clearData",
+  FRESHPRODUCTCOUNT:'freshProductCount'
 };
 
 export const InitialValue = {
@@ -51,6 +52,7 @@ export const InitialValue = {
     pincode: "",
     email: "",
     password: "",
+    payment:''
   },
   checkoutVisiblity: {
     address: true,
@@ -61,7 +63,6 @@ export const InitialValue = {
 export const FormReducer = (state, action) => {
   switch (action.type) {
     case ACTION.HANDELONCHANGE:
-      console.log(action.payload.name);
       if (action.payload.name === "pincodeName")
         localStorage.setItem(
           "pincodeDetails",
@@ -87,6 +88,11 @@ export const FormReducer = (state, action) => {
           [action.payload.key]: action.payload.value,
         },
       };
+    case ACTION.FRESHPRODUCTCOUNT:
+      return{
+        ...state,
+        productCount:[]
+      }
     case ACTION.COUNTNAME:
       const updatedQuantity = { ...state.productCount };
       if (action.payload.name === "increase") {
@@ -241,7 +247,6 @@ export const FormReducer = (state, action) => {
       };
     case ACTION.ERROR:
       const { name, errors } = action.payload;
-      console.log(name, errors);
       return {
         ...state,
         error: {

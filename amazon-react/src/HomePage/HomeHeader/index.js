@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
 import { MdLocationPin } from "react-icons/md";
 import SignInDropDown from "../SignInDropDown";
@@ -9,15 +9,19 @@ import { useMain } from "../../MainContext";
 import { handleKeys } from "../../Function/ComponentFunctions/HandleFunction";
 import { getAllCartData } from "../../API Function/CartAPI";
 import { addAddress, callSignIn } from "../../API Function/HeaderAPI";
-import Location from '../../Popup/Address/index.js'
+import { handleNavigate } from "../../Function/ComponentFunctions/NavigateFunction";
+import LocationAndPinCode from "../../Popup/Location&Address";
 const Header = ({ loginData, setloginData }) => {
   const mainContext = useMain();
   const [isAcive, setIsActive] = useState(false);
-
+  const navigate = useNavigate()
   useEffect(() => {
     getAllCartData(mainContext?.dispatch);
     !JSON.parse(localStorage?.getItem("datas"))?.loginVerification &&
       callSignIn(mainContext?.dispatch);
+    mainContext?.dispatch({
+      type:ACTION.FRESHPRODUCTCOUNT,
+    })
   }, []);
 
   const handleOnChange = (e) => {
@@ -96,7 +100,7 @@ const Header = ({ loginData, setloginData }) => {
               onMouseEnter={() => setIsActive(true)}
               onMouseLeave={() => setIsActive(false)}
             >
-              <div className="all-list-container">
+              <div className="all-list-container" onClick={(e) => handleNavigate(navigate, "loginemail", e)}>
                 <p className="singn-in">Hello, sign in</p>
                 <p className="account-lists">
                   Account & Lists
@@ -118,7 +122,7 @@ const Header = ({ loginData, setloginData }) => {
             </div>
           </Link>
           <Link to={"/"} className="return">
-            <div className="all-list-container">
+            <div className="all-list-container" onClick={(e) => handleNavigate(navigate, "loginemail", e)}>
               <p className="return-text">Returns</p>
               <p className="order-text">& Orders</p>
             </div>
@@ -136,9 +140,9 @@ const Header = ({ loginData, setloginData }) => {
             </div>
           </Link>
         </div>
-        {mainContext?.state?.locationVisible && <Location />}
+        {mainContext?.state?.locationVisible && <LocationAndPinCode />}
       </div>
-      <div className="location"></div>
+      {/* <div className="location"></div> */}
     </>
   );
 };

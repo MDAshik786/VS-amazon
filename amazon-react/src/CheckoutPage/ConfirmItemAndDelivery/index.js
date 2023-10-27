@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { handleCheckoutCondition } from "../../Function/ComponentFunctions/CheckoutFunctions";
 import { useMain } from "../../MainContext";
 
-const ConfirmItemAndDelivery = () => {
+const ConfirmItemAndDelivery = ({address, paymentProcess}) => {
+
   const mainContext = useMain();
   return (
     <div className="chosing-options">
@@ -11,7 +12,7 @@ const ConfirmItemAndDelivery = () => {
 
       <Link
         className="color-blue"
-        onClick={() => handleCheckoutCondition(mainContext?.dispatch, "item")}
+        onClick={() => handleCheckoutCondition(mainContext?.dispatch, "item", paymentProcess, address)}
       >
         Review Order
       </Link>
